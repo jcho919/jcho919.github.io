@@ -2020,16 +2020,15 @@ body.lang-zh .workflow-step span {
       <div class="contact-card">
         <h3 class="en-only">Sales & Inquiries</h3>
         <h3 class="zh-only">销售及查询</h3>
-        <div class="contact-row"><div class="contact-row-icon">@</div><div><strong>Email</strong><br><span>sales@fukatools.com</span></div></div>
-        <div class="contact-row"><div class="contact-row-icon">T</div><div><strong class="en-only">Phone</strong><strong class="zh-only">电话</strong><br><span>+852 2345 6789</span></div></div>
-        <div class="contact-row"><div class="contact-row-icon">W</div><div><strong>WhatsApp</strong><br><span>+852 9876 5432</span></div></div>
+        <div class="contact-row"><div class="contact-row-icon">@</div><div><strong>Email</strong><br><span>cs01@sam-tat.com.hk</span></div></div>
+        <div class="contact-row"><div class="contact-row-icon">T</div><div><strong class="en-only">Phone</strong><strong class="zh-only">电话</strong><br><span>(769) 22459945</span></div></div>
       </div>
       <div class="contact-card">
         <h3 class="en-only">Office</h3>
         <h3 class="zh-only">办公室</h3>
-        <div class="contact-row"><div class="contact-row-icon">A</div><div><strong class="en-only">Address</strong><strong class="zh-only">地址</strong><br><span class="en-only">Unit 1208, 12/F, Industry Building, Kwai Chung, N.T., Hong Kong</span><span class="zh-only">香港新界葵涌工業大廈12樓1208室</span></div></div>
+        <div class="contact-row"><div class="contact-row-icon">A</div><div><strong class="en-only">Address</strong><strong class="zh-only">地址</strong><br><span>東莞市東城區東城中路君豪商業中心 903 室</span></div></div>
         <div class="contact-row"><div class="contact-row-icon">H</div><div><strong class="en-only">Business Hours</strong><strong class="zh-only">营业时间</strong><br><span class="en-only">Mon-Fri: 9:00 - 18:00 HKT</span><span class="zh-only">星期一至五：上午9時至下午6時</span></div></div>
-        <div class="contact-row"><div class="contact-row-icon">W</div><div><strong>Website</strong><br><span>www.fukatools.com</span></div></div>
+        <div class="contact-row"><div class="contact-row-icon">W</div><div><strong>Website</strong><br><span>www.samtat.com</span></div></div>
       </div>
     </div>
   </div>
@@ -2345,9 +2344,9 @@ body.lang-zh .workflow-step span {
       <div class="footer-col">
         <h4 class="en-only">Contact</h4>
         <h4 class="zh-only">联络</h4>
-        <a>sales@fukatools.com</a>
-        <a>+852 2345 6789</a>
-        <a>WhatsApp +852 9876 5432</a>
+        <a>cs01@sam-tat.com.hk</a>
+        <a>(769) 22459945</a>
+        <a>www.samtat.com</a>
       </div>
     </div>
     <div class="footer-bottom">
@@ -3495,9 +3494,10 @@ function buildOrderDocumentHTML(order) {
         <div class="po-box">
           <h3>SUPPLIER / 供应商</h3>
           <div><strong>FUKA Cutting Tools Co., Ltd.</strong></div>
-          <div>Email: sales@fukatools.com</div>
-          <div>Phone: +852 2345 6789</div>
-          <div>WhatsApp: +852 9876 5432</div>
+          <div>Email: cs01@sam-tat.com.hk</div>
+          <div>Phone: (769) 22459945</div>
+          <div>Address: 東莞市東城區東城中路君豪商業中心 903 室</div>
+          <div>Website: www.samtat.com</div>
         </div>
       </div>
 
@@ -3701,7 +3701,7 @@ function emailOrderToSupplier(orderId) {
   ];
   const subject = encodeURIComponent(`FUKA Purchase Order ${order.id}`);
   const body = encodeURIComponent(lines.join('\n'));
-  window.location.href = `mailto:sales@fukatools.com?subject=${subject}&body=${body}`;
+  window.location.href = `mailto:cs01@sam-tat.com.hk?subject=${subject}&body=${body}`;
 }
 
 function findOrderById(orderId) {
