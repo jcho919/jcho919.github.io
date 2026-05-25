@@ -1,0 +1,4337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FUKA Precision Cutting Tools | Professional Ordering Portal</title>
+<style>
+/* ═══════════════════════════════════════════
+   DESIGN SYSTEM
+═══════════════════════════════════════════ */
+:root {
+  --primary: #1B3A6B;
+  --primary-mid: #2A5FA8;
+  --primary-dark: #0D2240;
+  --accent: #C8102E;
+  --accent-light: #E6354F;
+  --accent-bg: #FDF0F2;
+  --gold: #C8960C;
+  --gold-light: #F0C040;
+  --success: #1A7A3C;
+  --success-bg: #E8F5EC;
+  --warning: #D97706;
+  --warning-bg: #FEF3C7;
+  --error: #DC2626;
+  --error-bg: #FEF2F2;
+  --surface: #F0F4F8;
+  --surface-2: #E4EAF0;
+  --border: #CBD5E1;
+  --border-light: #E2E8F0;
+  --text: #1E293B;
+  --text-mid: #475569;
+  --text-light: #94A3B8;
+  --white: #FFFFFF;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.05);
+  --shadow-lg: 0 10px 30px rgba(0,0,0,0.12), 0 4px 12px rgba(0,0,0,0.06);
+  --radius: 10px;
+  --radius-sm: 6px;
+  --radius-lg: 14px;
+  --transition: 0.2s ease;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif; font-size: 15px; color: var(--text); background: var(--surface); line-height: 1.6; }
+
+/* ── TYPOGRAPHY ── */
+h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; color: var(--primary); }
+
+/* ── LAYOUT ── */
+.container { max-width: 1280px; margin: 0 auto; padding: 0 20px; }
+
+/* ── LANG SYSTEM ── */
+.en-only, .zh-only { display: none; }
+body.lang-en .en-only { display: block; }
+body.lang-en .zh-only { display: none; }
+body.lang-zh .en-only { display: none; }
+body.lang-zh .zh-only { display: block; }
+.en-inline { }
+body.lang-en .en-inline { display: inline; }
+body.lang-en .zh-inline { display: none; }
+body.lang-zh .en-inline { display: none; }
+body.lang-zh .zh-inline { display: inline; }
+
+/* ── BUTTONS ── */
+.btn { display: inline-flex; align-items: center; gap: 6px; padding: 9px 20px; border: none; border-radius: var(--radius-sm); font-size: 14px; font-weight: 600; cursor: pointer; transition: var(--transition); white-space: nowrap; }
+.btn-primary { background: var(--primary); color: var(--white); }
+.btn-primary:hover { background: var(--primary-dark); }
+.btn-accent { background: var(--accent); color: var(--white); }
+.btn-accent:hover { background: var(--accent-light); }
+.btn-success { background: var(--success); color: var(--white); }
+.btn-success:hover { background: #155c30; }
+.btn-outline { background: var(--white); color: var(--primary); border: 1.5px solid var(--border); }
+.btn-outline:hover { border-color: var(--primary); background: var(--surface); }
+.btn-ghost { background: transparent; color: var(--text-mid); padding: 7px 14px; }
+.btn-ghost:hover { background: var(--surface-2); color: var(--text); }
+.btn-sm { padding: 6px 14px; font-size: 13px; }
+.btn-lg { padding: 13px 28px; font-size: 16px; border-radius: var(--radius); }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+/* ── BADGE ── */
+.badge { display: inline-flex; align-items: center; padding: 2px 9px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.3px; }
+.badge-hs { background: #DBEAFE; color: #1D4ED8; }
+.badge-ca { background: #DCFCE7; color: #166534; }
+.badge-success { background: var(--success-bg); color: var(--success); }
+.badge-warning { background: var(--warning-bg); color: var(--warning); }
+.badge-error { background: var(--error-bg); color: var(--error); }
+.badge-neutral { background: var(--surface-2); color: var(--text-mid); }
+
+/* ── STATUS PILL ── */
+.status-pill { display: inline-flex; align-items: center; gap: 5px; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+.status-pending { background: var(--warning-bg); color: var(--warning); }
+.status-confirmed { background: #DBEAFE; color: #1D4ED8; }
+.status-shipped { background: var(--success-bg); color: var(--success); }
+.status-cancelled { background: var(--error-bg); color: var(--error); }
+
+/* ═══════════════════════════════════════════
+   HEADER
+═══════════════════════════════════════════ */
+.site-header {
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 60%, #2A5FA8 100%);
+  color: var(--white); position: sticky; top: 0; z-index: 200; box-shadow: var(--shadow-lg);
+}
+.header-main { display: flex; align-items: center; justify-content: space-between; padding: 0 20px; height: 64px; max-width: 1280px; margin: 0 auto; }
+.logo-area { display: flex; align-items: center; gap: 10px; }
+.logo-icon { width: 42px; height: 42px; border-radius: 8px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.logo-icon img { width: 42px; height: 42px; object-fit: contain; }
+.logo-icon-fallback { width: 42px; height: 42px; background: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 900; color: white; }
+.logo-name { font-size: 22px; font-weight: 800; letter-spacing: 2px; color: white; }
+.logo-sub { font-size: 11px; color: rgba(255,255,255,0.6); letter-spacing: 0.5px; }
+
+.header-right { display: flex; align-items: center; gap: 10px; }
+.lang-btn { padding: 5px 14px; border: 1.5px solid rgba(255,255,255,0.3); border-radius: 20px; background: transparent; color: rgba(255,255,255,0.75); font-size: 13px; cursor: pointer; transition: var(--transition); }
+.lang-btn.active, .lang-btn:hover { background: var(--white); color: var(--primary); border-color: white; }
+
+.hamburger { display: none; background: none; border: none; color: white; font-size: 26px; cursor: pointer; padding: 4px 8px; }
+
+.header-nav { background: rgba(0,0,0,0.12); border-top: 1px solid rgba(255,255,255,0.07); }
+.header-nav ul { display: flex; list-style: none; max-width: 1280px; margin: 0 auto; padding: 0 20px; overflow-x: auto; scrollbar-width: none; }
+.header-nav::-webkit-scrollbar { display: none; }
+.header-nav li { flex-shrink: 0; }
+.header-nav a { display: block; padding: 9px 16px; color: rgba(255,255,255,0.7); text-decoration: none; font-size: 13px; font-weight: 500; border-bottom: 2px solid transparent; transition: var(--transition); white-space: nowrap; }
+.header-nav a:hover, .header-nav a.active { color: white; border-bottom-color: var(--accent); }
+
+/* ═══════════════════════════════════════════
+   HERO BANNER
+═══════════════════════════════════════════ */
+.hero-banner { background: linear-gradient(135deg, var(--primary-dark), var(--primary), #1A4A8A); color: white; padding: 50px 0 40px; text-align: center; position: relative; overflow: hidden; }
+.hero-banner::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 20% 50%, rgba(200,16,46,0.1) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(200,150,12,0.08) 0%, transparent 60%); pointer-events: none; }
+.hero-banner h1 { font-size: clamp(28px,5vw,48px); font-weight: 900; margin-bottom: 10px; letter-spacing: 2px; color: white; }
+.hero-banner p { font-size: 16px; opacity: 0.75; max-width: 520px; margin: 0 auto 24px; }
+.hero-banner img { width: 100%; max-width: 760px; border-radius: 12px; margin: 20px auto 0; display: block; box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
+.hero-stats { display: flex; gap: 36px; justify-content: center; margin-top: 30px; flex-wrap: wrap; }
+.hero-stat { text-align: center; }
+.hero-stat .num { font-size: 28px; font-weight: 900; color: var(--gold-light); }
+.hero-stat .label { font-size: 11px; opacity: 0.6; margin-top: 2px; letter-spacing: 0.5px; }
+
+/* ═══════════════════════════════════════════
+   SECTION LAYOUT
+═══════════════════════════════════════════ */
+.section { padding: 40px 0; }
+.section-alt { background: var(--white); }
+.section-header { margin-bottom: 28px; }
+.section-header h2 { font-size: clamp(18px,3vw,24px); font-weight: 700; color: var(--primary); display: flex; align-items: center; gap: 10px; }
+.section-header h2::before { content: ''; width: 4px; height: 26px; background: var(--accent); border-radius: 2px; }
+.section-header p { color: var(--text-mid); font-size: 14px; margin-top: 6px; }
+
+/* ═══════════════════════════════════════════
+   PRODUCT SELECTOR (CUSTOMER FRONTEND)
+═══════════════════════════════════════════ */
+.selector-card {
+  background: var(--white); border-radius: var(--radius-lg); padding: 28px; margin-bottom: 28px;
+  box-shadow: var(--shadow-md); border: 1px solid var(--border-light);
+}
+.selector-card h3 { font-size: 16px; font-weight: 700; color: var(--primary); margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+.selector-steps { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr auto; gap: 14px; align-items: end; margin-bottom: 20px; }
+.selector-group label { display: block; font-size: 12px; font-weight: 700; color: var(--text-mid); margin-bottom: 6px; letter-spacing: 0.5px; text-transform: uppercase; }
+.selector-group select, .selector-group input {
+  width: 100%; padding: 11px 14px; border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+  font-size: 14px; background: var(--surface); color: var(--text); outline: none; transition: var(--transition);
+}
+.selector-group select:focus, .selector-group input:focus { border-color: var(--primary); background: var(--white); }
+.selector-group select:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* Order items table */
+.order-table-wrap { border: 1.5px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+.order-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.order-table thead { background: var(--surface-2); }
+.order-table th { padding: 11px 14px; text-align: left; font-size: 12px; font-weight: 700; color: var(--text-mid); letter-spacing: 0.5px; text-transform: uppercase; border-bottom: 2px solid var(--border); white-space: nowrap; }
+.order-table th.num { text-align: right; }
+.order-table th.center { text-align: center; }
+.order-table td { padding: 10px 14px; border-bottom: 1px solid var(--border-light); vertical-align: middle; }
+.order-table tr:last-child td { border-bottom: none; }
+.order-table tr:hover td { background: #F8FAFC; }
+.order-table tr.product-row { cursor: pointer; }
+.order-table .prod-code { font-weight: 700; color: var(--primary); font-size: 13px; }
+.order-table .prod-name { color: var(--text-mid); font-size: 13px; }
+.order-table .price-cell { font-weight: 700; color: var(--accent); text-align: right; font-family: 'Courier New', monospace; }
+.order-table .subtotal-cell { font-weight: 700; color: var(--text); text-align: right; font-family: 'Courier New', monospace; }
+.cart-table { table-layout: fixed; }
+.cart-table th,
+.cart-table td { box-sizing: border-box; }
+.cart-table .select-col { width: 44px; text-align: center; }
+.cart-table .stock-col { width: 86px; text-align: center; }
+.cart-table .price-col,
+.cart-table .subtotal-col { width: 132px; text-align: right; }
+.cart-table .qty-col { width: 128px; text-align: center; }
+.cart-table .action-col { width: 44px; text-align: center; }
+.cart-table .qty-input { margin: 0 auto; display: block; }
+.qty-input { width: 90px; padding: 7px 10px; border: 1.5px solid var(--border); border-radius: var(--radius-sm); font-size: 14px; text-align: center; outline: none; transition: var(--transition); }
+.qty-input:focus { border-color: var(--primary); }
+.qty-input.error { border-color: var(--error); background: var(--error-bg); }
+.qty-input:disabled { background: var(--surface-2); color: var(--text-light); cursor: not-allowed; }
+.stock-ok { font-size: 12px; color: var(--success); font-weight: 600; }
+.stock-low { font-size: 12px; color: var(--warning); font-weight: 600; }
+.stock-zero { font-size: 12px; color: var(--error); font-weight: 600; }
+.stock-error-msg { font-size: 12px; color: var(--error); font-weight: 600; margin-top: 3px; }
+
+/* Order summary row */
+.order-summary-bar { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; background: var(--surface); border-radius: var(--radius-sm); margin-top: 14px; flex-wrap: wrap; gap: 10px; }
+.order-count { font-size: 14px; color: var(--text-mid); }
+.order-count strong { color: var(--primary); font-size: 16px; }
+.order-total { font-size: 16px; color: var(--text-mid); }
+.order-total strong { font-size: 22px; color: var(--accent); font-weight: 900; }
+
+.bulk-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.bulk-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.custom-tool-card {
+  display: none;
+  padding: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+}
+
+.custom-tool-card h4 {
+  color: var(--primary);
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+.custom-tool-card p {
+  color: var(--text-mid);
+  font-size: 13px;
+  margin-bottom: 16px;
+}
+
+.order-settings-strip {
+  display: grid;
+  grid-template-columns: minmax(180px, 220px) 1fr;
+  gap: 14px;
+  align-items: end;
+  padding: 16px;
+  margin-bottom: 18px;
+  background: var(--surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+}
+
+.tax-note {
+  color: var(--text-mid);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.series-spec-card {
+  display: none;
+  margin: 18px 0 20px;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.series-spec-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 14px 16px;
+  background: var(--white);
+  border-bottom: 1px solid var(--border-light);
+  flex-wrap: wrap;
+}
+
+.series-spec-title {
+  min-width: 0;
+}
+
+.series-spec-title strong {
+  display: block;
+  color: var(--primary);
+  font-size: 15px;
+}
+
+.series-spec-title span {
+  display: block;
+  color: var(--text-mid);
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+.series-spec-image-wrap {
+  max-height: 78vh;
+  overflow: auto;
+  background: #F8FAFC;
+  padding: 14px;
+}
+
+.series-spec-image {
+  width: 100%;
+  min-width: 720px;
+  height: auto;
+  display: block;
+  background: var(--white);
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+}
+
+.tax-breakdown {
+  display: grid;
+  gap: 5px;
+  min-width: 230px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.72);
+}
+
+.tax-breakdown-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.admin-settings-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.admin-settings-note {
+  padding: 12px 14px;
+  background: var(--surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  color: var(--text-mid);
+  font-size: 13px;
+}
+
+/* Customer form */
+.customer-form { background: var(--white); border-radius: var(--radius-lg); padding: 28px; margin-top: 20px; box-shadow: var(--shadow-sm); border: 1px solid var(--border-light); }
+.customer-form h3 { font-size: 16px; font-weight: 700; color: var(--primary); margin-bottom: 20px; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-group { display: flex; flex-direction: column; gap: 5px; }
+.form-group.full { grid-column: 1 / -1; }
+.form-group label { font-size: 12px; font-weight: 600; color: var(--text-mid); letter-spacing: 0.3px; }
+.form-group label .req { color: var(--accent); }
+.form-group input, .form-group textarea, .form-group select {
+  padding: 10px 14px; border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+  font-size: 14px; background: var(--surface); color: var(--text); outline: none; transition: var(--transition);
+  font-family: inherit;
+}
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--primary); background: var(--white); }
+.form-group textarea { resize: vertical; min-height: 80px; }
+
+/* Submit order bar */
+.submit-bar { display: flex; align-items: center; justify-content: space-between; padding: 18px 24px; background: var(--primary-dark); color: white; border-radius: var(--radius); margin-top: 20px; flex-wrap: wrap; gap: 14px; }
+.submit-bar .total-display { font-size: 15px; }
+.submit-bar .total-display strong { font-size: 24px; color: var(--gold-light); font-weight: 900; }
+.submit-bar .actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.submit-bar .btn-accent { font-size: 15px; padding: 12px 28px; }
+
+/* ── TOOL PRODUCT PHOTOS ── */
+.photo-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 28px; }
+.photo-card { background: var(--white); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid var(--border-light); }
+.photo-card img { width: 100%; height: 180px; object-fit: cover; display: block; }
+.photo-card .photo-info { padding: 12px 14px; }
+.photo-card .photo-info h4 { font-size: 13px; font-weight: 700; color: var(--primary); margin-bottom: 4px; }
+.photo-card .photo-info p { font-size: 12px; color: var(--text-mid); }
+
+.product-series-feature {
+  display: grid;
+  grid-template-columns: minmax(420px, 0.95fr) minmax(0, 1fr);
+  gap: 34px;
+  align-items: center;
+  background: #FFFFFF;
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+.product-series-visual {
+  min-height: 470px;
+  background: #F3F6FA;
+  border-right: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 22px;
+}
+
+.product-series-visual img {
+  width: 100%;
+  max-height: 520px;
+  object-fit: contain;
+  display: block;
+}
+
+.product-series-copy {
+  padding: 34px 34px 34px 0;
+}
+
+.product-series-copy .badge {
+  margin-bottom: 14px;
+}
+
+.product-series-copy h3 {
+  color: var(--primary);
+  font-size: clamp(28px, 4vw, 44px);
+  line-height: 1.08;
+  margin-bottom: 18px;
+}
+
+.product-series-copy p {
+  color: var(--text-mid);
+  font-size: 16px;
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+.product-series-points {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 9px;
+  margin: 0 0 24px;
+  padding: 0;
+  list-style: none;
+}
+
+.product-series-points li {
+  color: var(--text);
+  font-size: 14px;
+  padding-left: 16px;
+  position: relative;
+}
+
+.product-series-points li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.72em;
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+/* ═══════════════════════════════════════════
+   ADMIN PANEL
+═══════════════════════════════════════════ */
+.admin-wrap { min-height: 100vh; background: var(--surface); padding: 36px 0; }
+.admin-login-box { max-width: 420px; margin: 80px auto; background: var(--white); border-radius: var(--radius-lg); padding: 36px; box-shadow: var(--shadow-lg); text-align: center; }
+.admin-login-box h2 { font-size: 24px; margin-bottom: 8px; }
+.admin-login-box p { color: var(--text-mid); font-size: 14px; margin-bottom: 24px; }
+.admin-panel { display: none; }
+.admin-header { display: flex; align-items: center; justify-content: space-between; padding: 20px 24px; background: var(--primary-dark); color: white; border-radius: var(--radius) var(--radius) 0 0; }
+.admin-header h2 { font-size: 18px; color: white; }
+.admin-body { background: var(--white); border-radius: 0 0 var(--radius) var(--radius); box-shadow: var(--shadow-md); overflow: hidden; }
+.admin-tabs { display: flex; background: var(--surface-2); border-bottom: 2px solid var(--border); }
+.admin-tab-btn { padding: 12px 24px; border: none; background: none; font-size: 14px; font-weight: 600; color: var(--text-light); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: var(--transition); white-space: nowrap; }
+.admin-tab-btn.active, .admin-tab-btn:hover { color: var(--primary); border-bottom-color: var(--accent); }
+.admin-tab-content { display: none; padding: 24px; }
+.admin-tab-content.active { display: block; }
+.admin-toolbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; gap: 12px; flex-wrap: wrap; }
+.admin-toolbar h3 { font-size: 17px; font-weight: 700; color: var(--primary); }
+.admin-table-wrap { overflow-x: auto; border: 1.5px solid var(--border); border-radius: var(--radius); }
+.admin-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.admin-table thead { background: var(--surface-2); }
+.admin-table th { padding: 10px 13px; text-align: left; font-size: 11px; font-weight: 700; color: var(--text-mid); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid var(--border); white-space: nowrap; }
+.admin-table td { padding: 9px 13px; border-bottom: 1px solid var(--border-light); vertical-align: middle; }
+.admin-table tr:hover td { background: #F8FAFC; }
+.admin-table .prod-id { font-weight: 700; color: var(--primary); font-size: 12px; }
+.admin-table input[type="text"], .admin-table input[type="number"], .admin-table textarea {
+  padding: 6px 10px; border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+  font-size: 13px; font-family: inherit; background: var(--surface); color: var(--text); outline: none; transition: var(--transition); width: 100%;
+}
+.admin-table input[type="text"]:focus, .admin-table input[type="number"]:focus, .admin-table textarea:focus { border-color: var(--primary); background: var(--white); }
+.admin-table .num-input { width: 90px; text-align: right; }
+.admin-table .stock-badge { font-size: 12px; font-weight: 600; padding: 3px 9px; border-radius: 20px; }
+.admin-table .stock-ok { background: var(--success-bg); color: var(--success); }
+.admin-table .stock-low { background: var(--warning-bg); color: var(--warning); }
+.admin-table .stock-zero { background: var(--error-bg); color: var(--error); }
+.admin-table .toggle-enabled { width: 44px; height: 24px; border-radius: 12px; border: none; cursor: pointer; position: relative; transition: var(--transition); }
+.admin-table .toggle-enabled.on { background: var(--success); }
+.admin-table .toggle-enabled.off { background: var(--border); }
+.admin-table .toggle-enabled::after { content: ''; position: absolute; width: 18px; height: 18px; background: white; border-radius: 50%; top: 3px; transition: var(--transition); }
+.admin-table .toggle-enabled.on::after { right: 3px; }
+.admin-table .toggle-enabled.off::after { left: 3px; }
+.admin-table .actions-cell { display: flex; gap: 5px; }
+.admin-table .btn-icon { padding: 5px 10px; border: none; border-radius: 4px; font-size: 12px; cursor: pointer; font-weight: 600; }
+.admin-table .btn-save { background: var(--primary); color: white; }
+.admin-table .btn-del { background: var(--accent); color: white; }
+.admin-table .btn-edit { background: var(--surface-2); color: var(--text-mid); }
+
+/* Order rows in admin */
+.order-card { background: var(--surface); border-radius: var(--radius); padding: 18px; margin-bottom: 14px; border: 1px solid var(--border-light); }
+.order-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px; }
+.order-card-id { font-size: 15px; font-weight: 700; color: var(--primary); }
+.order-card-date { font-size: 13px; color: var(--text-light); }
+.order-card-cust { font-size: 14px; color: var(--text-mid); margin-bottom: 6px; }
+.order-card-items { font-size: 13px; color: var(--text-mid); }
+.order-card-items strong { color: var(--text); }
+.order-card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border-light); flex-wrap: wrap; gap: 8px; }
+.order-card-total { font-size: 16px; font-weight: 700; color: var(--accent); }
+
+/* Add/edit modal */
+.modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 300; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(3px); }
+.modal-overlay.active { display: flex; }
+.modal-box { background: var(--white); border-radius: var(--radius-lg); max-width: 680px; width: 100%; max-height: 90vh; overflow-y: auto; box-shadow: var(--shadow-lg); animation: modalIn 0.2s ease; }
+@keyframes modalIn { from { opacity: 0; transform: translateY(16px); } }
+.modal-header { padding: 20px 24px; background: linear-gradient(135deg, var(--primary-dark), var(--primary)); color: white; border-radius: var(--radius-lg) var(--radius-lg) 0 0; display: flex; justify-content: space-between; align-items: center; }
+.modal-header h3 { font-size: 18px; color: white; }
+.modal-body { padding: 24px; }
+.modal-footer { padding: 16px 24px; border-top: 1px solid var(--border-light); display: flex; justify-content: flex-end; gap: 10px; }
+
+/* ── CONTACT SECTION ── */
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.contact-card { background: var(--white); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow-sm); border-left: 4px solid var(--accent); }
+.contact-card h3 { font-size: 16px; font-weight: 700; color: var(--primary); margin-bottom: 14px; }
+.contact-row { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px; font-size: 14px; }
+.contact-row-icon { width: 28px; height: 28px; background: var(--surface-2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; }
+
+/* ── FOOTER ── */
+.site-footer { background: var(--primary-dark); color: rgba(255,255,255,0.55); padding: 40px 0 20px; margin-top: 60px; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 32px; margin-bottom: 30px; }
+.footer-brand .logo-text { color: white; font-size: 22px; font-weight: 800; letter-spacing: 2px; margin-bottom: 8px; }
+.footer-brand p { font-size: 13px; line-height: 1.6; }
+.footer-col h4 { color: white; font-size: 14px; margin-bottom: 12px; }
+.footer-col a { display: block; color: rgba(255,255,255,0.5); font-size: 13px; text-decoration: none; padding: 3px 0; }
+.footer-col a:hover { color: var(--gold-light); }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 18px; text-align: center; font-size: 12px; }
+
+/* ── ORDER CONFIRMATION ── */
+.order-confirm { text-align: center; padding: 40px 24px; }
+.order-confirm .icon { font-size: 52px; margin-bottom: 14px; }
+.order-confirm h3 { font-size: 22px; color: var(--primary); margin-bottom: 8px; }
+.order-confirm p { color: var(--text-mid); margin-bottom: 6px; }
+.order-confirm .order-id { font-size: 16px; font-weight: 700; color: var(--accent); margin: 14px 0; }
+.order-confirm .summary-box { background: var(--surface); border-radius: var(--radius); padding: 20px; margin: 20px 0; text-align: left; max-width: 480px; margin-left: auto; margin-right: auto; }
+
+.order-doc-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 18px 0;
+}
+
+.order-document-frame {
+  max-width: 1160px;
+  margin: 20px auto 0;
+  background: var(--white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  overflow: auto;
+  text-align: left;
+}
+
+.po-document {
+  background: #fff;
+  color: #17212F;
+  padding: 26px 30px;
+  font-size: 11.6px;
+  line-height: 1.36;
+  min-width: 1020px;
+}
+
+.po-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  border-bottom: 3px solid #12345A;
+  padding-bottom: 18px;
+  margin-bottom: 18px;
+}
+
+.po-brand {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.po-brand img {
+  width: 128px;
+  height: auto;
+}
+
+.po-brand svg {
+  width: 128px;
+  height: auto;
+  flex-shrink: 0;
+  display: block;
+}
+
+.po-brand h1 {
+  font-size: 24px;
+  color: #12345A;
+  margin-bottom: 4px;
+}
+
+.po-title {
+  text-align: right;
+}
+
+.po-title h2 {
+  color: #B5122A;
+  font-size: 22px;
+  margin-bottom: 6px;
+}
+
+.po-meta-grid,
+.po-parties {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.po-meta-grid {
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.po-box {
+  border: 1px solid #D8E0EA;
+  border-radius: 6px;
+  padding: 10px 12px;
+  background: #F8FAFC;
+}
+
+.po-box h3 {
+  font-size: 12px;
+  color: #12345A;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.po-line {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 2px 0;
+}
+
+.po-line span:first-child {
+  color: #596579;
+}
+
+.po-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0;
+  table-layout: fixed;
+}
+
+.po-table th {
+  background: #12345A;
+  color: #fff;
+  padding: 6px 7px;
+  border: 1px solid #12345A;
+  font-size: 10.5px;
+  text-align: left;
+}
+
+.po-table td {
+  padding: 6px 7px;
+  border: 1px solid #D8E0EA;
+  vertical-align: top;
+}
+
+.po-table tr {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.po-table .num {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.po-totals {
+  width: 320px;
+  margin-left: auto;
+  border: 1px solid #D8E0EA;
+}
+
+.po-totals .po-line {
+  padding: 6px 10px;
+  border-bottom: 1px solid #D8E0EA;
+}
+
+.po-totals .po-line:last-child {
+  border-bottom: none;
+  background: #B5122A;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.po-terms {
+  margin-top: 12px;
+  border-top: 1px solid #D8E0EA;
+  padding-top: 10px;
+  color: #596579;
+}
+
+.po-signatures {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 34px;
+  margin-top: 22px;
+}
+
+.po-signature-line {
+  min-height: 82px;
+  border-bottom: 1px solid #17212F;
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 7px;
+  color: #596579;
+}
+
+.draft-list-card {
+  display: none;
+  background: var(--white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  padding: 18px;
+  margin: 0 0 22px;
+  box-shadow: var(--shadow-sm);
+}
+
+.draft-list-card h3 {
+  font-size: 15px;
+  color: var(--primary);
+  margin-bottom: 10px;
+}
+
+.draft-list-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 0;
+  border-top: 1px solid var(--border-light);
+  flex-wrap: wrap;
+}
+
+/* ── NO DATA ── */
+.no-data { text-align: center; padding: 48px 24px; color: var(--text-light); }
+.no-data .icon { font-size: 40px; margin-bottom: 10px; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .form-grid { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  .hamburger { display: block; }
+  .header-nav { display: none; }
+  .header-nav.open { display: block; }
+  .header-nav ul { flex-direction: column; padding: 0; }
+  .header-nav a { border-bottom: none; border-left: 3px solid transparent; padding: 12px 20px; }
+  .header-nav a:hover, .header-nav a.active { border-left-color: var(--accent); }
+  .selector-steps { grid-template-columns: 1fr 1fr; }
+  .selector-steps > *:last-child { grid-column: 1 / -1; }
+  .order-table { font-size: 12px; }
+  .order-table th, .order-table td { padding: 7px 8px; }
+  .submit-bar { flex-direction: column; align-items: stretch; }
+  .submit-bar .total-display { text-align: center; margin-bottom: 10px; }
+  .submit-bar .actions { flex-direction: column; }
+  .bulk-toolbar { align-items: stretch; }
+  .bulk-actions { width: 100%; }
+  .bulk-actions .btn { flex: 1 1 auto; }
+  .order-settings-strip, .admin-settings-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .container { padding: 0 14px; }
+  .selector-steps { grid-template-columns: 1fr; }
+  .order-table { display: block; }
+  .order-table thead { display: none; }
+  .order-table tr { display: block; padding: 12px; border-bottom: 1px solid var(--border); }
+  .order-table td { display: flex; justify-content: space-between; align-items: center; border: none; padding: 4px 0; }
+  .order-table td::before { content: attr(data-label); font-weight: 600; color: var(--text-mid); font-size: 12px; }
+}
+
+/* ═══════════════════════════════════════════
+   PROFESSIONAL EDITION OVERRIDES
+═══════════════════════════════════════════ */
+:root {
+  --primary: #12345A;
+  --primary-mid: #27628F;
+  --primary-dark: #071827;
+  --accent: #B5122A;
+  --accent-light: #D62A3F;
+  --gold: #B88A1D;
+  --surface: #F5F7FA;
+  --surface-2: #E9EEF5;
+  --border: #D8E0EA;
+  --text: #17212F;
+  --text-mid: #596579;
+  --radius: 8px;
+  --radius-lg: 8px;
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.08);
+  --shadow-lg: 0 18px 44px rgba(15, 23, 42, 0.14);
+}
+
+body {
+  background: #F7F9FC;
+  color: var(--text);
+}
+
+.site-header {
+  background: rgba(7, 24, 39, 0.96);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.08), 0 10px 30px rgba(7,24,39,0.18);
+}
+
+.header-main {
+  height: 72px;
+}
+
+.logo-icon {
+  width: 108px;
+  height: 44px;
+  border-radius: 0;
+}
+
+.logo-icon img {
+  width: 108px;
+  height: 44px;
+}
+
+.logo-name {
+  display: none;
+  font-size: 24px;
+  letter-spacing: 1.5px;
+}
+
+.logo-sub {
+  color: rgba(255,255,255,0.72);
+}
+
+.header-nav {
+  background: rgba(255,255,255,0.05);
+}
+
+.header-nav a {
+  padding: 12px 18px;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.lang-btn {
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+.hero-banner {
+  text-align: left;
+  padding: 64px 0 36px;
+  background:
+    linear-gradient(125deg, rgba(7,24,39,0.96) 0%, rgba(18,52,90,0.94) 48%, rgba(39,98,143,0.9) 100%),
+    url("images/catalog-index.png") center / cover no-repeat;
+}
+
+.hero-banner::before {
+  background: linear-gradient(90deg, rgba(7,24,39,0.82), rgba(7,24,39,0.25));
+}
+
+.hero-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 0.92fr);
+  gap: 44px;
+  align-items: center;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 11px;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.82);
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+.hero-banner h1 {
+  max-width: 680px;
+  margin: 18px 0 16px;
+  font-size: clamp(36px, 5vw, 64px);
+  line-height: 1.02;
+  letter-spacing: 0;
+}
+
+.hero-banner p {
+  max-width: 620px;
+  margin: 0 0 24px;
+  font-size: 17px;
+  line-height: 1.75;
+  color: rgba(255,255,255,0.78);
+  opacity: 1;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.hero-actions .btn {
+  min-height: 46px;
+}
+
+.hero-media {
+  position: relative;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.08);
+  padding: 14px;
+  box-shadow: 0 24px 70px rgba(0,0,0,0.34);
+}
+
+.hero-banner .hero-media img {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  border-radius: 6px;
+  box-shadow: none;
+}
+
+.hero-media-caption {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 4px 2px;
+  color: rgba(255,255,255,0.72);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.hero-stats {
+  justify-content: flex-start;
+  gap: 12px;
+  margin-top: 0;
+}
+
+.hero-stat {
+  min-width: 130px;
+  padding: 14px 16px;
+  text-align: left;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+}
+
+.hero-stat .num {
+  color: #F5C84C;
+  font-size: 25px;
+  letter-spacing: 0;
+}
+
+.hero-stat .label {
+  font-size: 12px;
+  opacity: 0.75;
+}
+
+.proof-strip {
+  background: #FFFFFF;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.proof-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border-light);
+  border-left: 1px solid var(--border-light);
+  border-right: 1px solid var(--border-light);
+}
+
+.proof-item {
+  min-height: 112px;
+  padding: 22px;
+  background: white;
+}
+
+.proof-item strong {
+  display: block;
+  color: var(--primary);
+  font-size: 15px;
+  margin-bottom: 6px;
+}
+
+.proof-item span {
+  color: var(--text-mid);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.workflow-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.workflow-step {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 18px;
+  background: #FFFFFF;
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  box-shadow: var(--shadow-sm);
+}
+
+.workflow-step .step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  flex: 0 0 30px;
+  background: var(--primary);
+  color: #FFFFFF;
+  border-radius: 50%;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.workflow-step strong {
+  display: block;
+  color: var(--primary);
+  font-size: 14px;
+  margin-bottom: 3px;
+}
+
+.workflow-step span {
+  display: block;
+  color: var(--text-mid);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.section {
+  padding: 56px 0;
+}
+
+.section-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+.section-header h2 {
+  font-size: clamp(24px, 3vw, 34px);
+  letter-spacing: 0;
+}
+
+.section-header h2::before {
+  height: 32px;
+}
+
+.selector-card,
+.customer-form,
+.photo-card,
+.contact-card,
+.admin-login-box,
+.admin-body {
+  border-radius: 8px;
+  box-shadow: var(--shadow-md);
+}
+
+.selector-card {
+  border-top: 4px solid var(--accent);
+}
+
+.photo-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.photo-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+
+.photo-card img {
+  background: #EEF3F8;
+}
+
+.contact-card {
+  border-left: 0;
+  border-top: 4px solid var(--accent);
+}
+
+.btn {
+  border-radius: 6px;
+}
+
+.btn-primary,
+.btn-accent,
+.btn-success {
+  box-shadow: 0 8px 18px rgba(15,23,42,0.12);
+}
+
+@media (max-width: 900px) {
+  .hero-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .proof-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .workflow-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .section-header {
+    display: block;
+  }
+}
+
+@media (max-width: 560px) {
+  .hero-banner {
+    padding: 44px 0 26px;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+  }
+
+  .hero-actions .btn {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .proof-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .workflow-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-stat {
+    flex: 1 1 140px;
+  }
+}
+
+/* ── MOBILE + TABLET RESPONSIVE REFINEMENTS ── */
+@media (max-width: 1180px) {
+  .container,
+  .header-main,
+  .header-nav ul {
+    max-width: 100%;
+  }
+
+  .hero-layout {
+    grid-template-columns: minmax(0, 0.95fr) minmax(340px, 0.9fr);
+    gap: 28px;
+  }
+
+  .product-series-feature {
+    grid-template-columns: minmax(360px, 0.92fr) minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 1024px) {
+  .hero-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-media {
+    max-width: 720px;
+  }
+
+  .proof-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .selector-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .selector-steps > div:last-child {
+    grid-column: auto;
+  }
+
+  .product-series-feature {
+    grid-template-columns: 1fr;
+  }
+
+  .product-series-visual {
+    min-height: 380px;
+    border-right: 0;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .product-series-copy {
+    padding: 28px;
+  }
+
+}
+
+@media (max-width: 820px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  .header-main {
+    height: auto;
+    min-height: 68px;
+    padding: 10px 16px;
+  }
+
+  .logo-area {
+    min-width: 0;
+  }
+
+  .logo-icon {
+    width: 92px;
+    height: 36px;
+    flex: 0 0 92px;
+  }
+
+  .logo-icon img {
+    width: 92px;
+    height: 36px;
+  }
+
+  .logo-sub {
+    font-size: 10px;
+    white-space: normal;
+  }
+
+  .hero-banner {
+    padding: 34px 0 24px;
+  }
+
+  .hero-banner h1 {
+    font-size: clamp(34px, 9vw, 52px);
+  }
+
+  .hero-banner p {
+    font-size: 15px;
+  }
+
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hero-stat {
+    min-width: 0;
+  }
+
+  .proof-grid,
+  .workflow-grid,
+  .selector-steps,
+  .form-grid,
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .selector-card,
+  .customer-form {
+    padding: 20px;
+  }
+
+  .bulk-toolbar {
+    align-items: stretch;
+  }
+
+  .bulk-toolbar > span {
+    width: 100%;
+  }
+
+  .bulk-actions {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .order-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .order-table {
+    min-width: 820px;
+  }
+
+  .product-series-visual {
+    min-height: 300px;
+    padding: 16px;
+  }
+}
+
+@media (max-width: 520px) {
+  .container {
+    padding: 0 14px;
+  }
+
+  .header-right {
+    gap: 6px;
+  }
+
+  .lang-btn {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+
+  .hamburger {
+    font-size: 24px;
+  }
+
+  .header-nav a {
+    padding: 13px 16px;
+  }
+
+  .hero-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .hero-actions .btn {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .hero-stats {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .hero-stat {
+    padding: 12px;
+  }
+
+  .hero-stat .num {
+    font-size: 21px;
+  }
+
+  .hero-media {
+    padding: 8px;
+  }
+
+  .hero-media-caption {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .section {
+    padding: 38px 0;
+  }
+
+  .section-header h2 {
+    font-size: 25px;
+  }
+
+  .bulk-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .order-table {
+    display: table;
+    min-width: 860px;
+  }
+
+  .order-table thead {
+    display: table-header-group;
+  }
+
+  .order-table tr {
+    display: table-row;
+    padding: 0;
+    border-bottom: 0;
+  }
+
+  .order-table td,
+  .order-table th {
+    display: table-cell;
+  }
+
+  .order-table td::before {
+    content: none;
+  }
+
+  .product-series-visual {
+    min-height: 240px;
+  }
+
+  .product-series-copy {
+    padding: 22px;
+  }
+
+  .product-series-copy .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .footer-grid {
+    gap: 22px;
+  }
+}
+
+/* Simplified Chinese readability: slightly larger text without changing the English layout. */
+body.lang-zh {
+  font-size: 17px;
+  line-height: 1.74;
+}
+
+body.lang-zh .header-nav a {
+  font-size: 16.5px;
+  font-weight: 700;
+  padding: 12px 18px;
+}
+
+body.lang-zh .lang-btn,
+body.lang-zh .btn,
+body.lang-zh .admin-tab-btn {
+  font-size: 15.5px;
+}
+
+body.lang-zh .btn-sm {
+  font-size: 14.5px;
+}
+
+body.lang-zh .logo-sub,
+body.lang-zh .hero-stat .label,
+body.lang-zh .selector-group label,
+body.lang-zh .form-group label,
+body.lang-zh .order-table th,
+body.lang-zh .admin-table th,
+body.lang-zh .footer-bottom {
+  font-size: 13.5px;
+}
+
+body.lang-zh .section-header p,
+body.lang-zh .hero-banner p,
+body.lang-zh .selector-card h3,
+body.lang-zh .selector-group select,
+body.lang-zh .selector-group input,
+body.lang-zh .form-group input,
+body.lang-zh .form-group textarea,
+body.lang-zh .form-group select,
+body.lang-zh .contact-row,
+body.lang-zh .footer-brand p,
+body.lang-zh .footer-col a,
+body.lang-zh .order-count,
+body.lang-zh .submit-bar .total-display {
+  font-size: 16px;
+}
+
+body.lang-zh .order-table,
+body.lang-zh .admin-table,
+body.lang-zh .prod-row-name,
+body.lang-zh .order-table .prod-name,
+body.lang-zh .admin-table input,
+body.lang-zh .admin-table select,
+body.lang-zh .tax-note {
+  font-size: 15.8px;
+}
+
+body.lang-zh .order-table .prod-code,
+body.lang-zh .stock-ok,
+body.lang-zh .stock-low,
+body.lang-zh .stock-zero,
+body.lang-zh .stock-error-msg,
+body.lang-zh .order-card-date,
+body.lang-zh .order-card-items {
+  font-size: 14.5px;
+}
+
+body.lang-zh .badge {
+  font-size: 12.5px;
+}
+
+body.lang-zh .qty-input {
+  font-size: 16px;
+  min-height: 40px;
+}
+
+body.lang-zh .product-series-copy p,
+body.lang-zh .proof-card p,
+body.lang-zh .workflow-step span {
+  font-size: 16.5px;
+}
+
+@media (max-width: 768px) {
+  body.lang-zh {
+    font-size: 16.5px;
+  }
+
+  body.lang-zh .order-table {
+    min-width: 980px;
+  }
+}
+
+@media (max-width: 520px) {
+  body.lang-zh .header-nav a {
+    font-size: 16px;
+    padding: 14px 16px;
+  }
+
+  body.lang-zh .section-header h2 {
+    font-size: 26px;
+  }
+}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+</head>
+<body class="lang-zh">
+
+<!-- ═══════════════════════════════════════
+  HEADER
+═══════════════════════════════════════ -->
+<header class="site-header">
+  <div class="header-main">
+    <div class="logo-area">
+      <div class="logo-icon">
+        <img src="images/logo/fuka-logo-official.svg" alt="FUKA" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <div class="logo-icon-fallback" style="display:none;">F</div>
+      </div>
+      <div>
+        <div class="logo-name">FUKA</div>
+        <div class="logo-sub en-only">High Precision Cutting Tools</div>
+        <div class="logo-sub zh-only">高精度刀具专业制造</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <button class="lang-btn" type="button" data-lang="en">EN</button>
+      <button class="lang-btn active" type="button" data-lang="zh">简</button>
+      <button class="hamburger" onclick="toggleMenu()">☰</button>
+    </div>
+  </div>
+  <nav class="header-nav" id="mainNav">
+    <ul>
+      <li><a href="#home" class="active en-only">Home</a><a href="#home" class="zh-only">首页</a></li>
+      <li><a href="#order" class="en-only">Place Order</a><a href="#order" class="zh-only">下单</a></li>
+      <li><a href="#products" class="en-only">Products</a><a href="#products" class="zh-only">产品</a></li>
+      <li><a href="#contact" class="en-only">Contact</a><a href="#contact" class="zh-only">联络</a></li>
+      <li><a href="#admin" class="en-only">Admin</a><a href="#admin" class="zh-only">管理</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- ═══════════════════════════════════════
+  HERO
+═══════════════════════════════════════ -->
+<section class="hero-banner" id="home">
+  <div class="container" style="position:relative;z-index:1;">
+    <div class="hero-layout">
+      <div>
+        <div class="eyebrow">
+          <span class="en-only">Precision Micro End Mills</span>
+          <span class="zh-only">高精度微径铣刀方案</span>
+        </div>
+        <h1>
+          <span class="en-only">FUKA Precision Cutting Tools</span>
+          <span class="zh-only">FUKA 高精度刀具订购平台</span>
+        </h1>
+        <p class="en-only">A professional ordering portal for hardened steel, copper, aluminum and micro-diameter end mills, built for repeat purchasing, clear specification checks and fast quotation follow-up.</p>
+        <p class="zh-only">面向模具、航空、汽车及医疗零件加工的专业刀具订购平台，支持快速选型、库存确认、批量下单及报价跟进。</p>
+        <div class="hero-actions">
+          <a class="btn btn-accent btn-lg" href="#order">
+            <span class="en-only">Start Order</span>
+            <span class="zh-only">立即下单</span>
+          </a>
+          <a class="btn btn-outline btn-lg" href="#products">
+            <span class="en-only">View Products</span>
+            <span class="zh-only">浏览产品</span>
+          </a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat"><div class="num">1,102</div><div class="label"><span class="en-only">Product SKUs</span><span class="zh-only">款产品型号</span></div></div>
+          <div class="hero-stat"><div class="num">±0.001mm</div><div class="label"><span class="en-only">Grinding precision</span><span class="zh-only">研磨精度</span></div></div>
+          <div class="hero-stat"><div class="num">Ø0.03mm</div><div class="label"><span class="en-only">Minimum diameter</span><span class="zh-only">最小刀径</span></div></div>
+          <div class="hero-stat"><div class="num">65HRC</div><div class="label"><span class="en-only">Hard milling</span><span class="zh-only">淬硬钢加工</span></div></div>
+        </div>
+      </div>
+      <div class="hero-media">
+        <img src="images/fuka-cutting-tools.png" alt="FUKA high precision cutting tools" onerror="this.style.display='none'">
+        <div class="hero-media-caption">
+          <span class="en-only">Catalog-backed product range</span>
+          <span class="zh-only">型录級产品资料</span>
+          <span>FX6M · FX3 · MICRO</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="proof-strip" aria-label="FUKA capabilities">
+  <div class="container">
+    <div class="proof-grid">
+      <div class="proof-item">
+        <strong class="en-only">Application Focus</strong>
+        <strong class="zh-only">应用导向</strong>
+        <span class="en-only">Hardened steel, copper, aluminum and precision mold machining.</span>
+        <span class="zh-only">覆盖淬硬钢、铜铝合金及精密模具加工场景。</span>
+      </div>
+      <div class="proof-item">
+        <strong class="en-only">Reliable Selection</strong>
+        <strong class="zh-only">清晰选型</strong>
+        <span class="en-only">Filter by series, tool type and diameter before placing an order.</span>
+        <span class="zh-only">按系列、刀型、直径逐步筛选，减少下单错误。</span>
+      </div>
+      <div class="proof-item">
+        <strong class="en-only">Inventory Visibility</strong>
+        <strong class="zh-only">库存可视</strong>
+        <span class="en-only">Stock quantity is shown before the order is submitted.</span>
+        <span class="zh-only">提交订单前可查看库存数量及缺货提示。</span>
+      </div>
+      <div class="proof-item">
+        <strong class="en-only">Admin Control</strong>
+        <strong class="zh-only">后台管理</strong>
+        <span class="en-only">Maintain product pricing, status and incoming customer orders.</span>
+        <span class="zh-only">可於后台维护产品价格、启用状态及客户订单。</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+  CUSTOMER ORDER SECTION
+═══════════════════════════════════════ -->
+<section class="section section-alt" id="order">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="en-only">Place Order</h2>
+      <h2 class="zh-only">填写订单</h2>
+      <p class="en-only">Select products, set quantities, and submit your order in one simple step.</p>
+      <p class="zh-only">选择产品、填写数量，一个步骤完成订单。</p>
+    </div>
+
+    <div class="workflow-grid">
+      <div class="workflow-step">
+        <div class="step-num">1</div>
+        <div>
+          <strong class="en-only">Choose Series</strong>
+          <strong class="zh-only">选择系列</strong>
+          <span class="en-only">Start from material and machining application.</span>
+          <span class="zh-only">按材料及加工用途选择刀具系列。</span>
+        </div>
+      </div>
+      <div class="workflow-step">
+        <div class="step-num">2</div>
+        <div>
+          <strong class="en-only">Confirm Specification</strong>
+          <strong class="zh-only">确认规格</strong>
+          <span class="en-only">Filter tool type, diameter, flute count and stock.</span>
+          <span class="zh-only">筛选刀型、直径、刃数及库存。</span>
+        </div>
+      </div>
+      <div class="workflow-step">
+        <div class="step-num">3</div>
+        <div>
+          <strong class="en-only">Build Order</strong>
+          <strong class="zh-only">建立订单</strong>
+          <span class="en-only">Add SKUs, edit quantities and check subtotal.</span>
+          <span class="zh-only">加入型号、修改数量并核对小计。</span>
+        </div>
+      </div>
+      <div class="workflow-step">
+        <div class="step-num">4</div>
+        <div>
+          <strong class="en-only">Submit Inquiry</strong>
+          <strong class="zh-only">提交查询</strong>
+          <span class="en-only">Sales team follows up with quotation and delivery.</span>
+          <span class="zh-only">销售团队跟进报价及交期。</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step-by-step selector -->
+    <div class="selector-card">
+      <h3><span class="en-only">Product Selector</span><span class="zh-only">产品选择</span></h3>
+      <div class="order-settings-strip">
+        <div class="selector-group">
+          <label class="en-only">Currency</label>
+          <label class="zh-only">货币</label>
+          <select id="order-currency" onchange="setOrderCurrency(this.value)">
+          </select>
+        </div>
+        <div class="tax-note">
+          <span class="en-only">English version uses USD or HKD. Chinese version uses CNY only. Tax applies to CNY only: <strong id="order-tax-label">CNY tax included 13%</strong>.</span>
+          <span class="zh-only">中文版只显示人民币。只有人民币适用税率：<strong id="order-tax-label-zh">人民币含税 13%</strong>。</span>
+        </div>
+      </div>
+      <div class="selector-steps">
+        <div class="selector-group">
+          <label class="en-only">① SERIES</label>
+          <label class="zh-only">① 选择系列</label>
+          <select id="sel-series" onchange="onSelSeries()">
+          </select>
+        </div>
+        <div class="selector-group">
+          <label class="en-only">② SUB SERIES</label>
+          <label class="zh-only">② 细系列</label>
+          <select id="sel-subseries" onchange="onSelSubseries()" disabled>
+            <option value="">-- Select Sub Series / 选择细系列 --</option>
+          </select>
+        </div>
+        <div class="selector-group">
+          <label class="en-only">③ TOOL TYPE</label>
+          <label class="zh-only">③ 刀具类型</label>
+          <select id="sel-type" onchange="onSelType()" disabled>
+            <option value="">-- Select Type / 选择类型 --</option>
+          </select>
+        </div>
+        <div class="selector-group">
+          <label class="en-only">④ DIAMETER FILTER</label>
+          <label class="zh-only">④ 直径过滤</label>
+          <select id="sel-diameter" onchange="onSelDiameter()" disabled>
+            <option value="">-- Select Diameter / 选择直径 --</option>
+          </select>
+        </div>
+        <div>
+          <button class="btn btn-ghost" onclick="resetSelector()" style="width:100%;">
+            <span class="en-only">Reset</span>
+            <span class="zh-only">重设</span>
+          </button>
+        </div>
+      </div>
+
+      <div id="series-spec-area" class="series-spec-card">
+        <div class="series-spec-header">
+          <div class="series-spec-title">
+            <strong id="series-spec-title"></strong>
+            <span id="series-spec-subtitle"></span>
+          </div>
+          <a id="series-spec-pdf-link" class="btn btn-outline btn-sm" href="assets/catalogs/fuka-cutting-tools.pdf" target="_blank" rel="noopener">
+            <span class="en-only">Open PDF</span>
+            <span class="zh-only">打开 PDF</span>
+          </a>
+        </div>
+        <div class="series-spec-image-wrap">
+          <img id="series-spec-image" class="series-spec-image" alt="Catalog specification sheet">
+        </div>
+      </div>
+
+      <!-- Product table (appears after type selection; diameter is optional) -->
+      <div id="prod-table-area" style="display:none;">
+        <div class="bulk-toolbar">
+          <span style="font-size:13px;color:var(--text-mid);">
+            <span class="en-only">Showing <strong id="prod-count">0</strong> products</span>
+            <span class="zh-only">共 <strong id="prod-count-zh">0</strong> 款产品</span>
+            <span style="margin-left:10px;">
+              <span class="en-only">Selected: <strong id="prod-selected-count">0</strong></span>
+              <span class="zh-only">已勾选：<strong id="prod-selected-count-zh">0</strong></span>
+            </span>
+            <span style="margin-left:10px;">
+              <span class="en-only">Tick products, then enter quantity on each row.</span>
+              <span class="zh-only">勾选型号后，直接在该行输入数量。</span>
+            </span>
+          </span>
+          <div class="bulk-actions">
+            <button class="btn btn-outline btn-sm" onclick="selectVisibleProducts(true)">
+              <span class="en-only">Select All</span>
+              <span class="zh-only">全选目前列表</span>
+            </button>
+            <button class="btn btn-ghost btn-sm" onclick="selectVisibleProducts(false)">
+              <span class="en-only">Clear Selection</span>
+              <span class="zh-only">取消勾选</span>
+            </button>
+          </div>
+        </div>
+        <div class="order-table-wrap" style="max-height:420px;overflow-y:auto;">
+          <table class="order-table" id="prod-table">
+            <thead style="position:sticky;top:0;z-index:10;background:var(--surface-2);">
+              <tr>
+                <th style="width:44px;text-align:center;"><span class="en-only">✓</span><span class="zh-only">✓</span></th>
+                <th><span class="en-only">Code</span><span class="zh-only">型号</span></th>
+                <th><span class="en-only">Product Name</span><span class="zh-only">产品名称</span></th>
+                <th class="center"><span class="en-only">Dia</span><span class="zh-only">直径</span></th>
+                <th class="center"><span class="en-only">Flutes</span><span class="zh-only">刃数</span></th>
+                <th class="num"><span class="en-only">Stock</span><span class="zh-only">库存</span></th>
+                <th class="num"><span class="en-only">Tax-included Unit Price</span><span class="zh-only">含税单价</span></th>
+                <th class="center"><span class="en-only">Qty</span><span class="zh-only">数量</span></th>
+              </tr>
+            </thead>
+            <tbody id="prod-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="custom-tool-area" class="custom-tool-card">
+        <h4 class="en-only">Custom Tool Request</h4>
+        <h4 class="zh-only">非标刀具查询</h4>
+        <p class="en-only">Enter the model, drawing reference or required specification. Sales will confirm feasibility and quotation.</p>
+        <p class="zh-only">请输入客户需要嘅型号、图纸编号或规格要求，销售会再跟进确认可否制作及报价。</p>
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="en-only">Reference / Model</label>
+            <label class="zh-only">型号或參考</label>
+            <input type="text" id="custom-model" placeholder="e.g. Custom Ø1.2 x 8L / Drawing No.">
+          </div>
+          <div class="form-group">
+            <label class="en-only">Quantity</label>
+            <label class="zh-only">数量</label>
+            <input type="number" id="custom-qty" min="1" value="1">
+          </div>
+          <div class="form-group full">
+            <label class="en-only">Specification / Requirements</label>
+            <label class="zh-only">规格要求</label>
+            <textarea id="custom-spec" rows="3" placeholder="直径、刃长、总长、R角、材料、涂层、加工物料等"></textarea>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:flex-end;margin-top:14px;">
+          <button class="btn btn-primary" onclick="addCustomToolToCart()">
+            <span class="en-only">Add Custom Tool</span>
+            <span class="zh-only">加入非标刀具</span>
+          </button>
+        </div>
+      </div>
+      <div id="sel-placeholder" style="text-align:center;padding:36px;color:var(--text-light);">
+        <div style="font-size:13px;margin-bottom:8px;font-weight:800;letter-spacing:0.8px;color:var(--primary);">SELECT PRODUCT</div>
+        <span class="en-only">Select a series to list all models. Tool type and diameter can narrow the list.</span>
+        <span class="zh-only">请先选择「系列」即可列出所有型号；刀具类型及直径可作进一步过滤。</span>
+      </div>
+    </div>
+
+    <div id="draft-list-section" class="draft-list-card">
+      <h3><span class="en-only">Saved Drafts</span><span class="zh-only">已暂存草稿</span></h3>
+      <div id="draft-list"></div>
+    </div>
+
+    <!-- Current order items -->
+    <div id="cart-section" style="display:none;">
+      <div class="order-summary-bar" style="margin-bottom:16px;background:var(--primary-dark);color:white;">
+        <div class="order-count">
+          <span class="en-only"><strong id="cart-count">0</strong> item(s) in order</span>
+          <span class="zh-only">订单中共 <strong id="cart-count-zh">0</strong> 项产品</span>
+        </div>
+        <div class="order-total">
+          <span class="en-only">Total: <strong id="cart-total">HK$0</strong></span>
+          <span class="zh-only">合計：<strong id="cart-total-zh">HK$0</strong></span>
+        </div>
+        <button class="btn btn-ghost btn-sm" onclick="clearCart()" style="color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.2);">
+          <span class="en-only">Clear All</span>
+          <span class="zh-only">清除全部</span>
+        </button>
+      </div>
+
+      <div class="order-table-wrap">
+        <table class="order-table cart-table">
+          <thead>
+            <tr>
+              <th class="select-col"><span class="en-only">✓</span><span class="zh-only">✓</span></th>
+              <th><span class="en-only">Product</span><span class="zh-only">产品</span></th>
+              <th class="stock-col"><span class="en-only">Stock</span><span class="zh-only">库存</span></th>
+              <th class="price-col"><span class="en-only">Tax-included Unit Price</span><span class="zh-only">含税单价</span></th>
+              <th class="qty-col"><span class="en-only">Quantity</span><span class="zh-only">数量</span></th>
+              <th class="subtotal-col"><span class="en-only">Subtotal</span><span class="zh-only">小计</span></th>
+              <th class="action-col"></th>
+            </tr>
+          </thead>
+          <tbody id="cart-tbody"></tbody>
+        </table>
+      </div>
+      <div id="cart-stock-warn" style="display:none;padding:10px 14px;background:var(--error-bg);border-radius:var(--radius-sm);margin-top:10px;font-size:13px;color:var(--error);font-weight:600;">
+        ⚠️ <span class="en-only">Some items exceed available stock. Please correct before submitting.</span>
+        <span class="zh-only">部分产品数量超出库存，请更正后再提交。</span>
+      </div>
+
+      <!-- Customer form -->
+      <div class="customer-form">
+        <h3><span class="en-only">Contact Information</span><span class="zh-only">联络资料</span></h3>
+        <div class="form-grid">
+          <div class="form-group">
+            <label><span class="en-only">Company Name</span><span class="zh-only">公司名称</span></label>
+            <input type="text" id="cust-company" placeholder="">
+          </div>
+          <div class="form-group">
+            <label><span class="en-only">Contact Name <span class="req">*</span> 联络人 <span class="req">*</span></span><span class="zh-only">联络人 <span class="req">*</span></span></label>
+            <input type="text" id="cust-name" placeholder="" required>
+          </div>
+          <div class="form-group">
+            <label><span class="en-only">Email <span class="req">*</span> 电邮 <span class="req">*</span></span><span class="zh-only">电邮 <span class="req">*</span></span></label>
+            <input type="email" id="cust-email" placeholder="" required>
+          </div>
+          <div class="form-group">
+            <label><span class="en-only">Phone</span><span class="zh-only">电话</span></label>
+            <input type="tel" id="cust-phone" placeholder="">
+          </div>
+          <div class="form-group full">
+            <label><span class="en-only">Notes / Special Requirements</span><span class="zh-only">备注 / 其他要求</span></label>
+            <textarea id="cust-notes" rows="3" placeholder=""></textarea>
+          </div>
+          <div class="form-group">
+            <label><span class="en-only">Payment Terms <span class="req">*</span></span><span class="zh-only">付款条件 <span class="req">*</span></span></label>
+            <select id="order-payment-term" onchange="onPaymentTermChange()"></select>
+          </div>
+          <div class="form-group" id="order-payment-custom-wrap" style="display:none;">
+            <label><span class="en-only">Custom Payment Terms</span><span class="zh-only">自定义付款条件</span></label>
+            <input type="text" id="order-payment-custom" placeholder="">
+          </div>
+          <div class="form-group">
+            <label><span class="en-only">Delivery Time <span class="req">*</span></span><span class="zh-only">交货时间 <span class="req">*</span></span></label>
+            <select id="order-delivery-mode" onchange="onDeliveryModeChange()">
+              <option value="stock">Ex-stock / 现货</option>
+              <option value="days">Within Days / 指定天数内交货</option>
+            </select>
+          </div>
+          <div class="form-group" id="order-delivery-days-wrap" style="display:none;">
+            <label><span class="en-only">Delivery Days</span><span class="zh-only">交货天数</span></label>
+            <input type="number" id="order-delivery-days" min="1" step="1" value="7">
+          </div>
+        </div>
+      </div>
+
+      <!-- Submit bar -->
+      <div class="submit-bar">
+        <div class="total-display">
+          <span class="en-only">Order Total:</span>
+          <span class="zh-only">订单合計：</span>
+          <strong id="submit-total">HK$0</strong>
+          <div class="tax-breakdown">
+            <div class="tax-breakdown-row">
+              <span class="en-only">Before Tax</span><span class="zh-only">未税金额</span>
+              <span id="submit-net">HK$0</span>
+            </div>
+            <div class="tax-breakdown-row">
+              <span class="en-only">Tax</span><span class="zh-only">税额</span>
+              <span id="submit-tax">HK$0</span>
+            </div>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="btn btn-ghost" onclick="clearCart()" style="color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.2);">
+            <span class="en-only">Clear</span>
+            <span class="zh-only">清除</span>
+          </button>
+          <button class="btn btn-outline btn-lg" onclick="saveCurrentOrderDraft()">
+            <span class="en-only">Save Draft</span>
+            <span class="zh-only">暂存草稿</span>
+          </button>
+          <button class="btn btn-accent btn-lg" id="submit-btn" onclick="submitOrder()">
+            <span class="en-only">Generate Order</span>
+            <span class="zh-only">生成订单</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+  PRODUCTS SHOWCASE
+═══════════════════════════════════════ -->
+<section class="section" id="products">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="en-only">Product Series</h2>
+      <h2 class="zh-only">产品系列</h2>
+    </div>
+
+    <div class="product-series-feature">
+      <div class="product-series-visual">
+        <img src="images/fuka-cutting-tools.png" alt="FUKA cutting tools product series" onerror="this.style.display='none'">
+      </div>
+      <div class="product-series-copy">
+        <span class="badge badge-hs">FUKA</span>
+        <h3 class="en-only">High Precision Micro Diameter Endmills</h3>
+        <h3 class="zh-only">高精度微径铣刀系列</h3>
+        <p class="en-only">FUKA cutting tools are designed for precision mold, automotive, aerospace and medical part machining. The series covers hardened steel and copper-aluminum applications, with micro diameter and long neck options for fine details and deep features.</p>
+        <p class="zh-only">FUKA 刀具系列面向精密模具、汽车、航空及医疗零件加工，覆盖淬硬钢及铜铝合金应用，并提供微径及长颈规格，适合细节位、深沟及高精度加工。</p>
+        <ul class="product-series-points">
+          <li class="en-only">FX6M hardened steel series for up to 65HRC machining.</li>
+          <li class="zh-only">FX6M 淬硬钢系列，最高适用於 65HRC 加工。</li>
+          <li class="en-only">FX3 copper and aluminum alloy series with high welding resistance.</li>
+          <li class="zh-only">FX3 铜铝合金系列，具备高抗焊接性及顺畅排屑。</li>
+          <li class="en-only">Micro diameter lineup from Ø0.03mm for precision details.</li>
+          <li class="zh-only">微径产品最小 Ø0.03mm，适合精密细节加工。</li>
+        </ul>
+        <a class="btn btn-accent" href="#order" onclick="prefillSeries('FX6M','__all')">
+          <span class="en-only">Select Product Models</span>
+          <span class="zh-only">选择产品型号</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+  CONTACT
+═══════════════════════════════════════ -->
+<section class="section section-alt" id="contact">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="en-only">Contact Us</h2>
+      <h2 class="zh-only">联络我們</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <h3 class="en-only">Sales & Inquiries</h3>
+        <h3 class="zh-only">销售及查询</h3>
+        <div class="contact-row"><div class="contact-row-icon">@</div><div><strong>Email</strong><br><span>sales@fukatools.com</span></div></div>
+        <div class="contact-row"><div class="contact-row-icon">T</div><div><strong class="en-only">Phone</strong><strong class="zh-only">电话</strong><br><span>+852 2345 6789</span></div></div>
+        <div class="contact-row"><div class="contact-row-icon">W</div><div><strong>WhatsApp</strong><br><span>+852 9876 5432</span></div></div>
+      </div>
+      <div class="contact-card">
+        <h3 class="en-only">Office</h3>
+        <h3 class="zh-only">办公室</h3>
+        <div class="contact-row"><div class="contact-row-icon">A</div><div><strong class="en-only">Address</strong><strong class="zh-only">地址</strong><br><span class="en-only">Unit 1208, 12/F, Industry Building, Kwai Chung, N.T., Hong Kong</span><span class="zh-only">香港新界葵涌工業大廈12樓1208室</span></div></div>
+        <div class="contact-row"><div class="contact-row-icon">H</div><div><strong class="en-only">Business Hours</strong><strong class="zh-only">营业时间</strong><br><span class="en-only">Mon-Fri: 9:00 - 18:00 HKT</span><span class="zh-only">星期一至五：上午9時至下午6時</span></div></div>
+        <div class="contact-row"><div class="contact-row-icon">W</div><div><strong>Website</strong><br><span>www.fukatools.com</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+  ADMIN PANEL
+═══════════════════════════════════════ -->
+<section class="admin-wrap" id="admin">
+  <div class="container">
+
+    <!-- Login -->
+    <div id="admin-login">
+      <div class="admin-login-box">
+        <h2><span class="en-only">Admin Login</span><span class="zh-only">管理员登录</span></h2>
+        <p class="en-only">Enter your password to access the admin panel</p>
+        <p class="zh-only">请输入密码以進入管理面板</p>
+        <div style="margin-top:20px;">
+          <div class="form-group" style="margin-bottom:14px;">
+            <label class="en-only">Password</label>
+            <label class="zh-only">密码</label>
+            <input type="password" id="admin-pw" placeholder="" onkeypress="if(event.key==='Enter')doLogin()">
+          </div>
+          <button class="btn btn-primary btn-lg" style="width:100%;" onclick="doLogin()">
+            <span class="en-only">Login</span>
+            <span class="zh-only">登录</span>
+          </button>
+          <p style="margin-top:12px;font-size:12px;color:var(--text-light);" class="en-only">Authorized staff access only</p>
+          <p style="margin-top:12px;font-size:12px;color:var(--text-light);" class="zh-only">只限授权员工使用</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="admin-panel" class="admin-panel">
+      <div class="admin-header">
+        <h2><span class="en-only">Admin Panel</span><span class="zh-only">管理面板</span></h2>
+        <div style="display:flex;gap:10px;align-items:center;">
+          <span style="font-size:13px;opacity:0.7;" class="en-only">Logged in as Admin</span>
+          <span style="font-size:13px;opacity:0.7;" class="zh-only">已登录管理员</span>
+          <button class="btn btn-ghost btn-sm" onclick="doLogout()" style="color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.2);">
+            <span class="en-only">Logout</span>
+            <span class="zh-only">登出</span>
+          </button>
+        </div>
+      </div>
+      <div class="admin-body">
+        <div class="admin-tabs">
+          <button class="admin-tab-btn" onclick="switchTab('settings')">
+            <span class="en-only">Settings</span>
+            <span class="zh-only">设置</span>
+          </button>
+          <button class="admin-tab-btn active" onclick="switchTab('products')">
+            <span class="en-only">Products & Pricing</span>
+            <span class="zh-only">产品及定价</span>
+          </button>
+          <button class="admin-tab-btn" onclick="switchTab('orders')">
+            <span class="en-only">Orders</span>
+            <span class="zh-only">订单</span>
+          </button>
+          <button class="admin-tab-btn" onclick="switchTab('new-product')">
+            <span class="en-only">+ Add Product</span>
+            <span class="zh-only">+ 新增产品</span>
+          </button>
+        </div>
+
+        <!-- Settings Tab -->
+        <div class="admin-tab-content" id="tab-settings">
+          <div class="admin-toolbar">
+            <h3 class="en-only">Website Pricing Settings</h3>
+            <h3 class="zh-only">网站价格设置</h3>
+            <button class="btn btn-success btn-sm" onclick="saveSiteSettings()">
+              <span class="en-only">Save Settings</span>
+              <span class="zh-only">保存设置</span>
+            </button>
+          </div>
+          <div class="admin-settings-grid">
+            <div class="form-group">
+              <label class="en-only">English Default Currency</label>
+              <label class="zh-only">英文版默认货币</label>
+              <select id="set-currency">
+                <option value="USD">USD</option>
+                <option value="HKD">HKD</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="en-only">CNY Tax Rate (%)</label>
+              <label class="zh-only">人民币税率 (%)</label>
+              <input type="number" id="set-tax-rate" step="0.01" min="0" value="13">
+            </div>
+            <div class="form-group">
+              <label class="en-only">CNY Tax Mode</label>
+              <label class="zh-only">人民币税务模式</label>
+              <select id="set-tax-included">
+                <option value="1">Tax Included / 含税</option>
+                <option value="0">Tax Excluded / 不含税</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="en-only">Allow Orders Above Stock</label>
+              <label class="zh-only">库存不足时允许生成订单</label>
+              <select id="set-allow-overstock">
+                <option value="0">No, block order / 不允许</option>
+                <option value="1">Yes, allow order / 允许</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="en-only">Default Payment Terms</label>
+              <label class="zh-only">默认付款条件</label>
+              <select id="set-payment-term">
+                <option value="cash">Cash on Delivery / 现金交付</option>
+                <option value="monthly30">Monthly 30 Days / 月结 30 天</option>
+                <option value="monthly60">Monthly 60 Days / 月结 60 天</option>
+                <option value="custom">Custom / 自定义</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="en-only">Custom Payment Terms</label>
+              <label class="zh-only">自定义付款条件</label>
+              <input type="text" id="set-custom-payment-term" placeholder="e.g. 50% deposit, balance before delivery">
+            </div>
+            <div class="form-group">
+              <label class="en-only">Default Delivery Time</label>
+              <label class="zh-only">默认交货时间</label>
+              <select id="set-delivery-mode">
+                <option value="stock">Ex-stock / 现货</option>
+                <option value="days">Within Days / 指定天数内交货</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="en-only">Default Delivery Days</label>
+              <label class="zh-only">默认交货天数</label>
+              <input type="number" id="set-delivery-days" min="1" step="1" value="7">
+            </div>
+          </div>
+          <div class="admin-settings-note">
+            <span class="en-only">Default rule: Chinese page uses CNY only. English page uses USD or HKD. Payment and delivery defaults can still be modified before generating each order.</span>
+            <span class="zh-only">默认规则：简体中文版只用人民币；英文版可用美元或港币。付款条件及交货时间会自动带入订单，下单前仍可修改。</span>
+          </div>
+        </div>
+
+        <!-- Products Tab -->
+        <div class="admin-tab-content active" id="tab-products">
+          <div class="admin-toolbar">
+            <h3 class="en-only">Products & Pricing</h3>
+            <h3 class="zh-only">产品及定价</h3>
+            <div style="display:flex;gap:8px;align-items:center;">
+              <select id="admin-series-filter" onchange="renderAdminProducts()" style="padding:8px 12px;border:1.5px solid var(--border);border-radius:6px;font-size:13px;">
+                <option value="">All Series 全部</option>
+                <option value="FX6M">FX6M</option>
+                <option value="FX3">FX3</option>
+              </select>
+              <button class="btn btn-primary btn-sm" onclick="switchTab('new-product')">
+                <span class="en-only">+ Add New</span>
+                <span class="zh-only">+ 新增</span>
+              </button>
+              <button class="btn btn-success btn-sm" onclick="saveAllProducts()">
+                <span class="en-only">Save All</span>
+                <span class="zh-only">保存全部</span>
+              </button>
+            </div>
+          </div>
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th><span class="en-only">Code</span><span class="zh-only">型号</span></th>
+                  <th><span class="en-only">Name</span><span class="zh-only">名称</span></th>
+                  <th><span class="en-only">Series</span><span class="zh-only">系列</span></th>
+                  <th><span class="en-only">Type</span><span class="zh-only">类型</span></th>
+                  <th><span class="en-only">Dia(mm)</span><span class="zh-only">直径</span></th>
+                  <th><span class="en-only">USD Tax-included Unit Price</span><span class="zh-only">美元含税单价</span></th>
+                  <th><span class="en-only">CNY Tax-included Unit Price</span><span class="zh-only">人民币含税单价</span></th>
+                  <th><span class="en-only">HKD Tax-included Unit Price</span><span class="zh-only">港币含税单价</span></th>
+                  <th><span class="en-only">Stock</span><span class="zh-only">库存</span></th>
+                  <th><span class="en-only">Active</span><span class="zh-only">启用</span></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="admin-products-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Orders Tab -->
+        <div class="admin-tab-content" id="tab-orders">
+          <div class="admin-toolbar">
+            <h3 class="en-only">All Orders</h3>
+            <h3 class="zh-only">所有订单</h3>
+            <button class="btn btn-outline btn-sm" onclick="exportOrdersCSV()">
+              <span class="en-only">Export CSV</span>
+              <span class="zh-only">导出CSV</span>
+            </button>
+          </div>
+          <div id="admin-orders-list"></div>
+        </div>
+
+        <!-- Add Product Tab -->
+        <div class="admin-tab-content" id="tab-new-product">
+          <div class="admin-toolbar">
+            <h3 class="en-only">Add / Edit Product</h3>
+            <h3 class="zh-only">新增或编辑产品</h3>
+          </div>
+          <div id="product-form-area">
+            <div class="form-grid" style="margin-bottom:16px;">
+              <div class="form-group">
+                <label class="en-only">Product Code *</label>
+                <label class="zh-only">产品型号 *</label>
+                <input type="text" id="np-code" placeholder="e.g. FX6ME0104">
+              </div>
+              <div class="form-group">
+                <label class="en-only">Series</label>
+                <label class="zh-only">系列</label>
+                <select id="np-series">
+                  <option value="FX6M">FX6M — Hardened Steels</option>
+                  <option value="FX3">FX3 — Copper · Aluminum</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="en-only">Product Name (EN)</label>
+                <label class="zh-only">产品名称（英）</label>
+                <input type="text" id="np-name-en" placeholder="e.g. 1x3L Flat Endmill">
+              </div>
+              <div class="form-group">
+                <label class="en-only">Product Name (ZH)</label>
+                <label class="zh-only">产品名称（中）</label>
+                <input type="text" id="np-name-zh" placeholder="e.g. 1x3L 平底铣刀">
+              </div>
+              <div class="form-group">
+                <label class="en-only">Tool Type</label>
+                <label class="zh-only">刀具类型</label>
+                <select id="np-type">
+                  <option value="Square Endmill">Flat Endmill 平底铣刀</option>
+                  <option value="Ball Endmill">Ball Endmill 球头铣刀</option>
+                  <option value="Corner Radius">Bull Nose Endmill 圆鼻铣刀</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="en-only">Diameter (mm)</label>
+                <label class="zh-only">直径 (mm)</label>
+                <input type="number" id="np-dia" step="0.01" min="0" placeholder="e.g. 1">
+              </div>
+              <div class="form-group">
+                <label class="en-only">Flutes</label>
+                <label class="zh-only">刃数</label>
+                <input type="number" id="np-flute" min="1" value="2">
+              </div>
+              <div class="form-group">
+                <label class="en-only">USD Tax-included Unit Price</label>
+                <label class="zh-only">美元含税单价</label>
+                <input type="number" id="np-price-usd" step="0.01" min="0" placeholder="e.g. 35">
+              </div>
+              <div class="form-group">
+                <label class="en-only">CNY Tax-included Unit Price</label>
+                <label class="zh-only">人民币含税单价</label>
+                <input type="number" id="np-price-cny" step="0.01" min="0" placeholder="e.g. 260">
+              </div>
+              <div class="form-group">
+                <label class="en-only">HKD Tax-included Unit Price</label>
+                <label class="zh-only">港币含税单价</label>
+                <input type="number" id="np-price-hkd" step="0.01" min="0" placeholder="e.g. 280">
+              </div>
+              <div class="form-group">
+                <label class="en-only">Stock Quantity</label>
+                <label class="zh-only">库存数量</label>
+                <input type="number" id="np-stock" min="0" value="100">
+              </div>
+              <div class="form-group">
+                <label class="en-only">Active</label>
+                <label class="zh-only">启用</label>
+                <select id="np-active">
+                  <option value="1">Enabled / 启用</option>
+                  <option value="0">Disabled / 停用</option>
+                </select>
+              </div>
+            </div>
+            <div style="display:flex;gap:10px;margin-top:8px;">
+              <button class="btn btn-primary" onclick="saveNewProduct()">
+                <span class="en-only">Save Product</span>
+                <span class="zh-only">保存产品</span>
+              </button>
+              <button class="btn btn-ghost" onclick="clearProductForm()">
+                <span class="en-only">Clear</span>
+                <span class="zh-only">重填</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+  FOOTER
+═══════════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="images/logo/fuka-logo-official.svg" alt="FUKA" style="width:160px;margin-bottom:8px;" onerror="this.style.display='none'">
+        <p class="en-only">High precision micro diameter cutting tools. From Hong Kong to the world.</p>
+        <p class="zh-only">高精度微径刀具。品质卓越，远销全球。</p>
+      </div>
+      <div class="footer-col">
+        <h4 class="en-only">Navigation</h4>
+        <h4 class="zh-only">导航</h4>
+        <a href="#home" class="en-only">Home</a><a href="#home" class="zh-only">首页</a>
+        <a href="#order" class="en-only">Place Order</a><a href="#order" class="zh-only">下单</a>
+        <a href="#products" class="en-only">Products</a><a href="#products" class="zh-only">产品</a>
+        <a href="#admin" class="en-only">Admin</a><a href="#admin" class="zh-only">管理</a>
+      </div>
+      <div class="footer-col">
+        <h4 class="en-only">Contact</h4>
+        <h4 class="zh-only">联络</h4>
+        <a>sales@fukatools.com</a>
+        <a>+852 2345 6789</a>
+        <a>WhatsApp +852 9876 5432</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="en-only">© 2026 FUKA Cutting Tools Co., Ltd. All rights reserved.</span>
+      <span class="zh-only">© 2026 FUKA刀具有限公司。版权所有。</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ═══════════════════════════════════════════
+// DATA STORE
+// Scalable: products stored as array of objects
+// ═══════════════════════════════════════════
+const PRODUCTS = [
+  // FX6M — Flat Endmills
+  {id:'FX6ME0104',name_en:'1x3L Square Endmill',name_zh:'1x3L 平底铣刀',series:'FX6M',type:'Square Endmill',dia:1,dia_type:'small',flute:4,material:'Hardened Steels',price:0,stock:500,enabled:1},
+  {id:'FX6ME0104L',name_en:'1x4L Square Endmill',name_zh:'1x4L 平底铣刀',series:'FX6M',type:'Square Endmill',dia:1,dia_type:'small',flute:4,material:'Hardened Steels',price:0,stock:500,enabled:1},
+  {id:'FX6ME0154',name_en:'1.5x4.5L Square Endmill',name_zh:'1.5x4.5L 平底铣刀',series:'FX6M',type:'Square Endmill',dia:1.5,dia_type:'small',flute:4,material:'Hardened Steels',price:0,stock:300,enabled:1},
+  {id:'FX6ME0254',name_en:'2.5x7L Square Endmill',name_zh:'2.5x7L 平底铣刀',series:'FX6M',type:'Square Endmill',dia:2.5,dia_type:'small',flute:4,material:'Hardened Steels',price:0,stock:200,enabled:1},
+  {id:'FX6ME0304',name_en:'3x8L Square Endmill',name_zh:'3x8L 平底铣刀',series:'FX6M',type:'Square Endmill',dia:3,dia_type:'medium',flute:4,material:'Hardened Steels',price:0,stock:150,enabled:1},
+  {id:'FX6ME0304D6',name_en:'3x8L Square Endmill (Type B)',name_zh:'3x8L 平底铣刀 (B型)',series:'FX6M',type:'Square Endmill',dia:3,dia_type:'medium',flute:4,material:'Hardened Steels',price:0,stock:100,enabled:1},
+  {id:'FX6ME0404',name_en:'4x11L Square Endmill',name_zh:'4x11L 平底铣刀',series:'FX6M',type:'Square Endmill',dia:4,dia_type:'medium',flute:4,material:'Hardened Steels',price:0,stock:100,enabled:1},
+  {id:'FX6ME0504',name_en:'5x14L Square Endmill',name_zh:'5x14L 平底铣刀',series:'FX6M',type:'Square Endmill',dia:5,dia_type:'medium',flute:4,material:'Hardened Steels',price:0,stock:60,enabled:1},
+  {id:'FX6ME0604',name_en:'6x18L Square Endmill',name_zh:'6x18L 平底铣刀',series:'FX6M',type:'Square Endmill',dia:6,dia_type:'medium',flute:4,material:'Hardened Steels',price:0,stock:50,enabled:1},
+  {id:'FX6ME0804',name_en:'8x22L Square Endmill',name_zh:'8x22L 平底铣刀',series:'FX6M',type:'Square Endmill',dia:8,dia_type:'large',flute:4,material:'Hardened Steels',price:0,stock:30,enabled:1},
+  // FX6M — Ball Endmills
+  {id:'FX6MB0102',name_en:'R0.5x2L Ball Endmill',name_zh:'R0.5x2L 球头铣刀',series:'FX6M',type:'Ball Endmill',dia:1,dia_type:'small',flute:2,material:'Hardened Steels',price:0,stock:300,enabled:1},
+  {id:'FX6MB0152',name_en:'R0.75x3L Ball Endmill',name_zh:'R0.75x3L 球头铣刀',series:'FX6M',type:'Ball Endmill',dia:1.5,dia_type:'small',flute:2,material:'Hardened Steels',price:0,stock:200,enabled:1},
+  {id:'FX6MB0202',name_en:'R1x4L Ball Endmill',name_zh:'R1x4L 球头铣刀',series:'FX6M',type:'Ball Endmill',dia:2,dia_type:'small',flute:2,material:'Hardened Steels',price:0,stock:150,enabled:1},
+  {id:'FX6MB0302',name_en:'R1.5x6L Ball Endmill',name_zh:'R1.5x6L 球头铣刀',series:'FX6M',type:'Ball Endmill',dia:3,dia_type:'medium',flute:2,material:'Hardened Steels',price:0,stock:100,enabled:1},
+  {id:'FX6MB0402',name_en:'R2x6L Ball Endmill',name_zh:'R2x6L 球头铣刀',series:'FX6M',type:'Ball Endmill',dia:4,dia_type:'medium',flute:2,material:'Hardened Steels',price:0,stock:80,enabled:1},
+  {id:'FX6MB0602',name_en:'R3x9L Ball Endmill',name_zh:'R3x9L 球头铣刀',series:'FX6M',type:'Ball Endmill',dia:6,dia_type:'medium',flute:2,material:'Hardened Steels',price:0,stock:50,enabled:1},
+  {id:'FX6MB1002',name_en:'R5x15L Ball Endmill',name_zh:'R5x15L 球头铣刀',series:'FX6M',type:'Ball Endmill',dia:10,dia_type:'large',flute:2,material:'Hardened Steels',price:0,stock:20,enabled:1},
+  // FX6M — Corner Radius
+  {id:'FX6MR0101',name_en:'1R0.1x3L Corner Radius Endmill',name_zh:'1R0.1x3L 圆鼻铣刀',series:'FX6M',type:'Corner Radius',dia:1,dia_type:'small',flute:4,material:'Hardened Steels',price:0,stock:200,enabled:1},
+  {id:'FX6MR0201',name_en:'2R0.1x6L Corner Radius Endmill',name_zh:'2R0.1x6L 圆鼻铣刀',series:'FX6M',type:'Corner Radius',dia:2,dia_type:'small',flute:4,material:'Hardened Steels',price:0,stock:150,enabled:1},
+  {id:'FX6MR0301',name_en:'3R0.1x8L Corner Radius Endmill',name_zh:'3R0.1x8L 圆鼻铣刀',series:'FX6M',type:'Corner Radius',dia:3,dia_type:'medium',flute:4,material:'Hardened Steels',price:0,stock:100,enabled:1},
+  {id:'FX6MR0601',name_en:'6R0.1x12L Corner Radius Endmill',name_zh:'6R0.1x12L 圆鼻铣刀',series:'FX6M',type:'Corner Radius',dia:6,dia_type:'medium',flute:4,material:'Hardened Steels',price:0,stock:50,enabled:1},
+  // FX6M — Micro Square
+  {id:'FX6MSE00042',name_en:'0.04x0.06L Micro Square Endmill',name_zh:'0.04x0.06L 微径平底',series:'FX6M',type:'Square Endmill',dia:0.04,dia_type:'micro',flute:2,material:'Hardened Steels',price:0,stock:500,enabled:1},
+  {id:'FX6MSE00052',name_en:'0.05x0.075L Micro Square Endmill',name_zh:'0.05x0.075L 微径平底',series:'FX6M',type:'Square Endmill',dia:0.05,dia_type:'micro',flute:2,material:'Hardened Steels',price:0,stock:500,enabled:1},
+  {id:'FX6MSE0012',name_en:'0.1x0.15L Micro Square Endmill',name_zh:'0.1x0.15L 微径平底',series:'FX6M',type:'Square Endmill',dia:0.1,dia_type:'micro',flute:2,material:'Hardened Steels',price:0,stock:400,enabled:1},
+  {id:'FX6MSE0022',name_en:'0.2x0.4L Micro Square Endmill',name_zh:'0.2x0.4L 微径平底',series:'FX6M',type:'Square Endmill',dia:0.2,dia_type:'micro',flute:2,material:'Hardened Steels',price:0,stock:400,enabled:1},
+  {id:'FX6MSE0032',name_en:'0.3x0.6L Micro Square Endmill',name_zh:'0.3x0.6L 微径平底',series:'FX6M',type:'Square Endmill',dia:0.3,dia_type:'micro',flute:2,material:'Hardened Steels',price:0,stock:300,enabled:1},
+  {id:'FX6MSE0052',name_en:'0.5x1L Micro Square Endmill',name_zh:'0.5x1L 微径平底',series:'FX6M',type:'Square Endmill',dia:0.5,dia_type:'micro',flute:2,material:'Hardened Steels',price:0,stock:250,enabled:1},
+  // FX6M — Micro Ball
+  {id:'FX6MSB00062',name_en:'R0.03x0.06L Micro Ball Endmill',name_zh:'R0.03x0.06L 微径球头',series:'FX6M',type:'Ball Endmill',dia:0.06,dia_type:'micro',flute:2,material:'Hardened Steels',price:0,stock:500,enabled:1},
+  {id:'FX6MSB0012',name_en:'R0.05x0.1L Micro Ball Endmill',name_zh:'R0.05x0.1L 微径球头',series:'FX6M',type:'Ball Endmill',dia:0.1,dia_type:'micro',flute:2,material:'Hardened Steels',price:0,stock:400,enabled:1},
+  {id:'FX6MSB0022',name_en:'R0.1x0.2L Micro Ball Endmill',name_zh:'R0.1x0.2L 微径球头',series:'FX6M',type:'Ball Endmill',dia:0.2,dia_type:'micro',flute:2,material:'Hardened Steels',price:0,stock:400,enabled:1},
+  {id:'FX6MSB0032',name_en:'R0.15x0.3L Micro Ball Endmill',name_zh:'R0.15x0.3L 微径球头',series:'FX6M',type:'Ball Endmill',dia:0.3,dia_type:'micro',flute:2,material:'Hardened Steels',price:0,stock:300,enabled:1},
+  // FX6M — Long Neck Square
+  {id:'FX6MNE0101',name_en:'0.1x1L Long Neck Square',name_zh:'0.1x1L 长颈平底',series:'FX6M',type:'Square Endmill',dia:0.1,dia_type:'micro',flute:2,material:'Hardened Steels',price:0,stock:200,enabled:1},
+  {id:'FX6MNE0201',name_en:'0.2x1L Long Neck Square',name_zh:'0.2x1L 长颈平底',series:'FX6M',type:'Square Endmill',dia:0.2,dia_type:'micro',flute:2,material:'Hardened Steels',price:0,stock:200,enabled:1},
+  {id:'FX6MNE0301',name_en:'0.3x1.5L Long Neck Square',name_zh:'0.3x1.5L 长颈平底',series:'FX6M',type:'Square Endmill',dia:0.3,dia_type:'micro',flute:2,material:'Hardened Steels',price:0,stock:200,enabled:1},
+  {id:'FX6MNE0501',name_en:'0.5x1L Long Neck Square',name_zh:'0.5x1L 长颈平底',series:'FX6M',type:'Square Endmill',dia:0.5,dia_type:'micro',flute:2,material:'Hardened Steels',price:0,stock:150,enabled:1},
+  {id:'FX6MNE1008',name_en:'1x8L Long Neck Square',name_zh:'1x8L 长颈平底',series:'FX6M',type:'Square Endmill',dia:1,dia_type:'small',flute:2,material:'Hardened Steels',price:0,stock:150,enabled:1},
+  {id:'FX6MNE1508',name_en:'1.5x8L Long Neck Square',name_zh:'1.5x8L 长颈平底',series:'FX6M',type:'Square Endmill',dia:1.5,dia_type:'small',flute:2,material:'Hardened Steels',price:0,stock:100,enabled:1},
+  {id:'FX6MNE2010',name_en:'2x10L Long Neck Square',name_zh:'2x10L 长颈平底',series:'FX6M',type:'Square Endmill',dia:2,dia_type:'small',flute:2,material:'Hardened Steels',price:0,stock:100,enabled:1},
+  // FX6M — Long Neck Ball
+  {id:'FX6MNB1002',name_en:'R0.05x0.2L Long Neck Ball',name_zh:'R0.05x0.2L 长颈球头',series:'FX6M',type:'Ball Endmill',dia:0.1,dia_type:'micro',flute:2,material:'Hardened Steels',price:0,stock:200,enabled:1},
+  {id:'FX6MNB2004',name_en:'R0.1x0.4L Long Neck Ball',name_zh:'R0.1x0.4L 长颈球头',series:'FX6M',type:'Ball Endmill',dia:0.2,dia_type:'micro',flute:2,material:'Hardened Steels',price:0,stock:200,enabled:1},
+  {id:'FX6MNB3003',name_en:'R0.15x3L Long Neck Ball',name_zh:'R0.15x3L 长颈球头',series:'FX6M',type:'Ball Endmill',dia:0.3,dia_type:'micro',flute:2,material:'Hardened Steels',price:0,stock:150,enabled:1},
+  {id:'FX6MNB5004',name_en:'R0.25x4L Long Neck Ball',name_zh:'R0.25x4L 长颈球头',series:'FX6M',type:'Ball Endmill',dia:0.5,dia_type:'micro',flute:2,material:'Hardened Steels',price:0,stock:100,enabled:1},
+  {id:'FX6MNB1006',name_en:'R0.5x6L Long Neck Ball',name_zh:'R0.5x6L 长颈球头',series:'FX6M',type:'Ball Endmill',dia:1,dia_type:'small',flute:2,material:'Hardened Steels',price:0,stock:100,enabled:1},
+  {id:'FX6MNB2016',name_en:'R1x16L Long Neck Ball',name_zh:'R1x16L 长颈球头',series:'FX6M',type:'Ball Endmill',dia:2,dia_type:'small',flute:2,material:'Hardened Steels',price:0,stock:80,enabled:1},
+  // FX3 — Copper Aluminum
+  {id:'FX3E0104',name_en:'1x3L Cu-Al Square Endmill',name_zh:'1x3L 铜铝平底铣刀',series:'FX3',type:'Square Endmill',dia:1,dia_type:'small',flute:4,material:'Copper · Aluminum',price:0,stock:300,enabled:1},
+  {id:'FX3E0204',name_en:'2x6L Cu-Al Square Endmill',name_zh:'2x6L 铜铝平底铣刀',series:'FX3',type:'Square Endmill',dia:2,dia_type:'small',flute:4,material:'Copper · Aluminum',price:0,stock:200,enabled:1},
+  {id:'FX3E0304',name_en:'3x9L Cu-Al Square Endmill',name_zh:'3x9L 铜铝平底铣刀',series:'FX3',type:'Square Endmill',dia:3,dia_type:'medium',flute:4,material:'Copper · Aluminum',price:0,stock:150,enabled:1},
+  {id:'FX3E0404',name_en:'4x12L Cu-Al Square Endmill',name_zh:'4x12L 铜铝平底铣刀',series:'FX3',type:'Square Endmill',dia:4,dia_type:'medium',flute:4,material:'Copper · Aluminum',price:0,stock:80,enabled:1},
+  {id:'FX3E0604',name_en:'6x18L Cu-Al Square Endmill',name_zh:'6x18L 铜铝平底铣刀',series:'FX3',type:'Square Endmill',dia:6,dia_type:'medium',flute:4,material:'Copper · Aluminum',price:0,stock:50,enabled:1},
+  {id:'FX3B0102',name_en:'R0.5x2L Cu-Al Ball Endmill',name_zh:'R0.5x2L 铜铝球头铣刀',series:'FX3',type:'Ball Endmill',dia:1,dia_type:'small',flute:2,material:'Copper · Aluminum',price:0,stock:200,enabled:1},
+  {id:'FX3B0302',name_en:'R1.5x6L Cu-Al Ball Endmill',name_zh:'R1.5x6L 铜铝球头铣刀',series:'FX3',type:'Ball Endmill',dia:3,dia_type:'medium',flute:2,material:'Copper · Aluminum',price:0,stock:100,enabled:1},
+  {id:'FX3B0602',name_en:'R3x9L Cu-Al Ball Endmill',name_zh:'R3x9L 铜铝球头铣刀',series:'FX3',type:'Ball Endmill',dia:6,dia_type:'medium',flute:2,material:'Copper · Aluminum',price:0,stock:50,enabled:1},
+  // FX3 — Micro
+  {id:'FX3SE0012',name_en:'0.1x0.3L Micro Cu-Al Square',name_zh:'0.1x0.3L 微径铜铝平底',series:'FX3',type:'Square Endmill',dia:0.1,dia_type:'micro',flute:2,material:'Copper · Aluminum',price:0,stock:300,enabled:1},
+  {id:'FX3SE0022',name_en:'0.2x0.4L Micro Cu-Al Square',name_zh:'0.2x0.4L 微径铜铝平底',series:'FX3',type:'Square Endmill',dia:0.2,dia_type:'micro',flute:2,material:'Copper · Aluminum',price:0,stock:300,enabled:1},
+  {id:'FX3SE0032',name_en:'0.3x0.6L Micro Cu-Al Square',name_zh:'0.3x0.6L 微径铜铝平底',series:'FX3',type:'Square Endmill',dia:0.3,dia_type:'micro',flute:2,material:'Copper · Aluminum',price:0,stock:250,enabled:1},
+  {id:'FX3SB0012',name_en:'R0.05x0.2L Micro Cu-Al Ball',name_zh:'R0.05x0.2L 微径铜铝球头',series:'FX3',type:'Ball Endmill',dia:0.1,dia_type:'micro',flute:2,material:'Copper · Aluminum',price:0,stock:300,enabled:1},
+  {id:'FX3SB0032',name_en:'R0.15x0.6L Micro Cu-Al Ball',name_zh:'R0.15x0.6L 微径铜铝球头',series:'FX3',type:'Ball Endmill',dia:0.3,dia_type:'micro',flute:2,material:'Copper · Aluminum',price:0,stock:250,enabled:1},
+  // FX3 — Long Neck
+  {id:'FX3NE0202',name_en:'0.2x2L Long Neck Cu-Al Square',name_zh:'0.2x2L 长颈铜铝平底',series:'FX3',type:'Square Endmill',dia:0.2,dia_type:'micro',flute:2,material:'Copper · Aluminum',price:0,stock:200,enabled:1},
+  {id:'FX3NE0404',name_en:'0.4x4L Long Neck Cu-Al Square',name_zh:'0.4x4L 长颈铜铝平底',series:'FX3',type:'Square Endmill',dia:0.4,dia_type:'micro',flute:2,material:'Copper · Aluminum',price:0,stock:150,enabled:1},
+  {id:'FX3NE1006',name_en:'1x6L Long Neck Cu-Al Square',name_zh:'1x6L 长颈铜铝平底',series:'FX3',type:'Square Endmill',dia:1,dia_type:'small',flute:2,material:'Copper · Aluminum',price:0,stock:100,enabled:1},
+  {id:'FX3NB1006',name_en:'R0.5x6L Long Neck Cu-Al Ball',name_zh:'R0.5x6L 长颈铜铝球头',series:'FX3',type:'Ball Endmill',dia:1,dia_type:'small',flute:2,material:'Copper · Aluminum',price:0,stock:100,enabled:1},
+  {id:'FX3NB2010',name_en:'R1x10L Long Neck Cu-Al Ball',name_zh:'R1x10L 长颈铜铝球头',series:'FX3',type:'Ball Endmill',dia:2,dia_type:'small',flute:2,material:'Copper · Aluminum',price:0,stock:80,enabled:1},
+];
+
+let orders = JSON.parse(localStorage.getItem('fuka_orders') || '[]');
+let orderDrafts = JSON.parse(localStorage.getItem('fuka_order_drafts') || '[]');
+let currentLang = 'zh';
+let adminLoggedIn = false;
+const CURRENCY_META = {
+  USD: { symbol: 'US$', label: 'USD' },
+  CNY: { symbol: '¥', label: 'CNY' },
+  HKD: { symbol: 'HK$', label: 'HKD' },
+};
+const DEFAULT_PRODUCT_PRICES = { USD: 5, CNY: 50, HKD: 55 };
+const DEFAULT_SITE_SETTINGS = {
+  currency: 'USD',
+  taxRate: 13,
+  taxIncluded: true,
+  allowOverStockOrders: false,
+  paymentTerm: 'cash',
+  customPaymentTerm: '待确认',
+  deliveryMode: 'stock',
+  deliveryDays: 7,
+};
+const PAYMENT_TERM_LABELS = {
+  cash: { en: 'Cash on Delivery', zh: '现金交付' },
+  monthly30: { en: 'Monthly 30 Days', zh: '月结 30 天' },
+  monthly60: { en: 'Monthly 60 Days', zh: '月结 60 天' },
+  custom: { en: 'Custom', zh: '自定义' },
+};
+let siteSettings = loadSiteSettings();
+let orderCurrency = siteSettings.currency;
+
+function normalizeProductPricing(product) {
+  const legacyPrice = parseFloat(product.price) || 0;
+  normalizeProductTerminology(product);
+  product.prices = {
+    USD: parseFloat(product.prices?.USD) || DEFAULT_PRODUCT_PRICES.USD,
+    CNY: parseFloat(product.prices?.CNY) || DEFAULT_PRODUCT_PRICES.CNY,
+    HKD: parseFloat(product.prices?.HKD) || legacyPrice || DEFAULT_PRODUCT_PRICES.HKD,
+  };
+  product.price = product.prices.HKD;
+}
+
+function normalizeProductTerminology(product) {
+  ['name_zh', 'name_en'].forEach(key => {
+    if (typeof product[key] !== 'string') return;
+    product[key] = product[key]
+      .replaceAll('Corner Radius Endmill', 'Bull Nose Endmill')
+      .replaceAll('Corner Radius', 'Bull Nose')
+      .replaceAll('Square Endmill', 'Flat Endmill')
+      .replaceAll('Micro Square Endmill', 'Micro Flat Endmill')
+      .replaceAll('Long Neck Square', 'Long Neck Flat')
+      .replaceAll('Cu-Al Square', 'Cu-Al Flat')
+      .replaceAll('Micro Cu-Al Square', 'Micro Cu-Al Flat')
+      .replaceAll('Long Neck Cu-Al Square', 'Long Neck Cu-Al Flat')
+      .replaceAll('圆角铣刀', '圆鼻铣刀')
+      .replaceAll('方头铣刀', '平底铣刀')
+      .replaceAll('圆角', '圆鼻')
+      .replaceAll('方头', '平底')
+      .replaceAll('圓角銑刀', '圓鼻銑刀')
+      .replaceAll('方頭銑刀', '平底銑刀')
+      .replaceAll('圓角', '圓鼻')
+      .replaceAll('方頭', '平底');
+  });
+}
+
+// Restore saved state after pricing constants and helpers are ready.
+function loadState() {
+  const saved = localStorage.getItem('fuka_products');
+  if (saved) {
+    try { const arr = JSON.parse(saved); PRODUCTS.length = 0; arr.forEach(p => PRODUCTS.push(p)); } catch(e) {}
+  }
+  PRODUCTS.forEach(normalizeProductPricing);
+  saveState();
+}
+
+function saveState() { localStorage.setItem('fuka_products', JSON.stringify(PRODUCTS)); }
+
+loadState();
+
+function loadSiteSettings() {
+  const saved = localStorage.getItem('fuka_site_settings');
+  if (saved) {
+    try {
+      const parsed = JSON.parse(saved);
+      const englishCurrency = ['USD', 'HKD'].includes(parsed.currency) ? parsed.currency : DEFAULT_SITE_SETTINGS.currency;
+      return {
+        ...DEFAULT_SITE_SETTINGS,
+        currency: englishCurrency,
+        taxRate: Number.isFinite(parseFloat(parsed.taxRate)) ? parseFloat(parsed.taxRate) : DEFAULT_SITE_SETTINGS.taxRate,
+        taxIncluded: parsed.taxIncluded !== false,
+        allowOverStockOrders: parsed.allowOverStockOrders === true,
+        paymentTerm: ['cash', 'monthly30', 'monthly60', 'custom'].includes(parsed.paymentTerm) ? parsed.paymentTerm : DEFAULT_SITE_SETTINGS.paymentTerm,
+        customPaymentTerm: String(parsed.customPaymentTerm || DEFAULT_SITE_SETTINGS.customPaymentTerm),
+        deliveryMode: parsed.deliveryMode === 'days' ? 'days' : DEFAULT_SITE_SETTINGS.deliveryMode,
+        deliveryDays: Math.max(1, parseInt(parsed.deliveryDays, 10) || DEFAULT_SITE_SETTINGS.deliveryDays),
+      };
+    } catch(e) {}
+  }
+  return { ...DEFAULT_SITE_SETTINGS };
+}
+
+function saveSiteSettingsState() {
+  localStorage.setItem('fuka_site_settings', JSON.stringify(siteSettings));
+}
+
+function hasSavedSiteSettings() {
+  return !!localStorage.getItem('fuka_site_settings');
+}
+
+function getLanguageDefaultCurrency(lang) {
+  return lang === 'en' ? siteSettings.currency : 'CNY';
+}
+
+function getProductPrice(product, currency = orderCurrency) {
+  normalizeProductPricing(product);
+  return parseFloat(product.prices[currency]) || 0;
+}
+
+function formatMoney(value, currency = orderCurrency) {
+  const meta = CURRENCY_META[currency] || CURRENCY_META.HKD;
+  const amount = parseFloat(value) || 0;
+  return meta.symbol + amount.toLocaleString(undefined, {
+    minimumFractionDigits: amount % 1 === 0 ? 0 : 2,
+    maximumFractionDigits: 2,
+  });
+}
+
+function calculateTotals(amount) {
+  const gross = parseFloat(amount) || 0;
+  if (orderCurrency !== 'CNY') {
+    return { net: gross, tax: 0, total: gross, taxRate: 0, taxApplicable: false };
+  }
+  const rate = Math.max(0, parseFloat(siteSettings.taxRate) || 0);
+  if (siteSettings.taxIncluded) {
+    const net = rate > 0 ? gross / (1 + rate / 100) : gross;
+    return { net, tax: gross - net, total: gross, taxRate: rate, taxApplicable: true };
+  }
+  const tax = gross * rate / 100;
+  return { net: gross, tax, total: gross + tax, taxRate: rate, taxApplicable: true };
+}
+
+function getTaxModeLabel() {
+  const rate = (parseFloat(siteSettings.taxRate) || 0).toFixed(2).replace(/\.00$/, '');
+  if (orderCurrency !== 'CNY') {
+    return currentLang === 'en' ? 'No tax for USD/HKD' : '美元及港币不设税率';
+  }
+  return siteSettings.taxIncluded
+    ? (currentLang === 'en' ? `CNY tax included ${rate}%` : `人民币含税 ${rate}%`)
+    : (currentLang === 'en' ? `CNY tax excluded ${rate}%` : `人民币不含税 ${rate}%`);
+}
+
+function enforceCurrencyForLanguage(currency) {
+  if (currentLang === 'zh') return 'CNY';
+  return ['USD', 'HKD'].includes(currency) ? currency : siteSettings.currency;
+}
+
+function renderCurrencyOptions() {
+  const orderCurrencyEl = document.getElementById('order-currency');
+  if (!orderCurrencyEl) return;
+  const options = currentLang === 'zh'
+    ? [{ value: 'CNY', label: 'CNY' }]
+    : [
+        { value: 'USD', label: 'USD' },
+        { value: 'HKD', label: 'HKD' },
+      ];
+  orderCurrencyEl.innerHTML = options.map(option => `<option value="${option.value}">${option.label}</option>`).join('');
+  orderCurrencyEl.disabled = currentLang === 'zh';
+}
+
+function getPaymentTermLabel(value, customValue = '') {
+  if (value === 'custom') {
+    const custom = String(customValue || siteSettings.customPaymentTerm || '').trim();
+    return custom || PAYMENT_TERM_LABELS.custom[currentLang] || PAYMENT_TERM_LABELS.custom.en;
+  }
+  const labels = PAYMENT_TERM_LABELS[value] || PAYMENT_TERM_LABELS.cash;
+  return currentLang === 'en' ? labels.en : labels.zh;
+}
+
+function renderPaymentOptions() {
+  const select = document.getElementById('order-payment-term');
+  if (!select) return;
+  const previousValue = select.value;
+  const options = [
+    { value: 'cash', en: 'Cash on Delivery', zh: '现金交付' },
+    { value: 'monthly30', en: 'Monthly 30 Days', zh: '月结 30 天' },
+    { value: 'monthly60', en: 'Monthly 60 Days', zh: '月结 60 天' },
+    { value: 'custom', en: `Custom: ${siteSettings.customPaymentTerm}`, zh: `自定义：${siteSettings.customPaymentTerm}` },
+  ];
+  select.innerHTML = options.map(option => `<option value="${option.value}">${currentLang === 'en' ? option.en : option.zh}</option>`).join('');
+  select.value = previousValue || siteSettings.paymentTerm || DEFAULT_SITE_SETTINGS.paymentTerm;
+  const customInput = document.getElementById('order-payment-custom');
+  if (customInput && !customInput.value) customInput.value = siteSettings.customPaymentTerm || '';
+  onPaymentTermChange();
+}
+
+function syncOrderTermsControls() {
+  renderPaymentOptions();
+  const deliveryMode = document.getElementById('order-delivery-mode');
+  const deliveryDays = document.getElementById('order-delivery-days');
+  if (deliveryMode && !deliveryMode.dataset.initialized) {
+    deliveryMode.value = siteSettings.deliveryMode || DEFAULT_SITE_SETTINGS.deliveryMode;
+    deliveryMode.dataset.initialized = '1';
+  }
+  if (deliveryDays && !deliveryDays.dataset.initialized) {
+    deliveryDays.value = Math.max(1, parseInt(siteSettings.deliveryDays, 10) || DEFAULT_SITE_SETTINGS.deliveryDays);
+    deliveryDays.dataset.initialized = '1';
+  }
+  onDeliveryModeChange();
+}
+
+function onPaymentTermChange() {
+  const select = document.getElementById('order-payment-term');
+  const wrap = document.getElementById('order-payment-custom-wrap');
+  if (wrap) wrap.style.display = select?.value === 'custom' ? 'block' : 'none';
+}
+
+function onDeliveryModeChange() {
+  const mode = document.getElementById('order-delivery-mode')?.value;
+  const wrap = document.getElementById('order-delivery-days-wrap');
+  if (wrap) wrap.style.display = mode === 'days' ? 'block' : 'none';
+}
+
+function getOrderTermsData() {
+  const paymentTerm = document.getElementById('order-payment-term')?.value || siteSettings.paymentTerm || DEFAULT_SITE_SETTINGS.paymentTerm;
+  const paymentCustom = document.getElementById('order-payment-custom')?.value.trim() || siteSettings.customPaymentTerm || '';
+  const deliveryMode = document.getElementById('order-delivery-mode')?.value || siteSettings.deliveryMode || DEFAULT_SITE_SETTINGS.deliveryMode;
+  const deliveryDays = Math.max(1, parseInt(document.getElementById('order-delivery-days')?.value, 10) || siteSettings.deliveryDays || DEFAULT_SITE_SETTINGS.deliveryDays);
+  return {
+    paymentTerm,
+    paymentCustom,
+    paymentLabel: getPaymentTermLabel(paymentTerm, paymentCustom),
+    deliveryMode,
+    deliveryDays,
+    deliveryLabel: deliveryMode === 'stock'
+      ? (currentLang === 'en' ? 'Ex-stock' : '现货')
+      : (currentLang === 'en' ? `Within ${deliveryDays} days` : `${deliveryDays} 天内交货`),
+  };
+}
+
+function applyOrderTermsData(orderTerms = {}) {
+  const paymentTerm = document.getElementById('order-payment-term');
+  const paymentCustom = document.getElementById('order-payment-custom');
+  const deliveryMode = document.getElementById('order-delivery-mode');
+  const deliveryDays = document.getElementById('order-delivery-days');
+  if (paymentTerm && orderTerms.paymentTerm) paymentTerm.value = orderTerms.paymentTerm;
+  if (paymentCustom) paymentCustom.value = orderTerms.paymentCustom || siteSettings.customPaymentTerm || '';
+  if (deliveryMode && orderTerms.deliveryMode) deliveryMode.value = orderTerms.deliveryMode;
+  if (deliveryDays && orderTerms.deliveryDays) deliveryDays.value = orderTerms.deliveryDays;
+  onPaymentTermChange();
+  onDeliveryModeChange();
+}
+
+function syncPricingControls() {
+  orderCurrency = enforceCurrencyForLanguage(orderCurrency);
+  renderCurrencyOptions();
+  const orderCurrencyEl = document.getElementById('order-currency');
+  if (orderCurrencyEl) orderCurrencyEl.value = orderCurrency;
+  const taxLabel = document.getElementById('order-tax-label');
+  const taxLabelZh = document.getElementById('order-tax-label-zh');
+  if (taxLabel) taxLabel.textContent = getTaxModeLabel();
+  if (taxLabelZh) taxLabelZh.textContent = getTaxModeLabel();
+  const setCurrency = document.getElementById('set-currency');
+  const setTaxRate = document.getElementById('set-tax-rate');
+  const setTaxIncluded = document.getElementById('set-tax-included');
+  const setAllowOverstock = document.getElementById('set-allow-overstock');
+  const setPaymentTerm = document.getElementById('set-payment-term');
+  const setCustomPaymentTerm = document.getElementById('set-custom-payment-term');
+  const setDeliveryMode = document.getElementById('set-delivery-mode');
+  const setDeliveryDays = document.getElementById('set-delivery-days');
+  if (setCurrency) setCurrency.value = siteSettings.currency;
+  if (setTaxRate) setTaxRate.value = siteSettings.taxRate;
+  if (setTaxIncluded) setTaxIncluded.value = siteSettings.taxIncluded ? '1' : '0';
+  if (setAllowOverstock) setAllowOverstock.value = siteSettings.allowOverStockOrders ? '1' : '0';
+  if (setPaymentTerm) setPaymentTerm.value = siteSettings.paymentTerm || DEFAULT_SITE_SETTINGS.paymentTerm;
+  if (setCustomPaymentTerm) setCustomPaymentTerm.value = siteSettings.customPaymentTerm || '';
+  if (setDeliveryMode) setDeliveryMode.value = siteSettings.deliveryMode || DEFAULT_SITE_SETTINGS.deliveryMode;
+  if (setDeliveryDays) setDeliveryDays.value = Math.max(1, parseInt(siteSettings.deliveryDays, 10) || DEFAULT_SITE_SETTINGS.deliveryDays);
+  syncOrderTermsControls();
+}
+
+function setOrderCurrency(currency) {
+  orderCurrency = enforceCurrencyForLanguage(currency);
+  refreshCartPrices();
+  syncPricingControls();
+  renderProdTable(getCurrentProducts());
+  renderCart();
+}
+
+function safeRefreshOrderViews() {
+  if (document.getElementById('sel-series') && document.getElementById('prod-tbody')) {
+    const selectedSeries = document.getElementById('sel-series').value;
+    const selectedSubseries = document.getElementById('sel-subseries')?.value || '';
+    renderSeriesOptions(selectedSeries);
+    if (selectedSeries && selectedSeries !== 'CUSTOM') {
+      populateSubseriesOptions(selectedSeries);
+      if ([...document.getElementById('sel-subseries').options].some(option => option.value === selectedSubseries)) {
+        document.getElementById('sel-subseries').value = selectedSubseries;
+      }
+      populateTypeOptions(getFilteredProducts());
+      populateDiameterOptions(getFilteredProducts());
+    }
+    renderCurrentSeriesSpec();
+    renderProdTable(getCurrentProducts());
+  }
+  if (document.getElementById('cart-section')) {
+    renderCart();
+  }
+  renderDraftList();
+}
+
+function refreshCartPrices() {
+  cart.forEach(c => {
+    if (c.custom) return;
+    const product = PRODUCTS.find(p => p.id === c.id);
+    if (product) {
+      c.unitPrice = getProductPrice(product);
+      c.currency = orderCurrency;
+      c.stock = product.stock;
+    }
+  });
+}
+
+// ────────────────────────────────────────
+// LANGUAGE
+// ────────────────────────────────────────
+function setLang(lang, btn, options = {}) {
+  lang = lang === 'en' ? 'en' : 'zh';
+  currentLang = lang;
+  orderCurrency = getLanguageDefaultCurrency(lang);
+  document.documentElement.lang = lang === 'en' ? 'en' : 'zh-CN';
+  document.body.classList.remove('lang-en', 'lang-zh');
+  document.body.classList.add('lang-' + lang);
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  const activeBtn = btn || document.querySelector(`.lang-btn[data-lang="${lang}"]`);
+  if (activeBtn) activeBtn.classList.add('active');
+  if (!options.skipPersist) {
+    localStorage.setItem('fuka_lang', lang);
+    const url = new URL(window.location.href);
+    url.searchParams.set('lang', lang);
+    window.history.replaceState(null, '', url);
+  }
+  syncPricingControls();
+  refreshCartPrices();
+  safeRefreshOrderViews();
+}
+
+document.querySelectorAll('.lang-btn[data-lang]').forEach(button => {
+  button.addEventListener('click', () => {
+    setLang(button.dataset.lang, button);
+  });
+});
+
+function getInitialLang() {
+  const params = new URLSearchParams(window.location.search);
+  const fromUrl = params.get('lang');
+  if (fromUrl === 'en' || fromUrl === 'zh') return fromUrl;
+  const saved = localStorage.getItem('fuka_lang');
+  if (saved === 'en' || saved === 'zh') return saved;
+  return 'zh';
+}
+
+// ────────────────────────────────────────
+// MOBILE MENU
+// ────────────────────────────────────────
+function toggleMenu() { document.getElementById('mainNav').classList.toggle('open'); }
+document.querySelectorAll('.header-nav a').forEach(a => {
+  a.addEventListener('click', () => {
+    document.querySelectorAll('.header-nav a').forEach(x => x.classList.remove('active'));
+    a.classList.add('active');
+    document.getElementById('mainNav').classList.remove('open');
+  });
+});
+
+// ────────────────────────────────────────
+// PRODUCT SELECTOR (STEP-BY-STEP)
+// ────────────────────────────────────────
+const TYPE_MAP = {
+  'Square Endmill': { en: 'Flat Endmill 平底铣刀', zh: '平底铣刀' },
+  'Ball Endmill': { en: 'Ball Endmill 球头铣刀', zh: '球头铣刀' },
+  'Corner Radius': { en: 'Bull Nose Endmill 圆鼻铣刀', zh: '圆鼻铣刀' },
+};
+
+function dualLabel(en, zh) {
+  return currentLang === 'en' ? en : zh;
+}
+
+function renderSeriesOptions(selected = '') {
+  const seriesSel = document.getElementById('sel-series');
+  if (!seriesSel) return;
+  const options = [
+    { value: '', en: '-- Select Series --', zh: '-- 选择系列 --' },
+    { value: 'FX6M', en: 'FX6M — Hardened Steels', zh: 'FX6M — 淬硬钢' },
+    { value: 'FX3', en: 'FX3 — Copper · Aluminum', zh: 'FX3 — 铜铝合金' },
+    { value: 'CUSTOM', en: 'Custom Tool', zh: '非标刀具' },
+  ];
+  seriesSel.innerHTML = options.map(option => `<option value="${option.value}">${dualLabel(option.en, option.zh)}</option>`).join('');
+  seriesSel.value = selected;
+}
+
+function resetSubseriesOptions() {
+  document.getElementById('sel-subseries').innerHTML = `<option value="">${dualLabel('-- Select Sub Series --', '-- 选择细系列 --')}</option>`;
+}
+
+function resetTypeOptions() {
+  document.getElementById('sel-type').innerHTML = `<option value="">${dualLabel('-- Select Type --', '-- 选择类型 --')}</option>`;
+}
+
+function resetDiameterOptions() {
+  document.getElementById('sel-diameter').innerHTML = `<option value="">${dualLabel('-- Select Diameter --', '-- 选择直径 --')}</option>`;
+}
+
+const SUBSERIES_MAP = {
+  FX6M: [
+    { code: 'FX6ME', en: 'Hardened Steels 4-Flute Flat Endmills', zh: '高硬钢用4刃平底铣刀', spec: 'images/catalog-spec-pages/FX6ME.png' },
+    { code: 'FX6MB', en: 'Hardened Steels 2-Flute Ball Endmills', zh: '高硬钢用2刃球头铣刀', spec: 'images/catalog-spec-pages/FX6MB.png' },
+    { code: 'FX6MIR', en: 'Hardened Steels 4-Flute Bull Nose Endmills', zh: '高硬钢用4刃圆鼻铣刀', spec: 'images/catalog-spec-pages/FX6MIR.png' },
+    { code: 'FX6MSE', en: 'Hardened Steels 2-Flute Micro Flat Endmills', zh: '高硬钢用2刃微小径平底铣刀', spec: 'images/catalog-spec-pages/FX6MSE.png' },
+    { code: 'FX6MSB', en: 'Hardened Steels 2-Flute Micro Ball Endmills', zh: '高硬钢用2刃微小径球头铣刀', spec: 'images/catalog-spec-pages/FX6MSB.png' },
+    { code: 'FX6MSR', en: 'Hardened Steels 2-Flute Micro Bull Nose Endmills', zh: '高硬钢用2刃微小径圆鼻铣刀', spec: 'images/catalog-spec-pages/FX6MSR.png' },
+    { code: 'FX6MNE2', en: 'Hardened Steels 2-Flute Long Neck Flat Endmills', zh: '高硬钢用2刃长颈平底铣刀', spec: 'images/catalog-spec-pages/FX6MNE2.png' },
+    { code: 'FX6MNE4', en: 'Hardened Steels 4-Flute Long Neck Flat Endmills', zh: '高硬钢用4刃长颈平底铣刀', spec: 'images/catalog-spec-pages/FX6MNE4.png' },
+    { code: 'FX6MNB', en: 'Hardened Steels 2-Flute Long Neck Ball Endmills', zh: '高硬钢用2刃长颈球头铣刀', spec: 'images/catalog-spec-pages/FX6MNB.png' },
+    { code: 'FX6MNR2', en: 'Hardened Steels 2-Flute Long Neck Bull Nose Endmills', zh: '高硬钢用2刃长颈圆鼻铣刀', spec: 'images/catalog-spec-pages/FX6MNR2.png' },
+    { code: 'FX6MNR4', en: 'Hardened Steels 4-Flute Long Neck Bull Nose Endmills', zh: '高硬钢用4刃长颈圆鼻铣刀', spec: 'images/catalog-spec-pages/FX6MNR4.png' },
+    { code: 'FX6MNR', en: 'Hardened Steels 4-Flute Long Neck Bull Nose Endmills', zh: '高硬钢用4刃长颈圆鼻铣刀', spec: 'images/catalog-spec-pages/FX6MNR.png' },
+  ],
+  FX3: [
+    { code: 'FX3E', en: 'Copper · Aluminum Alloy 4-Flute Flat Endmills', zh: '铜铝合金用4刃平底铣刀', spec: 'images/catalog-spec-pages/FX3E.png' },
+    { code: 'FX3B', en: 'Copper · Aluminum Alloy 2-Flute Ball Endmills', zh: '铜铝合金用2刃球头铣刀', spec: 'images/catalog-spec-pages/FX3B.png' },
+    { code: 'FX3SR', en: 'Copper · Aluminum Alloy 4-Flute Bull Nose Endmills', zh: '铜铝合金用4刃圆鼻铣刀', spec: 'images/catalog-spec-pages/FX3SR.png' },
+    { code: 'FX3SE', en: 'Copper · Aluminum Alloy 2-Flute Micro Flat Endmills', zh: '铜铝合金用2刃微小径平底铣刀', spec: 'images/catalog-spec-pages/FX3SE.png' },
+    { code: 'FX3SB', en: 'Copper · Aluminum Alloy 2-Flute Micro Ball Endmills', zh: '铜铝合金用2刃微小径球头铣刀', spec: 'images/catalog-spec-pages/FX3SB.png' },
+    { code: 'FX3NE2', en: 'Copper · Aluminum Alloy 2-Flute Long Neck Flat Endmills', zh: '铜铝合金用2刃长颈平底铣刀', spec: 'images/catalog-spec-pages/FX3NE2.png' },
+    { code: 'FX3NE4', en: 'Copper · Aluminum Alloy 4-Flute Long Neck Flat Endmills', zh: '铜铝合金用4刃长颈平底铣刀', spec: 'images/catalog-spec-pages/FX3NE4.png' },
+    { code: 'FX3NB', en: 'Copper · Aluminum Alloy 2-Flute Long Neck Ball Endmills', zh: '铜铝合金用2刃长颈球头铣刀', spec: 'images/catalog-spec-pages/FX3NB.png' },
+    { code: 'FX3NR2', en: 'Copper · Aluminum Alloy 2-Flute Long Neck Bull Nose Endmills', zh: '铜铝合金用2刃长颈圆鼻铣刀', spec: 'images/catalog-spec-pages/FX3NR2.png' },
+    { code: 'FX3NR4', en: 'Copper · Aluminum Alloy 4-Flute Long Neck Bull Nose Endmills', zh: '铜铝合金用4刃长颈圆鼻铣刀', spec: 'images/catalog-spec-pages/FX3NR4.png' },
+  ],
+};
+
+function inferSubseriesCode(product) {
+  const id = product.id || '';
+  if (product.subseries) return product.subseries;
+  if (id.startsWith('FX6MR')) return 'FX6MIR';
+  if (id.startsWith('FX6MNE')) return product.flute >= 4 ? 'FX6MNE4' : 'FX6MNE2';
+  if (id.startsWith('FX6MNR')) return product.flute >= 4 ? 'FX6MNR4' : 'FX6MNR2';
+  if (id.startsWith('FX3NE')) return product.flute >= 4 ? 'FX3NE4' : 'FX3NE2';
+  if (id.startsWith('FX3NB')) return 'FX3NB';
+  if (id.startsWith('FX3NR')) return product.flute >= 4 ? 'FX3NR4' : 'FX3NR2';
+  if (id.startsWith('FX3SR')) return 'FX3SR';
+  const candidates = [...(SUBSERIES_MAP.FX6M || []), ...(SUBSERIES_MAP.FX3 || [])]
+    .map(x => x.code)
+    .sort((a, b) => b.length - a.length);
+  return candidates.find(code => id.startsWith(code)) || product.series;
+}
+
+function getSubseriesMeta(code) {
+  return [...(SUBSERIES_MAP.FX6M || []), ...(SUBSERIES_MAP.FX3 || [])].find(item => item.code === code);
+}
+
+function getSubseriesLabel(code) {
+  const meta = getSubseriesMeta(code);
+  if (!meta) return code;
+  return currentLang === 'en' ? `${code} — ${meta.en}` : `${code} — ${meta.zh}`;
+}
+
+function hideSeriesSpec() {
+  const area = document.getElementById('series-spec-area');
+  if (area) area.style.display = 'none';
+}
+
+function renderSeriesSpec(code) {
+  const area = document.getElementById('series-spec-area');
+  const img = document.getElementById('series-spec-image');
+  const title = document.getElementById('series-spec-title');
+  const subtitle = document.getElementById('series-spec-subtitle');
+  if (!area || !img || !title || !subtitle) return;
+
+  const meta = getSubseriesMeta(code);
+  if (!meta || !meta.spec) {
+    hideSeriesSpec();
+    return;
+  }
+
+  title.textContent = getSubseriesLabel(code);
+  subtitle.textContent = currentLang === 'en'
+    ? 'Catalog specification sheet and milling condition reference'
+    : '目录规格表及切削参数参考';
+  img.src = meta.spec;
+  img.alt = `${code} catalog specification sheet`;
+  area.style.display = 'block';
+}
+
+function renderCurrentSeriesSpec() {
+  const subseries = document.getElementById('sel-subseries')?.value;
+  if (subseries && subseries !== '__all') {
+    renderSeriesSpec(subseries);
+  } else {
+    hideSeriesSpec();
+  }
+}
+
+function showProductSpec(productId) {
+  const product = PRODUCTS.find(p => p.id === productId);
+  if (!product) return;
+  renderSeriesSpec(inferSubseriesCode(product));
+}
+
+function onSelSeries() {
+  const series = document.getElementById('sel-series').value;
+  const subSel = document.getElementById('sel-subseries');
+  const typeSel = document.getElementById('sel-type');
+  const diaSel = document.getElementById('sel-diameter');
+  const customArea = document.getElementById('custom-tool-area');
+  subSel.innerHTML = `<option value="__all">${dualLabel('All Sub Series', '全部细系列')}</option>`;
+  typeSel.innerHTML = `<option value="__all">${dualLabel('All Tool Types', '全部刀型')}</option>`;
+  diaSel.innerHTML = `<option value="">${dualLabel('All Diameters', '全部直径')}</option>`;
+  subSel.disabled = true;
+  typeSel.disabled = true;
+  diaSel.disabled = true;
+  document.getElementById('prod-table-area').style.display = 'none';
+  document.getElementById('sel-placeholder').style.display = 'block';
+  hideSeriesSpec();
+  if (customArea) customArea.style.display = 'none';
+
+  if (!series) { return; }
+  if (series === 'CUSTOM') {
+    subSel.disabled = true;
+    typeSel.disabled = true;
+    diaSel.disabled = true;
+    document.getElementById('sel-placeholder').style.display = 'none';
+    if (customArea) customArea.style.display = 'block';
+    return;
+  }
+  subSel.disabled = false;
+  typeSel.disabled = false;
+  diaSel.disabled = false;
+
+  populateSubseriesOptions(series);
+  populateTypeOptions(getFilteredProducts());
+  populateDiameterOptions(getFilteredProducts());
+  renderProdTable(getFilteredProducts());
+  renderCurrentSeriesSpec();
+}
+
+function populateSubseriesOptions(series) {
+  const subSel = document.getElementById('sel-subseries');
+  subSel.innerHTML = `<option value="__all">${dualLabel('All Sub Series', '全部细系列')}</option>`;
+  (SUBSERIES_MAP[series] || []).forEach(item => {
+    const count = PRODUCTS.filter(p => p.series === series && p.enabled && inferSubseriesCode(p) === item.code).length;
+    if (!count) return;
+    const o = document.createElement('option');
+    o.value = item.code;
+    o.textContent = `${getSubseriesLabel(item.code)}${count ? ` (${count})` : ''}`;
+    subSel.appendChild(o);
+  });
+}
+
+function populateTypeOptions(filtered) {
+  const typeSel = document.getElementById('sel-type');
+  typeSel.innerHTML = `<option value="__all">${dualLabel('All Tool Types', '全部刀型')}</option>`;
+  const types = [...new Set(filtered.map(p => p.type))].sort();
+  types.forEach(t => {
+    const o = document.createElement('option');
+    o.value = t;
+    o.textContent = TYPE_MAP[t] ? (currentLang === 'en' ? TYPE_MAP[t].en : TYPE_MAP[t].zh) : t;
+    typeSel.appendChild(o);
+  });
+}
+
+function onSelSubseries() {
+  document.getElementById('sel-type').value = '__all';
+  document.getElementById('sel-diameter').value = '';
+  const filtered = getFilteredProducts();
+  populateTypeOptions(filtered);
+  populateDiameterOptions(filtered);
+  renderProdTable(filtered);
+  renderCurrentSeriesSpec();
+}
+
+function onSelType() {
+  const series = document.getElementById('sel-series').value;
+  const diaSel = document.getElementById('sel-diameter');
+  diaSel.innerHTML = `<option value="">${dualLabel('All Diameters', '全部直径')}</option>`;
+  document.getElementById('prod-table-area').style.display = 'none';
+  document.getElementById('sel-placeholder').style.display = 'block';
+
+  if (!series) { diaSel.disabled = true; return; }
+  diaSel.disabled = false;
+
+  const filtered = getFilteredProducts();
+  populateDiameterOptions(filtered);
+  renderProdTable(filtered);
+}
+
+function populateDiameterOptions(filtered) {
+  const diaSel = document.getElementById('sel-diameter');
+  diaSel.innerHTML = `<option value="">${dualLabel('All Diameters', '全部直径')}</option>`;
+  const groups = {};
+  filtered.forEach(p => {
+    const key = parseFloat(p.dia).toFixed(2);
+    if (!groups[key]) groups[key] = [];
+    groups[key].push(p);
+  });
+
+  Object.keys(groups).sort((a,b) => parseFloat(a) - parseFloat(b)).forEach(key => {
+    const count = groups[key].length;
+    const o = document.createElement('option');
+    o.value = key;
+    o.textContent = currentLang === 'en'
+      ? `Ø ${key}mm — ${count} variant${count>1?'s':''}`
+      : `Ø ${key}mm — ${count}款`;
+    diaSel.appendChild(o);
+  });
+}
+
+function onSelDiameter() {
+  renderProdTable(getFilteredProducts());
+}
+
+function renderProdTable(products) {
+  const area = document.getElementById('prod-table-area');
+  const placeholder = document.getElementById('sel-placeholder');
+  const tbody = document.getElementById('prod-tbody');
+
+  if (!products.length) {
+    area.style.display = 'none'; placeholder.style.display = 'block';
+    placeholder.querySelector('.en-only').textContent = 'No products found.';
+    placeholder.querySelector('.zh-only').textContent = '找不到相符的产品。';
+    return;
+  }
+
+  area.style.display = 'block';
+  placeholder.style.display = 'none';
+  document.getElementById('prod-count').textContent = products.length;
+  document.getElementById('prod-count-zh').textContent = products.length;
+
+  tbody.innerHTML = products.map(p => {
+    const cartItem = cart.find(c => c.id === p.id);
+    const inCart = !!cartItem;
+    const seriesClass = p.series === 'FX6M' ? 'badge-hs' : 'badge-ca';
+
+    return `<tr class="product-row" onclick="showProductSpec('${p.id}')">
+      <td style="text-align:center;">
+        <input type="checkbox" id="prod-chk-${p.id}" ${inCart ? 'checked' : ''}
+          onclick="event.stopPropagation()" onchange="toggleCartItem('${p.id}')" style="width:18px;height:18px;cursor:pointer;accent-color:var(--primary);">
+      </td>
+      <td>
+        <div class="prod-code">${p.id}</div>
+        <span class="badge ${seriesClass}" style="font-size:10px;">${p.series}</span>
+        <span class="badge badge-neutral" style="font-size:10px;margin-left:4px;">${inferSubseriesCode(p)}</span>
+      </td>
+      <td>
+        <span class="en-only prod-row-name">${p.name_en}</span>
+        <span class="zh-only prod-row-name">${p.name_zh}</span>
+      </td>
+      <td style="text-align:center;font-size:13px;color:var(--text-mid);">${p.dia}mm</td>
+      <td style="text-align:center;font-size:13px;color:var(--text-mid);">${p.flute}F</td>
+      <td style="text-align:right;">
+        ${p.stock === 0 ? `<span class="stock-zero">0</span>` : p.stock < 20 ? `<span class="stock-low">${p.stock}</span>` : `<span class="stock-ok">${p.stock}</span>`}
+      </td>
+      <td style="text-align:right;font-weight:700;color:var(--accent);font-family:'Courier New',monospace;">
+        ${getProductPrice(p) > 0 ? formatMoney(getProductPrice(p)) : `<span style="color:var(--text-light);font-size:12px;">${currentLang==='en'?'TBD':'待定'}</span>`}
+      </td>
+      <td style="text-align:center;">
+        <input type="number" min="0" value="${cartItem ? cartItem.qty : 0}" class="qty-input"
+          onclick="event.stopPropagation()" onchange="setProductQty('${p.id}', this.value)"
+          aria-label="${p.id} quantity" ${inCart ? '' : 'disabled'}>
+      </td>
+    </tr>`;
+  }).join('');
+  updateProductSelectionCount();
+}
+
+function addAllToCart() {
+  selectVisibleProducts(true);
+}
+
+function resetSelector() {
+  document.getElementById('sel-series').value = '';
+  resetSubseriesOptions();
+  document.getElementById('sel-subseries').disabled = true;
+  resetTypeOptions();
+  document.getElementById('sel-type').disabled = true;
+  resetDiameterOptions();
+  document.getElementById('sel-diameter').disabled = true;
+  document.getElementById('prod-table-area').style.display = 'none';
+  document.getElementById('custom-tool-area').style.display = 'none';
+  hideSeriesSpec();
+  document.getElementById('sel-placeholder').style.display = 'block';
+  document.getElementById('sel-placeholder').querySelector('.en-only').textContent = 'Select a series to list all models. Tool type and diameter can narrow the list.';
+  document.getElementById('sel-placeholder').querySelector('.zh-only').textContent = '请先选择「系列」即可列出所有型号；刀具类型及直径可作进一步过滤。';
+}
+
+function prefillSeries(series, type) {
+  document.getElementById('sel-series').value = series;
+  onSelSeries();
+  const typeSel = document.getElementById('sel-type');
+  if (type && [...typeSel.options].some(option => option.value === type)) {
+    typeSel.value = type;
+    onSelType();
+  }
+  setTimeout(() => document.getElementById('order').scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+}
+
+// ────────────────────────────────────────
+// CART MANAGEMENT
+// cart = [{ id, qty, unitPrice }] plus custom quote-only items
+// ────────────────────────────────────────
+let cart = [];
+
+function addCustomToolToCart() {
+  const model = document.getElementById('custom-model').value.trim();
+  const spec = document.getElementById('custom-spec').value.trim();
+  const qty = Math.max(1, parseInt(document.getElementById('custom-qty').value, 10) || 1);
+
+  if (!model && !spec) {
+    alert(currentLang === 'en' ? 'Please enter custom tool model or specification.' : '请输入非标刀具型号或规格要求。');
+    return;
+  }
+
+  const id = 'CUSTOM-' + Date.now().toString(36).toUpperCase();
+  cart.push({
+    id,
+    custom: true,
+    qty,
+    unitPrice: 0,
+    currency: orderCurrency,
+    stock: null,
+    name_en: model || 'Custom Tool Request',
+    name_zh: model || '非标刀具查询',
+    spec,
+  });
+  document.getElementById('custom-model').value = '';
+  document.getElementById('custom-spec').value = '';
+  document.getElementById('custom-qty').value = '1';
+  renderCart();
+}
+
+function toggleCartItem(id) {
+  const product = PRODUCTS.find(p => p.id === id);
+  if (!product) return;
+
+  const idx = cart.findIndex(c => c.id === id);
+  if (idx >= 0) {
+    cart.splice(idx, 1);
+  } else {
+    cart.push({ id, qty: 1, unitPrice: getProductPrice(product), currency: orderCurrency, stock: product.stock });
+  }
+  renderCart();
+  syncProductRow(id);
+  updateProductSelectionCount();
+}
+
+function updateCartQty(id, newQty) {
+  const item = cart.find(c => c.id === id);
+  if (!item) return;
+  const qty = parseInt(newQty) || 0;
+  if (item.custom) {
+    item.qty = Math.max(1, qty);
+    renderCart();
+    return;
+  }
+  const product = PRODUCTS.find(p => p.id === id);
+  if (!product) return;
+  if (qty < 0) return;
+  item.qty = qty;
+  item.unitPrice = getProductPrice(product);
+  item.currency = orderCurrency;
+  item.stock = product.stock;
+  renderCart();
+  syncProductRow(id);
+  updateProductSelectionCount();
+}
+
+function setProductQty(id, newQty) {
+  const product = PRODUCTS.find(p => p.id === id);
+  if (!product) return;
+  const qty = Math.max(0, parseInt(newQty, 10) || 0);
+  let item = cart.find(c => c.id === id);
+  if (qty === 0) {
+    cart = cart.filter(c => c.id !== id);
+    renderCart();
+    syncProductRow(id);
+    updateProductSelectionCount();
+    return;
+  }
+  if (!item) {
+    item = { id, qty, unitPrice: getProductPrice(product), currency: orderCurrency, stock: product.stock };
+    cart.push(item);
+  } else {
+    item.qty = qty;
+    item.unitPrice = getProductPrice(product);
+    item.currency = orderCurrency;
+    item.stock = product.stock;
+  }
+  renderCart();
+  syncProductRow(id);
+  updateProductSelectionCount();
+}
+
+function syncProductRow(id) {
+  const checkbox = document.getElementById(`prod-chk-${id}`);
+  const qtyInput = document.querySelector(`#prod-tbody input[type="number"][onchange*="${id}"]`);
+  const item = cart.find(c => c.id === id);
+  if (checkbox) checkbox.checked = !!item;
+  if (qtyInput) {
+    qtyInput.disabled = !item;
+    qtyInput.value = item ? item.qty : 0;
+  }
+}
+
+function updateProductSelectionCount() {
+  const visibleIds = [...document.querySelectorAll('#prod-tbody input[type="checkbox"]')].map(input => input.id.replace('prod-chk-', ''));
+  const count = visibleIds.filter(id => cart.some(c => c.id === id)).length;
+  const en = document.getElementById('prod-selected-count');
+  const zh = document.getElementById('prod-selected-count-zh');
+  if (en) en.textContent = count;
+  if (zh) zh.textContent = count;
+}
+
+function selectVisibleProducts(checked) {
+  document.querySelectorAll('#prod-tbody input[type="checkbox"]').forEach(checkbox => {
+    const id = checkbox.id.replace('prod-chk-', '');
+    const product = PRODUCTS.find(p => p.id === id);
+    if (!product) return;
+
+    const existing = cart.find(c => c.id === id);
+    if (checked && !existing) {
+      cart.push({ id, qty: 1, unitPrice: getProductPrice(product), currency: orderCurrency, stock: product.stock });
+    }
+    if (!checked && existing) {
+      cart = cart.filter(c => c.id !== id);
+    }
+    checkbox.checked = checked;
+    syncProductRow(id);
+  });
+  renderCart();
+  updateProductSelectionCount();
+}
+
+function removeCartItem(id) {
+  cart = cart.filter(c => c.id !== id);
+  renderCart();
+  syncProductRow(id);
+  updateProductSelectionCount();
+}
+
+function clearCart() {
+  cart = [];
+  renderCart();
+  document.querySelectorAll('#prod-tbody input[type="checkbox"]').forEach(input => syncProductRow(input.id.replace('prod-chk-', '')));
+  updateProductSelectionCount();
+}
+
+function getCartTotal() {
+  return cart.reduce((sum, c) => sum + (c.unitPrice * c.qty), 0);
+}
+
+function hasStockError() {
+  return cart.some(c => {
+    const p = PRODUCTS.find(x => x.id === c.id);
+    return p && c.qty > p.stock;
+  });
+}
+
+function escapeHtml(value) {
+  return String(value ?? '').replace(/[&<>"']/g, char => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;',
+  }[char]));
+}
+
+function getOrderLogoHTML() {
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 110" role="img" aria-label="FUKA logo">
+    <ellipse cx="140" cy="55" rx="126" ry="38" transform="rotate(-8 140 55)" fill="#07894a"/>
+    <text x="40" y="72" font-family="Arial Black, Arial, Helvetica, sans-serif" font-size="64" font-style="italic" font-weight="900" fill="#fff" stroke="#353535" stroke-width="3">FUKA</text>
+  </svg>`;
+}
+
+function getCustomerDraftData() {
+  return {
+    company: document.getElementById('cust-company')?.value.trim() || '',
+    name: document.getElementById('cust-name')?.value.trim() || '',
+    email: document.getElementById('cust-email')?.value.trim() || '',
+    phone: document.getElementById('cust-phone')?.value.trim() || '',
+    notes: document.getElementById('cust-notes')?.value.trim() || '',
+  };
+}
+
+function getSelectorDraftData() {
+  return {
+    series: document.getElementById('sel-series')?.value || '',
+    subseries: document.getElementById('sel-subseries')?.value || '',
+    type: document.getElementById('sel-type')?.value || '',
+    diameter: document.getElementById('sel-diameter')?.value || '',
+  };
+}
+
+function getDraftSettingsSnapshot() {
+  return {
+    siteSettings: { ...siteSettings },
+    orderCurrency,
+    language: currentLang,
+    selector: getSelectorDraftData(),
+  };
+}
+
+function persistOrderDrafts() {
+  localStorage.setItem('fuka_order_drafts', JSON.stringify(orderDrafts));
+}
+
+function upsertOrderDraft(draft) {
+  const index = orderDrafts.findIndex(item => item.id === draft.id);
+  if (index >= 0) {
+    orderDrafts[index] = draft;
+  } else {
+    orderDrafts.unshift(draft);
+  }
+  persistOrderDrafts();
+  renderDraftList();
+}
+
+function buildOrderFromCart(status = 'draft') {
+  const orderId = (status === 'draft' ? 'DRAFT-' : 'PO-') + Date.now().toString(36).toUpperCase();
+  const subtotal = getCartTotal();
+  const totals = calculateTotals(subtotal);
+  const customer = getCustomerDraftData();
+  const orderTerms = getOrderTermsData();
+  return {
+    id: orderId,
+    draftName: status === 'draft' ? `FUKA Draft ${new Date().toISOString().slice(0, 10)} ${new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}` : '',
+    date: new Date().toLocaleString('zh-HK', { timeZone: 'Asia/Hong_Kong' }),
+    items: cart.map(c => {
+      const p = PRODUCTS.find(x => x.id === c.id);
+      if (c.custom || !p) {
+        return {
+          id: c.id,
+          name_en: c.name_en,
+          name_zh: c.name_zh,
+          spec: c.spec,
+          custom: true,
+          qty: c.qty,
+          unitPrice: 0,
+          subtotal: 0,
+          currency: orderCurrency,
+          stock: null,
+        };
+      }
+      return {
+        id: p.id,
+        name_en: p.name_en,
+        name_zh: p.name_zh,
+        qty: c.qty,
+        unitPrice: c.unitPrice,
+        subtotal: c.unitPrice * c.qty,
+        currency: orderCurrency,
+        stock: c.stock,
+      };
+    }),
+    currency: orderCurrency,
+    taxRate: totals.taxApplicable ? totals.taxRate : 0,
+    taxIncluded: totals.taxApplicable ? siteSettings.taxIncluded : false,
+    subtotal,
+    netTotal: totals.net,
+    taxAmount: totals.tax,
+    total: totals.total,
+    customer,
+    orderTerms,
+    allowOverStockOrders: !!siteSettings.allowOverStockOrders,
+    draftSettings: getDraftSettingsSnapshot(),
+    status,
+  };
+}
+
+function buildOrderDocumentHTML(order) {
+  const currency = order.currency || 'HKD';
+  const total = Number.isFinite(parseFloat(order.total)) ? parseFloat(order.total) : parseFloat(order.subtotal) || 0;
+  const net = Number.isFinite(parseFloat(order.netTotal)) ? parseFloat(order.netTotal) : total;
+  const tax = Number.isFinite(parseFloat(order.taxAmount)) ? parseFloat(order.taxAmount) : 0;
+  const taxLabel = currency === 'CNY'
+    ? `${order.taxIncluded ? 'Tax Included' : 'Tax Excluded'} ${order.taxRate || 0}%`
+    : 'No tax for USD/HKD';
+  const orderTerms = order.orderTerms || {
+    paymentLabel: getPaymentTermLabel(siteSettings.paymentTerm, siteSettings.customPaymentTerm),
+    deliveryLabel: siteSettings.deliveryMode === 'stock'
+      ? (currentLang === 'en' ? 'Ex-stock' : '现货')
+      : (currentLang === 'en' ? `Within ${siteSettings.deliveryDays} days` : `${siteSettings.deliveryDays} 天内交货`),
+  };
+
+  return `
+    <div class="po-document">
+      <div class="po-header">
+        <div class="po-brand">
+          ${getOrderLogoHTML()}
+          <div>
+            <h1>FUKA Cutting Tools</h1>
+            <div>High Precision Cutting Tools</div>
+            <div>Professional Purchase Order</div>
+          </div>
+        </div>
+        <div class="po-title">
+          <h2>${order.status === 'draft' ? 'ORDER DRAFT' : 'PURCHASE ORDER'}</h2>
+          <div><strong>${escapeHtml(order.id)}</strong></div>
+          <div>${escapeHtml(order.date)}</div>
+        </div>
+      </div>
+
+      <div class="po-meta-grid">
+        <div class="po-box">
+          <h3>Order No. / 订单号</h3>
+          <strong>${escapeHtml(order.id)}</strong>
+        </div>
+        <div class="po-box">
+          <h3>Date / 日期</h3>
+          <strong>${escapeHtml(order.date)}</strong>
+        </div>
+        <div class="po-box">
+          <h3>Currency / 货币</h3>
+          <strong>${escapeHtml(currency)}</strong>
+        </div>
+        <div class="po-box">
+          <h3>Tax / 税项</h3>
+          <strong>${escapeHtml(taxLabel)}</strong>
+        </div>
+        <div class="po-box">
+          <h3>Payment Terms / 付款条件</h3>
+          <strong>${escapeHtml(orderTerms.paymentLabel || '-')}</strong>
+        </div>
+        <div class="po-box">
+          <h3>Delivery Time / 交货时间</h3>
+          <strong>${escapeHtml(orderTerms.deliveryLabel || '-')}</strong>
+        </div>
+      </div>
+
+      <div class="po-parties">
+        <div class="po-box">
+          <h3>BUYER / 买方</h3>
+          <div><strong>${escapeHtml(order.customer?.company || '-')}</strong></div>
+          <div>Contact: ${escapeHtml(order.customer?.name || '-')}</div>
+          <div>Email: ${escapeHtml(order.customer?.email || '-')}</div>
+          <div>Phone: ${escapeHtml(order.customer?.phone || '-')}</div>
+          <div style="margin-top:5px;white-space:pre-wrap;">Remarks: ${escapeHtml(order.customer?.notes || 'No special requirements.')}</div>
+        </div>
+        <div class="po-box">
+          <h3>SUPPLIER / 供应商</h3>
+          <div><strong>FUKA Cutting Tools Co., Ltd.</strong></div>
+          <div>Email: sales@fukatools.com</div>
+          <div>Phone: +852 2345 6789</div>
+          <div>WhatsApp: +852 9876 5432</div>
+        </div>
+      </div>
+
+      <table class="po-table">
+        <thead>
+          <tr>
+            <th style="width:38px;">#</th>
+            <th style="width:130px;">Model / 型号</th>
+            <th>Description / 产品说明</th>
+            <th class="num" style="width:70px;">Qty / 数量</th>
+            <th class="num" style="width:126px;">Tax-included Unit Price / 含税单价</th>
+            <th class="num" style="width:120px;">Amount / 金额</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${order.items.map((item, index) => `
+            <tr>
+              <td>${index + 1}</td>
+              <td><strong>${escapeHtml(item.id)}</strong></td>
+              <td>
+                <div>${escapeHtml(currentLang === 'en' ? item.name_en : item.name_zh)}</div>
+                ${item.spec ? `<div style="color:#596579;margin-top:4px;white-space:pre-wrap;">${escapeHtml(item.spec)}</div>` : ''}
+                ${item.custom ? `<div style="color:#B5122A;margin-top:4px;">Custom tool, quotation required</div>` : ''}
+              </td>
+              <td class="num">${escapeHtml(item.qty)}</td>
+              <td class="num">${item.unitPrice > 0 ? formatMoney(item.unitPrice, currency) : 'TBD'}</td>
+              <td class="num">${item.subtotal > 0 ? formatMoney(item.subtotal, currency) : 'TBD'}</td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+
+      <div class="po-totals">
+        <div class="po-line"><span>${currency === 'CNY' && order.taxIncluded ? 'Before Tax / 未税金额' : 'Subtotal / 小计'}</span><strong>${formatMoney(currency === 'CNY' && order.taxIncluded ? net : order.subtotal, currency)}</strong></div>
+        <div class="po-line"><span>Tax / 税额</span><strong>${currency === 'CNY' ? formatMoney(tax, currency) : 'N/A'}</strong></div>
+        <div class="po-line"><span>Total / 合计</span><strong>${formatMoney(total, currency)}</strong></div>
+      </div>
+
+      <div class="po-terms">
+        <strong>Terms / 条款</strong>
+        <div>1. This document is generated from the FUKA ordering portal and is subject to final quotation and stock confirmation.</div>
+        <div>　 本订单由 FUKA 订购系统生成，最终价格、交期及库存以供应商确认报价为准。</div>
+        <div>2. Custom tools are quotation items and will be confirmed separately by the sales team.</div>
+        <div>　 非标刀具属于询价项目，规格、价格及交期需由销售人员另行确认。</div>
+        <div>3. CNY orders may include or exclude tax according to the setting shown above. USD and HKD orders do not include tax.</div>
+        <div>　 人民币订单按上方设置显示含税或未税；美元及港币订单不含税项。</div>
+      </div>
+
+      <div class="po-signatures">
+        <div class="po-signature-line">Buyer Signature / 买方签署</div>
+        <div class="po-signature-line">Supplier Confirmation / 供应商确认</div>
+      </div>
+    </div>
+  `;
+}
+
+function buildStandaloneOrderHTML(order) {
+  return `<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>${escapeHtml(order.id)} FUKA Purchase Order</title>
+<style>
+body{font-family:Arial,'Microsoft YaHei',sans-serif;margin:0;background:#eef2f6;color:#17212F;}
+.print-shell{max-width:1160px;margin:18px auto;background:#fff;box-shadow:0 8px 28px rgba(0,0,0,.12);}
+${[...document.querySelectorAll('style')].map(style => style.textContent).join('\n')}
+@page{size:A4 landscape;margin:9mm}
+@media print{body{background:#fff}.print-shell{box-shadow:none;margin:0;max-width:none}.po-document{min-width:0;padding:0}.no-print{display:none!important}}
+</style></head><body><div class="print-shell">${buildOrderDocumentHTML(order)}</div></body></html>`;
+}
+
+function downloadBlob(filename, content, type) {
+  const blob = new Blob([content], { type });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+function printOrder(orderId) {
+  const order = findOrderById(orderId);
+  if (!order) return;
+  const win = window.open('', '_blank');
+  win.document.write(buildStandaloneOrderHTML(order));
+  win.document.close();
+  win.focus();
+  setTimeout(() => win.print(), 400);
+}
+
+async function waitForPdfLibraries() {
+  const started = Date.now();
+  while ((!window.html2canvas || !window.jspdf?.jsPDF) && Date.now() - started < 8000) {
+    await new Promise(resolve => setTimeout(resolve, 120));
+  }
+  if (!window.html2canvas || !window.jspdf?.jsPDF) {
+    throw new Error('PDF libraries are not available');
+  }
+}
+
+async function downloadOrderPDF(orderId, event) {
+  const order = findOrderById(orderId);
+  if (!order) return;
+  const button = event?.currentTarget;
+  const originalHtml = button?.innerHTML;
+  if (button) {
+    button.disabled = true;
+    button.innerHTML = currentLang === 'en' ? 'Generating PDF...' : '正在生成 PDF...';
+  }
+
+  const shell = document.createElement('div');
+  shell.style.position = 'fixed';
+  shell.style.left = '-10000px';
+  shell.style.top = '0';
+  shell.style.width = '1120px';
+  shell.style.background = '#fff';
+  shell.innerHTML = buildOrderDocumentHTML(order);
+  document.body.appendChild(shell);
+
+  try {
+    await waitForPdfLibraries();
+    if (document.fonts?.ready) await document.fonts.ready;
+    const docEl = shell.querySelector('.po-document');
+    const canvas = await window.html2canvas(docEl, {
+      scale: 2,
+      backgroundColor: '#ffffff',
+      useCORS: true,
+      logging: false,
+    });
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
+    const pageWidth = 297;
+    const pageHeight = 210;
+    const margin = 8;
+    const imageWidth = pageWidth - margin * 2;
+    const imageHeight = canvas.height * imageWidth / canvas.width;
+    const imageData = canvas.toDataURL('image/png', 1.0);
+
+    let y = margin;
+    let remainingHeight = imageHeight;
+    pdf.addImage(imageData, 'PNG', margin, y, imageWidth, imageHeight);
+    while (remainingHeight > pageHeight - margin * 2) {
+      remainingHeight -= pageHeight - margin * 2;
+      y -= pageHeight - margin * 2;
+      pdf.addPage('a4', 'landscape');
+      pdf.addImage(imageData, 'PNG', margin, y, imageWidth, imageHeight);
+    }
+    pdf.save(`${order.id}_FUKA_purchase_order.pdf`);
+  } catch (error) {
+    alert(currentLang === 'en'
+      ? 'PDF download is unavailable in this browser. Please use Print / Save PDF instead.'
+      : '此浏览器暂时无法直接下载 PDF，请使用「打印 / 另存 PDF」。');
+  } finally {
+    shell.remove();
+    if (button) {
+      button.disabled = false;
+      button.innerHTML = originalHtml;
+    }
+  }
+}
+
+function archiveOrder(orderId) {
+  const order = findOrderById(orderId);
+  if (!order) return;
+  downloadBlob(`${order.id}_FUKA_purchase_order.html`, buildStandaloneOrderHTML(order), 'text/html;charset=utf-8');
+}
+
+function downloadOrderWord(orderId) {
+  const order = findOrderById(orderId);
+  if (!order) return;
+  let savedEditableDraft = false;
+  if (order.status !== 'draft' && !orderDrafts.some(d => d.id === order.id)) {
+    upsertOrderDraft({
+      ...order,
+      status: 'draft',
+      draftName: `FUKA Draft ${order.id}`,
+      draftSettings: order.draftSettings || getDraftSettingsSnapshot(),
+    });
+    savedEditableDraft = true;
+  }
+  const html = buildStandaloneOrderHTML(order);
+  downloadBlob(`${order.id}_FUKA_purchase_order.doc`, html, 'application/msword;charset=utf-8');
+  if (savedEditableDraft) {
+    alert(currentLang === 'en'
+      ? 'Editable draft saved. You can reopen it from Saved Drafts later.'
+      : '已暂存为可修改草稿，之后可在「已暂存草稿」重新打开。');
+  }
+}
+
+function emailOrderToSupplier(orderId) {
+  const order = findOrderById(orderId);
+  if (!order) return;
+  const lines = [
+    `Order: ${order.id}`,
+    `Customer: ${order.customer?.company || ''} ${order.customer?.name || ''}`,
+    `Email: ${order.customer?.email || ''}`,
+    `Currency: ${order.currency}`,
+    `Total: ${formatMoney(order.total, order.currency)}`,
+    '',
+    'Items:',
+    ...order.items.map(item => `${item.id} x ${item.qty} - ${item.subtotal > 0 ? formatMoney(item.subtotal, order.currency) : 'TBD'}`),
+    '',
+    'Please see the generated purchase order document from the FUKA ordering portal.'
+  ];
+  const subject = encodeURIComponent(`FUKA Purchase Order ${order.id}`);
+  const body = encodeURIComponent(lines.join('\n'));
+  window.location.href = `mailto:sales@fukatools.com?subject=${subject}&body=${body}`;
+}
+
+function findOrderById(orderId) {
+  return orders.find(o => o.id === orderId) || orderDrafts.find(o => o.id === orderId);
+}
+
+function saveCurrentOrderDraft() {
+  if (!cart.length) {
+    alert(currentLang === 'en' ? 'No items to save.' : '没有产品可以暂存。');
+    return;
+  }
+  const draft = buildOrderFromCart('draft');
+  const defaultName = draft.draftName;
+  const draftName = prompt(
+    currentLang === 'en' ? 'Draft name:' : '请输入草稿名称：',
+    defaultName
+  );
+  if (draftName === null) return;
+  draft.draftName = draftName.trim() || defaultName;
+  upsertOrderDraft(draft);
+  alert(currentLang === 'en'
+    ? `Draft saved as ${draft.draftName}. You can reopen it from Saved Drafts.`
+    : `草稿已暂存为 ${draft.draftName}，之后可在「已暂存草稿」重新打开修改。`);
+}
+
+function renderDraftList() {
+  const section = document.getElementById('draft-list-section');
+  const list = document.getElementById('draft-list');
+  if (!section || !list) return;
+  if (!orderDrafts.length) {
+    section.style.display = 'none';
+    return;
+  }
+  section.style.display = 'block';
+  list.innerHTML = orderDrafts.slice(0, 6).map(draft => `
+    <div class="draft-list-row">
+      <div>
+        <strong>${escapeHtml(draft.draftName || draft.id)}</strong>
+        <div style="font-size:12px;color:var(--text-mid);">${escapeHtml(draft.date)} · ${draft.items.length} item(s) · ${formatMoney(draft.total || 0, draft.currency || orderCurrency)}</div>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <button class="btn btn-outline btn-sm" onclick="restoreDraft('${draft.id}')">
+          <span class="en-only">Reopen & Edit</span><span class="zh-only">重新打开修改</span>
+        </button>
+        <button class="btn btn-outline btn-sm" onclick="downloadDraftWord('${draft.id}')">
+          <span class="en-only">Word</span><span class="zh-only">Word</span>
+        </button>
+        <button class="btn btn-ghost btn-sm" onclick="deleteDraft('${draft.id}')">
+          <span class="en-only">Delete</span><span class="zh-only">删除</span>
+        </button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function restoreDraft(draftId) {
+  const draft = orderDrafts.find(d => d.id === draftId);
+  if (!draft) return;
+  if (draft.draftSettings?.siteSettings) {
+    siteSettings = {
+      ...DEFAULT_SITE_SETTINGS,
+      ...siteSettings,
+      ...draft.draftSettings.siteSettings,
+    };
+    saveSiteSettingsState();
+  }
+  if (draft.draftSettings?.language && draft.draftSettings.language !== currentLang) {
+    currentLang = draft.draftSettings.language;
+    document.body.className = `lang-${currentLang}`;
+    localStorage.setItem('fuka_lang', currentLang);
+  }
+  orderCurrency = enforceCurrencyForLanguage(draft.draftSettings?.orderCurrency || draft.currency || orderCurrency);
+  syncPricingControls();
+  cart = draft.items.map(item => {
+    if (item.custom) {
+      return {
+        id: item.id,
+        custom: true,
+        qty: item.qty,
+        unitPrice: 0,
+        currency: orderCurrency,
+        stock: null,
+        name_en: item.name_en,
+        name_zh: item.name_zh,
+        spec: item.spec || '',
+      };
+    }
+    const product = PRODUCTS.find(p => p.id === item.id);
+    return {
+      id: item.id,
+      qty: item.qty,
+      unitPrice: product ? getProductPrice(product) : item.unitPrice,
+      currency: orderCurrency,
+      stock: product ? product.stock : item.stock,
+    };
+  });
+  const customer = draft.customer || {};
+  if (document.getElementById('cust-company')) document.getElementById('cust-company').value = customer.company || '';
+  if (document.getElementById('cust-name')) document.getElementById('cust-name').value = customer.name || '';
+  if (document.getElementById('cust-email')) document.getElementById('cust-email').value = customer.email || '';
+  if (document.getElementById('cust-phone')) document.getElementById('cust-phone').value = customer.phone || '';
+  if (document.getElementById('cust-notes')) document.getElementById('cust-notes').value = customer.notes || '';
+  applyOrderTermsData(draft.orderTerms || {});
+  const selector = draft.draftSettings?.selector || {};
+  if (selector.series && document.getElementById('sel-series')) {
+    document.getElementById('sel-series').value = selector.series;
+    onSelSeries();
+    if (selector.subseries && document.getElementById('sel-subseries')) {
+      document.getElementById('sel-subseries').value = selector.subseries;
+      onSelSubseries();
+    }
+    if (selector.type && document.getElementById('sel-type')) {
+      document.getElementById('sel-type').value = selector.type;
+      onSelType();
+    }
+    if (selector.diameter && document.getElementById('sel-diameter')) {
+      document.getElementById('sel-diameter').value = selector.diameter;
+      onSelDiameter();
+    }
+  }
+  renderCart();
+  renderProdTable(getCurrentProducts());
+  document.getElementById('cart-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  alert(currentLang === 'en'
+    ? `Draft reopened: ${draft.draftName || draft.id}`
+    : `已重新打开草稿：${draft.draftName || draft.id}`);
+}
+
+function deleteDraft(draftId) {
+  orderDrafts = orderDrafts.filter(d => d.id !== draftId);
+  persistOrderDrafts();
+  renderDraftList();
+}
+
+function downloadDraftWord(draftId) {
+  const draft = orderDrafts.find(d => d.id === draftId);
+  if (!draft) return;
+  downloadBlob(`${draft.id}_FUKA_order_draft.doc`, buildStandaloneOrderHTML(draft), 'application/msword;charset=utf-8');
+}
+
+function renderCart() {
+  const section = document.getElementById('cart-section');
+  const tbody = document.getElementById('cart-tbody');
+  const countEl = document.getElementById('cart-count');
+  const countZhEl = document.getElementById('cart-count-zh');
+  const totalEl = document.getElementById('cart-total');
+  const totalZhEl = document.getElementById('cart-total-zh');
+  const submitTotalEl = document.getElementById('submit-total');
+  const warnEl = document.getElementById('cart-stock-warn');
+  const submitBtn = document.getElementById('submit-btn');
+
+  if (!cart.length) {
+    section.style.display = 'none';
+    return;
+  }
+
+  section.style.display = 'block';
+  const subtotal = getCartTotal();
+  const totals = calculateTotals(subtotal);
+  countEl.textContent = cart.length;
+  countZhEl.textContent = cart.length;
+  totalEl.textContent = formatMoney(totals.total);
+  totalZhEl.textContent = formatMoney(totals.total);
+  submitTotalEl.textContent = formatMoney(totals.total);
+  const submitNetEl = document.getElementById('submit-net');
+  const submitTaxEl = document.getElementById('submit-tax');
+  if (submitNetEl) submitNetEl.textContent = formatMoney(totals.net);
+  if (submitTaxEl) submitTaxEl.textContent = formatMoney(totals.tax);
+  [submitNetEl, submitTaxEl].forEach(el => {
+    const row = el?.closest('.tax-breakdown-row');
+    if (row) row.style.display = totals.taxApplicable ? 'flex' : 'none';
+  });
+
+  const hasError = hasStockError();
+  warnEl.style.display = hasError ? 'block' : 'none';
+  if (warnEl && hasError) {
+    warnEl.innerHTML = siteSettings.allowOverStockOrders
+      ? `⚠️ <span class="en-only">Some items exceed available stock, but admin settings allow this order to be generated.</span><span class="zh-only">部分产品数量超出库存，但后台设置允许生成订单。</span>`
+      : `⚠️ <span class="en-only">Some items exceed available stock. Please correct before submitting.</span><span class="zh-only">部分产品数量超出库存，请更正后再提交。</span>`;
+  }
+  submitBtn.disabled = (hasError && !siteSettings.allowOverStockOrders) || cart.length === 0;
+
+  tbody.innerHTML = cart.map(c => {
+    const p = PRODUCTS.find(x => x.id === c.id);
+    if (!p && !c.custom) return '';
+    if (c.custom) {
+      return `<tr>
+        <td class="select-col">
+          <input type="checkbox" checked onchange="removeCartItem('${c.id}')" style="width:18px;height:18px;cursor:pointer;accent-color:var(--primary);">
+        </td>
+        <td>
+          <div class="prod-code">${c.id}</div>
+          <div class="prod-name">
+            <span class="en-only">${c.name_en}</span>
+            <span class="zh-only">${c.name_zh}</span>
+          </div>
+          ${c.spec ? `<div style="margin-top:4px;font-size:12px;color:var(--text-mid);white-space:pre-wrap;">${c.spec}</div>` : ''}
+          <div class="stock-low" style="margin-top:3px;">${currentLang==='en'?'Custom quote item':'非标待报价'}</div>
+        </td>
+        <td class="stock-col" style="font-size:13px;color:var(--text-mid);">-</td>
+        <td class="price-cell price-col">${currentLang==='en'?'TBD':'待报价'}</td>
+        <td class="qty-col">
+          <input type="number" min="1" value="${c.qty}" class="qty-input"
+            onchange="updateCartQty('${c.id}', this.value)">
+        </td>
+        <td class="subtotal-cell subtotal-col">-</td>
+        <td class="action-col">
+          <button onclick="removeCartItem('${c.id}')" style="background:none;border:none;color:var(--text-light);cursor:pointer;font-size:18px;padding:4px;" title="Remove">✕</button>
+        </td>
+      </tr>`;
+    }
+    const subtotal = c.unitPrice * c.qty;
+    const overStock = c.qty > p.stock;
+    const stockClass = p.stock === 0 ? 'stock-zero' : p.stock < 20 ? 'stock-low' : 'stock-ok';
+    const inputClass = overStock ? 'qty-input error' : 'qty-input';
+
+    return `<tr>
+      <td class="select-col">
+        <input type="checkbox" checked onchange="removeCartItem('${c.id}'); renderProdTable(getCurrentProducts())" style="width:18px;height:18px;cursor:pointer;accent-color:var(--primary);">
+      </td>
+      <td>
+        <div class="prod-code">${p.id}</div>
+        <div class="prod-name">
+          <span class="en-only">${p.name_en}</span>
+          <span class="zh-only">${p.name_zh}</span>
+        </div>
+        <div class="${stockClass}" style="margin-top:3px;">${currentLang==='en'?'Stock: ':'库存: '}${p.stock}</div>
+        ${overStock ? `<div class="stock-error-msg">⚠️ ${currentLang==='en'?'Exceeds stock!':'超出库存！'}</div>` : ''}
+      </td>
+      <td class="stock-col" style="font-size:13px;color:var(--text-mid);">${p.stock}</td>
+      <td class="price-cell price-col">${c.unitPrice > 0 ? formatMoney(c.unitPrice) : '-'}</td>
+      <td class="qty-col">
+        <input type="number" min="1" value="${c.qty}" class="${inputClass}"
+          onchange="updateCartQty('${c.id}', this.value)">
+      </td>
+      <td class="subtotal-cell subtotal-col">
+        ${subtotal > 0 ? formatMoney(subtotal) : '-'}
+      </td>
+      <td class="action-col">
+        <button onclick="removeCartItem('${c.id}'); renderProdTable(getCurrentProducts())" style="background:none;border:none;color:var(--text-light);cursor:pointer;font-size:18px;padding:4px;" title="Remove">✕</button>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+function getCurrentProducts() {
+  return getFilteredProducts();
+}
+
+function getFilteredProducts() {
+  const series = document.getElementById('sel-series').value;
+  const subseries = document.getElementById('sel-subseries')?.value;
+  const type = document.getElementById('sel-type').value;
+  const diaValue = document.getElementById('sel-diameter').value;
+  const dia = parseFloat(diaValue);
+  if (!series || series === 'CUSTOM') return [];
+  return PRODUCTS.filter(p => {
+    const subseriesMatch = !subseries || subseries === '__all' || inferSubseriesCode(p) === subseries;
+    const typeMatch = !type || type === '__all' || p.type === type;
+    const baseMatch = p.series === series && subseriesMatch && typeMatch && p.enabled;
+    return diaValue ? baseMatch && Math.abs(p.dia - dia) < 0.001 : baseMatch;
+  });
+}
+
+// ────────────────────────────────────────
+// ORDER SUBMISSION
+// ────────────────────────────────────────
+function submitOrder() {
+  if (hasStockError() && !siteSettings.allowOverStockOrders) {
+    alert(currentLang === 'en' ? 'Please correct quantities before submitting, or allow stock shortage orders in admin settings.' : '请更正超出库存的数量，或在后台设置允许库存不足时生成订单。');
+    return;
+  }
+  if (!cart.length) {
+    alert(currentLang === 'en' ? 'No items in order.' : '订单中没有产品。');
+    return;
+  }
+
+  const name = document.getElementById('cust-name').value.trim();
+  const email = document.getElementById('cust-email').value.trim();
+  if (!name || !email) {
+    alert(currentLang === 'en' ? 'Please fill in name and email.' : '请填写姓名及电邮。');
+    return;
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    alert(currentLang === 'en' ? 'Please enter a valid email address.' : '请输入有效的电邮地址。');
+    return;
+  }
+  const terms = getOrderTermsData();
+  if (terms.paymentTerm === 'custom' && !terms.paymentCustom.trim()) {
+    alert(currentLang === 'en' ? 'Please enter custom payment terms.' : '请输入自定义付款条件。');
+    return;
+  }
+  if (terms.deliveryMode === 'days' && (!terms.deliveryDays || terms.deliveryDays < 1)) {
+    alert(currentLang === 'en' ? 'Please enter delivery days.' : '请输入交货天数。');
+    return;
+  }
+
+  const order = buildOrderFromCart('pending');
+
+  orders.unshift(order);
+  localStorage.setItem('fuka_orders', JSON.stringify(orders));
+
+  // Deduct stock
+  cart.forEach(c => {
+    if (c.custom) return;
+    const p = PRODUCTS.find(x => x.id === c.id);
+    if (p) p.stock = Math.max(0, p.stock - c.qty);
+  });
+  saveState();
+  cart = [];
+  renderCart();
+
+  // Show confirmation
+  const html = `
+    <div class="order-confirm">
+      <div class="icon">📄</div>
+      <h3>${currentLang === 'en' ? 'Purchase Order Generated' : '专业订单已生成'}</h3>
+      <p class="en-only">Preview the order below, then download it as PDF, print, archive, email, or save it as a Word draft.</p>
+      <p class="zh-only">请先预览下方订单，然后下载 PDF、打印、存档、电邮或暂存为 Word 文档。</p>
+      <div class="order-id">${order.id}</div>
+      <div class="order-doc-actions">
+        <button class="btn btn-primary" onclick="downloadOrderPDF('${order.id}', event)">
+          <span class="en-only">Download PDF</span>
+          <span class="zh-only">下载 PDF</span>
+        </button>
+        <button class="btn btn-outline" onclick="printOrder('${order.id}')">
+          <span class="en-only">Print</span>
+          <span class="zh-only">打印</span>
+        </button>
+        <button class="btn btn-outline" onclick="archiveOrder('${order.id}')">
+          <span class="en-only">Archive File</span>
+          <span class="zh-only">存档</span>
+        </button>
+        <button class="btn btn-outline" onclick="emailOrderToSupplier('${order.id}')">
+          <span class="en-only">Email Supplier</span>
+          <span class="zh-only">电邮供应商</span>
+        </button>
+        <button class="btn btn-outline" onclick="downloadOrderWord('${order.id}')">
+          <span class="en-only">Save Editable Draft</span>
+          <span class="zh-only">暂存可修改草稿</span>
+        </button>
+      </div>
+      <div class="order-document-frame">
+        ${buildOrderDocumentHTML(order)}
+      </div>
+      <button class="btn btn-primary btn-lg" onclick="scrollToTop()" style="margin-top:16px;">
+        ${currentLang === 'en' ? '← Back to Order' : '← 回到下单'}
+      </button>
+    </div>
+  `;
+  document.querySelector('#order .container').innerHTML = `
+    <div class="section-header"><h2>${currentLang === 'en' ? 'Order Document Preview' : '订单文件预览'}</h2></div>
+    ${html}
+  `;
+  document.getElementById('order')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); location.reload(); }
+
+// ────────────────────────────────────────
+// ADMIN
+// ────────────────────────────────────────
+function doLogin() {
+  const pw = document.getElementById('admin-pw').value;
+  if (pw !== 'admin1234') {
+    alert(currentLang === 'en' ? 'Incorrect password.' : '密码错误。');
+    return;
+  }
+  adminLoggedIn = true;
+  document.getElementById('admin-login').style.display = 'none';
+  document.getElementById('admin-panel').style.display = 'block';
+  renderAdminProducts();
+  renderAdminOrders();
+}
+
+function doLogout() {
+  adminLoggedIn = false;
+  document.getElementById('admin-login').style.display = 'block';
+  document.getElementById('admin-panel').style.display = 'none';
+}
+
+function switchTab(tab) {
+  document.querySelectorAll('.admin-tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.admin-tab-content').forEach(c => c.classList.remove('active'));
+  event && event.target && event.target.closest('.admin-tab-btn') && event.target.closest('.admin-tab-btn').classList.add('active');
+  document.getElementById('tab-' + tab).classList.add('active');
+  if (tab === 'orders') renderAdminOrders();
+  if (tab === 'settings') syncPricingControls();
+}
+
+function saveSiteSettings() {
+  const currency = document.getElementById('set-currency').value;
+  const taxRate = parseFloat(document.getElementById('set-tax-rate').value);
+  const deliveryDays = parseInt(document.getElementById('set-delivery-days').value, 10);
+  siteSettings = {
+    currency: ['USD', 'HKD'].includes(currency) ? currency : 'USD',
+    taxRate: Number.isFinite(taxRate) ? Math.max(0, taxRate) : 13,
+    taxIncluded: document.getElementById('set-tax-included').value === '1',
+    allowOverStockOrders: document.getElementById('set-allow-overstock').value === '1',
+    paymentTerm: document.getElementById('set-payment-term').value,
+    customPaymentTerm: document.getElementById('set-custom-payment-term').value.trim() || DEFAULT_SITE_SETTINGS.customPaymentTerm,
+    deliveryMode: document.getElementById('set-delivery-mode').value,
+    deliveryDays: Math.max(1, Number.isFinite(deliveryDays) ? deliveryDays : DEFAULT_SITE_SETTINGS.deliveryDays),
+  };
+  orderCurrency = getLanguageDefaultCurrency(currentLang);
+  saveSiteSettingsState();
+  applyOrderTermsData({
+    paymentTerm: siteSettings.paymentTerm,
+    paymentCustom: siteSettings.customPaymentTerm,
+    deliveryMode: siteSettings.deliveryMode,
+    deliveryDays: siteSettings.deliveryDays,
+  });
+  setOrderCurrency(orderCurrency);
+  alert(currentLang === 'en' ? 'Settings saved.' : '设置已保存。');
+}
+
+function renderAdminProducts() {
+  const series = document.getElementById('admin-series-filter').value;
+  const filtered = PRODUCTS.filter(p => !series || p.series === series);
+  const tbody = document.getElementById('admin-products-tbody');
+
+  tbody.innerHTML = filtered.map((p) => {
+    normalizeProductPricing(p);
+    const i = PRODUCTS.indexOf(p);
+    const stockClass = p.stock === 0 ? 'stock-zero' : p.stock < 20 ? 'stock-low' : 'stock-ok';
+
+    return `<tr>
+      <td><span class="prod-id">${p.id}</span></td>
+      <td>
+        <input type="text" id="name-en-${i}" value="${p.name_en}" style="margin-bottom:3px;">
+        <input type="text" id="name-zh-${i}" value="${p.name_zh}">
+      </td>
+      <td>
+        <select id="series-${i}" onchange="PRODUCTS[${i}].series=this.value;PRODUCTS[${i}].material=this.value==='FX6M'?'Hardened Steels':'Copper · Aluminum';">
+          <option value="FX6M" ${p.series==='FX6M'?'selected':''}>FX6M</option>
+          <option value="FX3" ${p.series==='FX3'?'selected':''}>FX3</option>
+        </select>
+      </td>
+      <td>
+        <select id="type-${i}" onchange="PRODUCTS[${i}].type=this.value;">
+          <option value="Square Endmill" ${p.type==='Square Endmill'?'selected':''}>Flat Endmill 平底铣刀</option>
+          <option value="Ball Endmill" ${p.type==='Ball Endmill'?'selected':''}>Ball</option>
+          <option value="Corner Radius" ${p.type==='Corner Radius'?'selected':''}>Bull Nose Endmill 圆鼻铣刀</option>
+        </select>
+      </td>
+      <td><input type="number" id="dia-${i}" value="${p.dia}" step="0.01" min="0" class="num-input"></td>
+      <td><input type="number" id="price-usd-${i}" value="${p.prices.USD || ''}" step="0.01" min="0" class="num-input" placeholder="0"></td>
+      <td><input type="number" id="price-cny-${i}" value="${p.prices.CNY || ''}" step="0.01" min="0" class="num-input" placeholder="0"></td>
+      <td><input type="number" id="price-hkd-${i}" value="${p.prices.HKD || ''}" step="0.01" min="0" class="num-input" placeholder="0"></td>
+      <td><input type="number" id="stock-${i}" value="${p.stock}" min="0" class="num-input"></td>
+      <td>
+        <button class="toggle-enabled ${p.enabled ? 'on' : 'off'}" onclick="toggleEnabled(${i}, this)"></button>
+      </td>
+      <td class="actions-cell">
+        <button class="btn-icon btn-save" onclick="saveProductRow(${i})">Save</button>
+        <button class="btn-icon btn-del" onclick="deleteProduct(${i})">✕</button>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+function toggleEnabled(idx, btn) {
+  PRODUCTS[idx].enabled = PRODUCTS[idx].enabled ? 0 : 1;
+  btn.className = 'toggle-enabled ' + (PRODUCTS[idx].enabled ? 'on' : 'off');
+  saveState();
+}
+
+function saveProductRow(idx) {
+  const p = PRODUCTS[idx];
+  p.name_en = document.getElementById('name-en-' + idx).value;
+  p.name_zh = document.getElementById('name-zh-' + idx).value;
+  p.series = document.getElementById('series-' + idx).value;
+  p.material = p.series === 'FX6M' ? 'Hardened Steels' : 'Copper · Aluminum';
+  p.type = document.getElementById('type-' + idx).value;
+  p.dia = parseFloat(document.getElementById('dia-' + idx).value) || 0;
+  p.prices = {
+    USD: parseFloat(document.getElementById('price-usd-' + idx).value) || 0,
+    CNY: parseFloat(document.getElementById('price-cny-' + idx).value) || 0,
+    HKD: parseFloat(document.getElementById('price-hkd-' + idx).value) || 0,
+  };
+  p.price = p.prices.HKD;
+  p.stock = parseInt(document.getElementById('stock-' + idx).value) || 0;
+  saveState();
+  refreshCartPrices();
+  renderAdminProducts();
+  renderProdTable(getCurrentProducts());
+  renderCart();
+}
+
+function saveAllProducts() {
+  PRODUCTS.forEach((p, i) => {
+    normalizeProductPricing(p);
+    p.name_en = document.getElementById('name-en-' + i)?.value || p.name_en;
+    p.name_zh = document.getElementById('name-zh-' + i)?.value || p.name_zh;
+    p.series = document.getElementById('series-' + i)?.value || p.series;
+    p.material = p.series === 'FX6M' ? 'Hardened Steels' : 'Copper · Aluminum';
+    p.type = document.getElementById('type-' + i)?.value || p.type;
+    p.dia = parseFloat(document.getElementById('dia-' + i)?.value) || p.dia;
+    p.prices = {
+      USD: parseFloat(document.getElementById('price-usd-' + i)?.value) || p.prices.USD,
+      CNY: parseFloat(document.getElementById('price-cny-' + i)?.value) || p.prices.CNY,
+      HKD: parseFloat(document.getElementById('price-hkd-' + i)?.value) || p.prices.HKD,
+    };
+    p.price = p.prices.HKD;
+    p.stock = parseInt(document.getElementById('stock-' + i)?.value) || p.stock;
+  });
+  saveState();
+  refreshCartPrices();
+  renderAdminProducts();
+  renderProdTable(getCurrentProducts());
+  renderCart();
+  alert(currentLang === 'en' ? 'All products saved!' : '全部产品已保存！');
+}
+
+function deleteProduct(idx) {
+  if (!confirm(currentLang === 'en' ? `Delete this product?` : `确定删除此产品？`)) return;
+  PRODUCTS.splice(idx, 1);
+  saveState();
+  renderAdminProducts();
+}
+
+function saveNewProduct() {
+  const code = document.getElementById('np-code').value.trim();
+  if (!code) { alert(currentLang === 'en' ? 'Please enter product code.' : '请输入产品型号。'); return; }
+  if (PRODUCTS.find(p => p.id === code)) { alert(currentLang === 'en' ? 'Product code already exists.' : '产品型号已存在。'); return; }
+
+  const newP = {
+    id: code,
+    name_en: document.getElementById('np-name-en').value || code,
+    name_zh: document.getElementById('np-name-zh').value || code,
+    series: document.getElementById('np-series').value,
+    type: document.getElementById('np-type').value,
+    material: document.getElementById('np-series').value === 'FX6M' ? 'Hardened Steels' : 'Copper · Aluminum',
+    dia: parseFloat(document.getElementById('np-dia').value) || 1,
+    dia_type: 'small',
+    flute: parseInt(document.getElementById('np-flute').value) || 2,
+    prices: {
+      USD: parseFloat(document.getElementById('np-price-usd').value) || 0,
+      CNY: parseFloat(document.getElementById('np-price-cny').value) || 0,
+      HKD: parseFloat(document.getElementById('np-price-hkd').value) || 0,
+    },
+    stock: parseInt(document.getElementById('np-stock').value) || 100,
+    enabled: parseInt(document.getElementById('np-active').value) || 1,
+  };
+  newP.price = newP.prices.HKD;
+  newP.dia_type = newP.dia <= 0.5 ? 'micro' : newP.dia <= 2 ? 'small' : newP.dia <= 6 ? 'medium' : 'large';
+
+  PRODUCTS.push(newP);
+  saveState();
+  clearProductForm();
+  renderAdminProducts();
+  alert(currentLang === 'en' ? 'Product saved!' : '产品已保存！');
+}
+
+function clearProductForm() {
+  ['np-code','np-name-en','np-name-zh','np-dia','np-flute','np-price-usd','np-price-cny','np-price-hkd','np-stock'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('np-series').value = 'FX6M';
+  document.getElementById('np-type').value = 'Square Endmill';
+  document.getElementById('np-active').value = '1';
+}
+
+function updateOrderStatus(orderId, status) {
+  const o = orders.find(x => x.id === orderId);
+  if (o) { o.status = status; localStorage.setItem('fuka_orders', JSON.stringify(orders)); renderAdminOrders(); }
+}
+
+function renderAdminOrders() {
+  const list = document.getElementById('admin-orders-list');
+  if (!orders.length) {
+    list.innerHTML = `<div class="no-data"><div class="icon">📋</div><div class="en-only">No orders yet.</div><div class="zh-only">暂无订单。</div></div>`;
+    return;
+  }
+  list.innerHTML = orders.map(o => {
+    const currency = o.currency || 'HKD';
+    const orderTotal = Number.isFinite(parseFloat(o.total)) ? parseFloat(o.total) : parseFloat(o.subtotal) || 0;
+    const orderNet = Number.isFinite(parseFloat(o.netTotal)) ? parseFloat(o.netTotal) : orderTotal;
+    const orderTax = Number.isFinite(parseFloat(o.taxAmount)) ? parseFloat(o.taxAmount) : 0;
+    const orderTaxRate = Number.isFinite(parseFloat(o.taxRate)) ? parseFloat(o.taxRate) : 0;
+    const statusClass = o.status === 'pending' ? 'status-pending' : o.status === 'confirmed' ? 'status-confirmed' : o.status === 'shipped' ? 'status-shipped' : 'status-cancelled';
+    const statusLabel = { pending: { en: '⏳ Pending 待处理', zh: '⏳ 待处理' }, confirmed: { en: '✅ Confirmed 已确认', zh: '✅ 已确认' }, shipped: { en: '🚚 Shipped 已出货', zh: '🚚 已出货' }, cancelled: { en: '❌ Cancelled 已取消', zh: '❌ 已取消' } };
+    return `<div class="order-card">
+      <div class="order-card-header">
+        <div>
+          <div class="order-card-id">${o.id}</div>
+          <div class="order-card-date">${o.date}</div>
+        </div>
+        <div style="display:flex;gap:6px;align-items:center;">
+          <select onchange="updateOrderStatus('${o.id}', this.value)" style="padding:5px 10px;border:1.5px solid var(--border);border-radius:6px;font-size:13px;">
+            <option value="pending" ${o.status==='pending'?'selected':''}>⏳ Pending 待处理</option>
+            <option value="confirmed" ${o.status==='confirmed'?'selected':''}>✅ Confirmed 已确认</option>
+            <option value="shipped" ${o.status==='shipped'?'selected':''}>🚚 Shipped 已出货</option>
+            <option value="cancelled" ${o.status==='cancelled'?'selected':''}>❌ Cancelled 已取消</option>
+          </select>
+        </div>
+      </div>
+      <div class="order-card-cust">
+        <strong>${o.customer.name}</strong> · ${o.customer.email}
+        ${o.customer.company ? ' · ' + o.customer.company : ''}
+        ${o.customer.phone ? ' · ' + o.customer.phone : ''}
+      </div>
+      <div style="font-size:12px;color:var(--text-light);margin-top:4px;">${o.customer.notes || ''}</div>
+      <div style="margin-top:10px;">
+        ${o.items.map(i => `<div style="display:flex;justify-content:space-between;padding:4px 0;font-size:13px;border-bottom:1px solid var(--border-light);">
+          <span>${i.id} — <span class="en-inline">${i.name_en}</span><span class="zh-inline">${i.name_zh}</span> × ${i.qty}${i.custom && i.spec ? `<br><span style="color:var(--text-light);font-size:12px;white-space:pre-wrap;">${i.spec}</span>` : ''}</span>
+          <span style="font-weight:600;">${i.subtotal > 0 ? formatMoney(i.subtotal, i.currency || currency) : '-'}</span>
+        </div>`).join('')}
+      </div>
+      <div class="order-card-footer">
+        <div>
+          <div class="order-card-total">${formatMoney(orderTotal, currency)}</div>
+          <div style="font-size:12px;color:var(--text-light);">${
+            currency === 'CNY'
+              ? `${currency} · ${o.taxIncluded ? 'CNY tax included' : 'CNY tax excluded'} ${orderTaxRate}% · Tax ${formatMoney(orderTax, currency)} · Net ${formatMoney(orderNet, currency)}`
+              : `${currency} · No tax`
+          }</div>
+        </div>
+        <div style="font-size:12px;color:var(--text-light);">${o.items.length} item(s)</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function exportOrdersCSV() {
+  if (!orders.length) { alert(currentLang === 'en' ? 'No orders to export.' : '暂无订单可导出。'); return; }
+  let csv = 'Order ID,Date,Customer,Email,Company,Phone,Items,Currency,Net,Tax Rate,Tax Amount,Total,Status\n';
+  orders.forEach(o => {
+    const itemStr = o.items.map(i => `${i.id}×${i.qty}${i.custom && i.spec ? ' [' + i.spec.replace(/"/g, '""') + ']' : ''}`).join('; ');
+    const currency = o.currency || 'HKD';
+    const total = Number.isFinite(parseFloat(o.total)) ? parseFloat(o.total) : parseFloat(o.subtotal) || 0;
+    const net = Number.isFinite(parseFloat(o.netTotal)) ? parseFloat(o.netTotal) : total;
+    const tax = Number.isFinite(parseFloat(o.taxAmount)) ? parseFloat(o.taxAmount) : 0;
+    const taxRate = Number.isFinite(parseFloat(o.taxRate)) ? parseFloat(o.taxRate) : 0;
+    csv += `"${o.id}","${o.date}","${o.customer.name}","${o.customer.email}","${o.customer.company}","${o.customer.phone}","${itemStr}","${currency}","${net.toFixed(2)}","${currency === 'CNY' ? taxRate + '%' : 'N/A'}","${tax.toFixed(2)}","${total.toFixed(2)}","${o.status}"\n`;
+  });
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+  a.download = 'fuka_orders_' + new Date().toISOString().slice(0,10) + '.csv'; a.click();
+}
+
+// ────────────────────────────────────────
+// INIT
+// ────────────────────────────────────────
+renderSeriesOptions();
+setLang(getInitialLang(), null, { skipPersist: true });
+renderDraftList();
+</script>
+</body>
+</html>
