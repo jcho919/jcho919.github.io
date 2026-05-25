@@ -1820,6 +1820,11 @@ body.lang-zh .workflow-step span {
             <label class="zh-only">数量</label>
             <input type="number" id="custom-qty" min="1" value="1">
           </div>
+          <div class="form-group">
+            <label class="en-only">Tax-included Unit Price</label>
+            <label class="zh-only">含税单价</label>
+            <input type="number" id="custom-price" min="0" step="0.01" value="0">
+          </div>
           <div class="form-group full">
             <label class="en-only">Specification / Requirements</label>
             <label class="zh-only">规格要求</label>
@@ -3145,6 +3150,7 @@ function addCustomToolToCart() {
   const model = document.getElementById('custom-model').value.trim();
   const spec = document.getElementById('custom-spec').value.trim();
   const qty = Math.max(1, parseInt(document.getElementById('custom-qty').value, 10) || 1);
+  const unitPrice = Math.max(0, parseFloat(document.getElementById('custom-price')?.value) || 0);
 
   if (!model && !spec) {
     alert(currentLang === 'en' ? 'Please enter custom tool model or specification.' : '请输入非标刀具型号或规格要求。');
@@ -3156,7 +3162,7 @@ function addCustomToolToCart() {
     id,
     custom: true,
     qty,
-    unitPrice: 0,
+    unitPrice,
     currency: orderCurrency,
     stock: null,
     name_en: model || 'Custom Tool Request',
@@ -3166,6 +3172,7 @@ function addCustomToolToCart() {
   document.getElementById('custom-model').value = '';
   document.getElementById('custom-spec').value = '';
   document.getElementById('custom-qty').value = '1';
+  if (document.getElementById('custom-price')) document.getElementById('custom-price').value = '0';
   renderCart();
 }
 
@@ -3203,6 +3210,14 @@ function updateCartQty(id, newQty) {
   renderCart();
   syncProductRow(id);
   updateProductSelectionCount();
+}
+
+function updateCartUnitPrice(id, newPrice) {
+  const item = cart.find(c => c.id === id);
+  if (!item || !item.custom) return;
+  item.unitPrice = Math.max(0, parseFloat(newPrice) || 0);
+  item.currency = orderCurrency;
+  renderCart();
 }
 
 function setProductQty(id, newQty) {
@@ -3376,8 +3391,8 @@ function buildOrderFromCart(status = 'draft') {
           spec: c.spec,
           custom: true,
           qty: c.qty,
-          unitPrice: 0,
-          subtotal: 0,
+          unitPrice: c.unitPrice,
+          subtotal: c.unitPrice * c.qty,
           currency: orderCurrency,
           stock: null,
         };
@@ -3505,7 +3520,7 @@ function buildOrderDocumentHTML(order) {
               <td>
                 <div>${escapeHtml(currentLang === 'en' ? item.name_en : item.name_zh)}</div>
                 ${item.spec ? `<div style="color:#596579;margin-top:4px;white-space:pre-wrap;">${escapeHtml(item.spec)}</div>` : ''}
-                ${item.custom ? `<div style="color:#B5122A;margin-top:4px;">Custom tool, quotation required</div>` : ''}
+                ${item.custom ? `<div style="color:#B5122A;margin-top:4px;">Custom tool / 非标刀具</div>` : ''}
               </td>
               <td class="num">${escapeHtml(item.qty)}</td>
               <td class="num">${item.unitPrice > 0 ? formatMoney(item.unitPrice, currency) : 'TBD'}</td>
@@ -3526,7 +3541,7 @@ function buildOrderDocumentHTML(order) {
         <div>1. This document is generated from the FUKA ordering portal and is subject to final quotation and stock confirmation.</div>
         <div>　 本订单由 FUKA 订购系统生成，最终价格、交期及库存以供应商确认报价为准。</div>
         <div>2. Custom tools are quotation items and will be confirmed separately by the sales team.</div>
-        <div>　 非标刀具属于询价项目，规格、价格及交期需由销售人员另行确认。</div>
+        <div>　 非标刀具规格及交期需由销售人员确认；如订单已填写单价，则按订单显示金额作参考。</div>
         <div>3. CNY orders may include or exclude tax according to the setting shown above. USD and HKD orders do not include tax.</div>
         <div>　 人民币订单按上方设置显示含税或未税；美元及港币订单不含税项。</div>
       </div>
@@ -3766,7 +3781,7 @@ function restoreDraft(draftId) {
         id: item.id,
         custom: true,
         qty: item.qty,
-        unitPrice: 0,
+        unitPrice: parseFloat(item.unitPrice) || 0,
         currency: orderCurrency,
         stock: null,
         name_en: item.name_en,
@@ -3873,6 +3888,7 @@ function renderCart() {
     const p = PRODUCTS.find(x => x.id === c.id);
     if (!p && !c.custom) return '';
     if (c.custom) {
+      const customSubtotal = c.unitPrice * c.qty;
       return `<tr>
         <td class="select-col">
           <input type="checkbox" checked onchange="removeCartItem('${c.id}')" style="width:18px;height:18px;cursor:pointer;accent-color:var(--primary);">
@@ -3884,15 +3900,18 @@ function renderCart() {
             <span class="zh-only">${c.name_zh}</span>
           </div>
           ${c.spec ? `<div style="margin-top:4px;font-size:12px;color:var(--text-mid);white-space:pre-wrap;">${c.spec}</div>` : ''}
-          <div class="stock-low" style="margin-top:3px;">${currentLang==='en'?'Custom quote item':'非标待报价'}</div>
+          <div class="stock-low" style="margin-top:3px;">${currentLang==='en'?'Custom tool item':'非标刀具'}</div>
         </td>
         <td class="stock-col" style="font-size:13px;color:var(--text-mid);">-</td>
-        <td class="price-cell price-col">${currentLang==='en'?'TBD':'待报价'}</td>
+        <td class="price-cell price-col">
+          <input type="number" min="0" step="0.01" value="${c.unitPrice || 0}" class="qty-input"
+            onchange="updateCartUnitPrice('${c.id}', this.value)">
+        </td>
         <td class="qty-col">
           <input type="number" min="1" value="${c.qty}" class="qty-input"
             onchange="updateCartQty('${c.id}', this.value)">
         </td>
-        <td class="subtotal-cell subtotal-col">-</td>
+        <td class="subtotal-cell subtotal-col">${customSubtotal > 0 ? formatMoney(customSubtotal) : '-'}</td>
         <td class="action-col">
           <button onclick="removeCartItem('${c.id}')" style="background:none;border:none;color:var(--text-light);cursor:pointer;font-size:18px;padding:4px;" title="Remove">✕</button>
         </td>
