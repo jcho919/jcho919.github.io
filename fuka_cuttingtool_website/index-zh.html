@@ -523,6 +523,13 @@ body.lang-zh .zh-inline { display: inline; }
 .contact-card h3 { font-size: 16px; font-weight: 700; color: var(--primary); margin-bottom: 14px; }
 .contact-row { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px; font-size: 14px; }
 .contact-row-icon { width: 28px; height: 28px; background: var(--surface-2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; }
+.wechat-panel { margin-top: 22px; background: var(--white); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow-sm); }
+.wechat-panel h3 { font-size: 17px; color: var(--primary); margin-bottom: 14px; }
+.wechat-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.wechat-card { display: grid; grid-template-columns: 132px 1fr; gap: 18px; align-items: center; padding: 16px; border: 1.5px solid var(--border); border-radius: var(--radius); background: linear-gradient(180deg, #FFFFFF, #F8FAFC); }
+.wechat-card img { width: 132px; height: 132px; object-fit: contain; background: white; border-radius: 8px; border: 1px solid var(--border-light); padding: 8px; }
+.wechat-card h4 { font-size: 15px; color: var(--primary); margin-bottom: 6px; }
+.wechat-card p { color: var(--text-mid); font-size: 13px; line-height: 1.55; }
 
 /* ── FOOTER ── */
 .site-footer { background: var(--primary-dark); color: rgba(255,255,255,0.55); padding: 40px 0 20px; margin-top: 60px; }
@@ -1276,8 +1283,18 @@ body {
   .workflow-grid,
   .selector-steps,
   .form-grid,
-  .contact-grid {
+  .contact-grid,
+  .wechat-grid {
     grid-template-columns: 1fr;
+  }
+
+  .wechat-card {
+    grid-template-columns: 112px 1fr;
+  }
+
+  .wechat-card img {
+    width: 112px;
+    height: 112px;
   }
 
   .selector-card,
@@ -2029,6 +2046,27 @@ body.lang-zh .workflow-step span {
         <div class="contact-row"><div class="contact-row-icon">A</div><div><strong class="en-only">Address</strong><strong class="zh-only">地址</strong><br><span>深圳市福田区福华路319号兆邦基金融大厦2111室</span></div></div>
         <div class="contact-row"><div class="contact-row-icon">H</div><div><strong class="en-only">Business Hours</strong><strong class="zh-only">营业时间</strong><br><span class="en-only">Mon-Fri: 9:00 - 18:00 HKT</span><span class="zh-only">星期一至五：上午9時至下午6時</span></div></div>
         <div class="contact-row"><div class="contact-row-icon">W</div><div><strong>Website</strong><br><span>www.samtat.com</span></div></div>
+      </div>
+    </div>
+    <div class="wechat-panel">
+      <h3><span class="en-only">WeChat</span><span class="zh-only">微信联系</span></h3>
+      <div class="wechat-grid">
+        <div class="wechat-card">
+          <img src="images/wechat/wechat-official-account.jpg" alt="Sam Tat WeChat official account QR code">
+          <div>
+            <h4><span class="en-only">WeChat Official Account</span><span class="zh-only">微信公众号</span></h4>
+            <p class="en-only">Scan to follow Sam Tat for product updates and machining information.</p>
+            <p class="zh-only">扫码关注公众号，获取产品资讯及加工应用内容。</p>
+          </div>
+        </div>
+        <div class="wechat-card">
+          <img src="images/wechat/wechat-store.jpg" alt="Sam Tat WeChat store QR code">
+          <div>
+            <h4><span class="en-only">WeChat Store</span><span class="zh-only">微信商城</span></h4>
+            <p class="en-only">Scan to open the WeChat store for product browsing and inquiries.</p>
+            <p class="zh-only">扫码进入微信商城，浏览产品并提交查询。</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
