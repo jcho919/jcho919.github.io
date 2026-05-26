@@ -2241,6 +2241,7 @@ body.lang-zh .workflow-step span {
                   <th><span class="en-only">USD Tax-included Unit Price</span><span class="zh-only">美元含税单价</span></th>
                   <th><span class="en-only">CNY Tax-included Unit Price</span><span class="zh-only">人民币含税单价</span></th>
                   <th><span class="en-only">HKD Tax-included Unit Price</span><span class="zh-only">港币含税单价</span></th>
+                  <th><span class="en-only">CNY Tax-included Cost</span><span class="zh-only">人民币含税成本</span></th>
                   <th><span class="en-only">Stock</span><span class="zh-only">库存</span></th>
                   <th><span class="en-only">Active</span><span class="zh-only">启用</span></th>
                   <th></th>
@@ -2328,6 +2329,11 @@ body.lang-zh .workflow-step span {
                 <label class="en-only">HKD Tax-included Unit Price</label>
                 <label class="zh-only">港币含税单价</label>
                 <input type="number" id="np-price-hkd" step="0.01" min="0" placeholder="e.g. 280">
+              </div>
+              <div class="form-group">
+                <label class="en-only">CNY Tax-included Cost</label>
+                <label class="zh-only">人民币含税成本</label>
+                <input type="number" id="np-cost-cny" step="0.01" min="0" placeholder="e.g. 40.91">
               </div>
               <div class="form-group">
                 <label class="en-only">Stock Quantity</label>
@@ -2484,6 +2490,221 @@ const CURRENCY_META = {
   HKD: { symbol: 'HK$', label: 'HKD' },
 };
 const DEFAULT_PRODUCT_PRICES = { USD: 5, CNY: 50, HKD: 55 };
+const DEFAULT_PRODUCT_COSTS_CNY = {
+  "FX3B0102": 39.89,
+  "FX3B0152": 39.89,
+  "FX3B0202": 39.89,
+  "FX3B0302": 39.89,
+  "FX3B0302D3": 39.89,
+  "FX3B0402": 39.89,
+  "FX3B0502": 73.17,
+  "FX3B0602": 73.17,
+  "FX3B0602L": 84.98,
+  "FX3B0802": 133.28,
+  "FX3B1002": 242.78,
+  "FX3E0103": 36.61,
+  "FX3E0104": 36.61,
+  "FX3E0154": 36.61,
+  "FX3E0204": 36.61,
+  "FX3E0254": 36.61,
+  "FX3E0304": 36.61,
+  "FX3E0304D3": 36.61,
+  "FX3E0304D6": 68.82,
+  "FX3E0404": 36.61,
+  "FX3E0404D6": 68.82,
+  "FX3E0504": 68.82,
+  "FX3E0604": 68.82,
+  "FX3E0604L": 80.63,
+  "FX3E0804": 125.71,
+  "FX3E1004": 233.06,
+  "FX3E1204": 351.15,
+  "FX3IB0402": 54.92,
+  "FX3IB0602": 102.15,
+  "FX3IB0802": 160.12,
+  "FX3IE0304": 50.57,
+  "FX3IE0404": 50.57,
+  "FX3IE0604": 96.73,
+  "FX3IE0804": 152.55,
+  "FX3IR0302": 54.92,
+  "FX3IR0402": 54.92,
+  "FX3IR0405": 54.92,
+  "FX3IR0602": 102.15,
+  "FX3IR0605": 102.15,
+  "FX3IR0805": 160.12,
+  "FX3JB0602": 132.21,
+  "FX3JB0802": 213.8,
+  "FX3JB1002": 317.93,
+  "FX3JE0604": 126.79,
+  "FX3JE0804": 206.23,
+  "FX3JE1004": 308.21,
+  "FX3JE1204": 469.23,
+  "FX3JR0602": 132.21,
+  "FX3JR0605": 132.21,
+  "FX3JR0805": 213.8,
+  "FX3JR1005": 317.93,
+  "FX3JR1010": 317.93,
+  "FX3R01002": 39.89,
+  "FX3R01003": 39.89,
+  "FX3R01005": 39.89,
+  "FX3R0101": 39.89,
+  "FX3R0101L": 39.89,
+  "FX3R0102": 39.89,
+  "FX3R0102L": 39.89,
+  "FX3R0151": 39.89,
+  "FX3R0152": 39.89,
+  "FX3R02003": 39.89,
+  "FX3R0201": 39.89,
+  "FX3R0202": 39.89,
+  "FX3R0203": 39.89,
+  "FX3R0205": 39.89,
+  "FX3R0301": 39.89,
+  "FX3R0302": 39.89,
+  "FX3R0302D3": 39.89,
+  "FX3R0303D3": 39.89,
+  "FX3R0305": 39.89,
+  "FX3R0305D3": 39.89,
+  "FX3R0401": 39.89,
+  "FX3R0402": 39.89,
+  "FX3R0403": 39.89,
+  "FX3R0405": 39.89,
+  "FX3R0602": 73.17,
+  "FX3R0605": 73.17,
+  "FX3R0605L": 84.98,
+  "FX3R0802": 133.28,
+  "FX3R0805": 133.28,
+  "FX3R1005": 242.78,
+  "FX3R1010": 242.78,
+  "FX6MB0102": 44.18,
+  "FX6MB0152": 44.18,
+  "FX6MB0202": 44.18,
+  "FX6MB0252": 44.18,
+  "FX6MB0302": 44.18,
+  "FX6MB0302D3": 44.18,
+  "FX6MB0302D6": 87.12,
+  "FX6MB0352": 44.18,
+  "FX6MB0402": 44.18,
+  "FX6MB0402D6": 87.12,
+  "FX6MB0502": 75.31,
+  "FX6MB0602": 75.31,
+  "FX6MB0602L": 87.12,
+  "FX6MB0802": 136.5,
+  "FX6MB1002": 253.52,
+  "FX6MB1202": 373.75,
+  "FX6ME0104": 40.91,
+  "FX6ME0104L": 40.91,
+  "FX6ME0154": 40.91,
+  "FX6ME0204": 40.91,
+  "FX6ME0254": 40.91,
+  "FX6ME0304": 40.91,
+  "FX6ME0304D3": 40.91,
+  "FX6ME0304D6": 70.96,
+  "FX6ME0404": 40.91,
+  "FX6ME0404B": 70.96,
+  "FX6ME0504": 70.96,
+  "FX6ME0604": 70.96,
+  "FX6ME0604L": 82.77,
+  "FX6ME0804": 128.93,
+  "FX6ME1004": 243.8,
+  "FX6ME1204": 361.88,
+  "FX6MIB0402": 57.07,
+  "FX6MIB0502": 102.15,
+  "FX6MIB0602": 102.15,
+  "FX6MIB0802": 165.49,
+  "FX6MIE0404": 52.71,
+  "FX6MIE0604": 96.73,
+  "FX6MIE0804": 157.92,
+  "FX6MINR601802": 102.15,
+  "FX6MINR601803": 102.15,
+  "FX6MINR601805": 102.15,
+  "FX6MINR802405": 165.49,
+  "FX6MINR802410": 165.49,
+  "FX6MIR0402": 57.07,
+  "FX6MIR0403YBH": 57.07,
+  "FX6MIR0405": 57.07,
+  "FX6MIR0602": 102.15,
+  "FX6MIR0605": 102.15,
+  "FX6MIR0610": 102.15,
+  "FX6MIR0802": 165.49,
+  "FX6MIR0805": 165.49,
+  "FX6MIR0810": 165.49,
+  "FX6MIR4010": 57.07,
+  "FX6MJB0402": 68.87,
+  "FX6MJB0602": 136.5,
+  "FX6MJB0802": 215.94,
+  "FX6MJB1002": 323.29,
+  "FX6MJB1202": 470.36,
+  "FX6MJE0404": 64.52,
+  "FX6MJE0604": 131.08,
+  "FX6MJE0804": 208.37,
+  "FX6MJE1004": 313.58,
+  "FX6MJE1204": 458.5,
+  "FX6MJNR103005": 323.29,
+  "FX6MJNR103010": 323.29,
+  "FX6MJNR123605": 470.36,
+  "FX6MJNR123610": 470.36,
+  "FX6MJNR601802": 136.5,
+  "FX6MJNR601803": 136.5,
+  "FX6MJNR601805": 136.5,
+  "FX6MJNR802405": 215.94,
+  "FX6MJR0605": 136.5,
+  "FX6MJR0805": 215.94,
+  "FX6MJR0810": 215.94,
+  "FX6MJR1005": 323.29,
+  "FX6MJR1010": 323.29,
+  "FX6MJR1205": 470.36,
+  "FX6MJR1210": 470.36,
+  "FX6MNR103005": 253.52,
+  "FX6MNR103010": 253.52,
+  "FX6MNR123605": 373.75,
+  "FX6MNR123610": 373.75,
+  "FX6MNR601802": 75.31,
+  "FX6MNR601802L": 87.12,
+  "FX6MNR601803": 75.31,
+  "FX6MNR601803L": 87.12,
+  "FX6MNR601805": 75.31,
+  "FX6MNR601805L": 87.12,
+  "FX6MNR802405": 136.5,
+  "FX6MR01005": 44.18,
+  "FX6MR0101": 44.18,
+  "FX6MR01015": 44.18,
+  "FX6MR0102": 44.18,
+  "FX6MR015005": 44.18,
+  "FX6MR01501": 44.18,
+  "FX6MR01502": 44.18,
+  "FX6MR02005": 44.18,
+  "FX6MR0201": 44.18,
+  "FX6MR0202": 44.18,
+  "FX6MR0203": 44.18,
+  "FX6MR0205": 44.18,
+  "FX6MR0301": 44.18,
+  "FX6MR0302": 44.18,
+  "FX6MR0302D3": 44.18,
+  "FX6MR0303": 44.18,
+  "FX6MR0303D3": 44.18,
+  "FX6MR0305": 44.18,
+  "FX6MR0305D3": 44.18,
+  "FX6MR0401": 44.18,
+  "FX6MR0402": 44.18,
+  "FX6MR0403": 44.18,
+  "FX6MR0405": 44.18,
+  "FX6MR0410": 44.18,
+  "FX6MR0502": 75.31,
+  "FX6MR0505": 75.31,
+  "FX6MR0601": 75.31,
+  "FX6MR0602": 75.31,
+  "FX6MR0602L": 87.12,
+  "FX6MR0605": 75.31,
+  "FX6MR0605L": 87.12,
+  "FX6MR0610L": 87.12,
+  "FX6MR0801": 136.5,
+  "FX6MR0802": 136.5,
+  "FX6MR0805": 136.5,
+  "FX6MR0810": 136.5,
+  "FX6MR1005": 253.52,
+  "FX6MR1010": 253.52,
+  "FX6MR1205": 373.75,
+  "FX6MR1210": 373.75
+};
 const DEFAULT_SITE_SETTINGS = {
   currency: 'USD',
   taxRate: 13,
@@ -2511,6 +2732,8 @@ function normalizeProductPricing(product) {
     CNY: parseFloat(product.prices?.CNY) || DEFAULT_PRODUCT_PRICES.CNY,
     HKD: parseFloat(product.prices?.HKD) || legacyPrice || DEFAULT_PRODUCT_PRICES.HKD,
   };
+  const savedCost = parseFloat(product.costCNY);
+  product.costCNY = Number.isFinite(savedCost) && savedCost > 0 ? savedCost : (DEFAULT_PRODUCT_COSTS_CNY[product.id] || 0);
   product.price = product.prices.HKD;
 }
 
@@ -4193,6 +4416,7 @@ function renderAdminProducts() {
       <td><input type="number" id="price-usd-${i}" value="${p.prices.USD || ''}" step="0.01" min="0" class="num-input" placeholder="0"></td>
       <td><input type="number" id="price-cny-${i}" value="${p.prices.CNY || ''}" step="0.01" min="0" class="num-input" placeholder="0"></td>
       <td><input type="number" id="price-hkd-${i}" value="${p.prices.HKD || ''}" step="0.01" min="0" class="num-input" placeholder="0"></td>
+      <td><input type="number" id="cost-cny-${i}" value="${p.costCNY || ''}" step="0.01" min="0" class="num-input" placeholder="0"></td>
       <td><input type="number" id="stock-${i}" value="${p.stock}" min="0" class="num-input"></td>
       <td>
         <button class="toggle-enabled ${p.enabled ? 'on' : 'off'}" onclick="toggleEnabled(${i}, this)"></button>
@@ -4225,6 +4449,7 @@ function saveProductRow(idx) {
     HKD: parseFloat(document.getElementById('price-hkd-' + idx).value) || 0,
   };
   p.price = p.prices.HKD;
+  p.costCNY = parseFloat(document.getElementById('cost-cny-' + idx).value) || 0;
   p.stock = parseInt(document.getElementById('stock-' + idx).value) || 0;
   saveState();
   refreshCartPrices();
@@ -4248,6 +4473,7 @@ function saveAllProducts() {
       HKD: parseFloat(document.getElementById('price-hkd-' + i)?.value) || p.prices.HKD,
     };
     p.price = p.prices.HKD;
+    p.costCNY = parseFloat(document.getElementById('cost-cny-' + i)?.value) || p.costCNY || 0;
     p.stock = parseInt(document.getElementById('stock-' + i)?.value) || p.stock;
   });
   saveState();
@@ -4285,6 +4511,7 @@ function saveNewProduct() {
       CNY: parseFloat(document.getElementById('np-price-cny').value) || 0,
       HKD: parseFloat(document.getElementById('np-price-hkd').value) || 0,
     },
+    costCNY: parseFloat(document.getElementById('np-cost-cny').value) || DEFAULT_PRODUCT_COSTS_CNY[code] || 0,
     stock: parseInt(document.getElementById('np-stock').value) || 100,
     enabled: parseInt(document.getElementById('np-active').value) || 1,
   };
@@ -4299,7 +4526,7 @@ function saveNewProduct() {
 }
 
 function clearProductForm() {
-  ['np-code','np-name-en','np-name-zh','np-dia','np-flute','np-price-usd','np-price-cny','np-price-hkd','np-stock'].forEach(id => document.getElementById(id).value = '');
+  ['np-code','np-name-en','np-name-zh','np-dia','np-flute','np-price-usd','np-price-cny','np-price-hkd','np-cost-cny','np-stock'].forEach(id => document.getElementById(id).value = '');
   document.getElementById('np-series').value = 'FX6M';
   document.getElementById('np-type').value = 'Square Endmill';
   document.getElementById('np-active').value = '1';
